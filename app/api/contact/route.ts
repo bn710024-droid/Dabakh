@@ -1,27 +1,27 @@
-import { NextResponse } from 'next/server'
+import { NextResponse } from 'next/server';
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json()
-    const { nom, entreprise, telephone, email, service, message } = body
+    const { name, email, phone, message } = await request.json();
 
-    const res = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-      },
-      body: JSON.stringify({
-        from: 'Site Web <onboarding@resend.dev>',
-        to: ['contact@dabakhglobalservices.com'],
-        subject: `Nouveau message : ${service}`,
-        html: `<h2>Nouvelle demande</h2><p><b>Nom:</b> ${nom}</p><p><b>Entreprise:</b> ${entreprise}</p><p><b>Téléphone:</b> ${telephone}</p><p><b>Email:</b> ${email}</p><p><b>Objet:</b> ${service}</p><p><b>Message:</b> ${message}</p>`,
-      }),
-    })
+    await resend.emails.send({
+      from: 'Contact <onboarding@resend.dev>',
+      to: 'contact@dabakhglobalservices.com',
+      subject: `Nouveau message de ${name}`,
+      html: `
+        <h2>Nouveau message de contact</h2>
+        <p><strong>Nom:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>TÃ©lÃ©phone:</strong> ${phone}</p>
+        <p><strong>Message:</strong> ${message}</p>
+      `,
+    });
 
-    if (!res.ok) return NextResponse.json({ error: 'Erreur envoi' }, { status: 500 })
-    return NextResponse.json({ success: true })
+    return NextResponse.json({ success: true });
   } catch (error) {
-    return NextResponse.json({ error: 'Erreur serveur' }, { status: 500 })
+    return NextResponse.json({ error: 'Erreur envoi email' }, { status: 500 });
   }
 }
