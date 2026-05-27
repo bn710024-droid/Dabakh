@@ -69,7 +69,7 @@ const services = [
   {
     icon: <Radio size={36} />,
     title: 'Télégestion',
-    subtitle: 'IGEL · Lacroix',
+    subtitle: 'Lacroix · Nivus',
     img: '/images/refinery.png',
     color: '#22A050',
     desc: 'Solutions de télégestion et de supervision à distance pour vos installations industrielles dispersées. Monitoring en temps réel, alertes automatiques et tableaux de bord centralisés.',
