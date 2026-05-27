@@ -75,7 +75,7 @@ export default function Footer() {
               { icon: <Phone size={13} />, text: '+221 33 877 50 78', href: 'tel:+221338775078' },
               { icon: <Phone size={13} />, text: '+221 77 651 19 85', href: 'tel:+221776511985' },
               { icon: <Mail size={13} />, text: 'contact@dabakhglobalservices.com', href: 'mailto:contact@dabakhglobalservices.com' },
-              { icon: <MapPin size={13} />, text: 'K14 Hamo 1, Dakar — Sénégal', href: '#' },
+              { icon: <MapPin size={13} />, text: '105 Golf Sud, Derrière Hopital Dalal Jam', href: '#' },
             ].map((item, i) => (
               <a key={i} href={item.href} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontFamily: 'Rajdhani, sans-serif', fontSize: '12px', color: 'rgba(255,255,255,0.45)', textDecoration: 'none', padding: '5px 0' }}>
                 <span style={{ color: '#E8600A', marginTop: '1px', flexShrink: 0 }}>{item.icon}</span>{item.text}
