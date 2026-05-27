@@ -260,17 +260,86 @@ h1, h2, h3, h4 {
 }
 .page-enter { animation: pageIn 0.5s cubic-bezier(0.25,0.46,0.45,0.94) forwards; }
 
-/* ── MOBILE ── */
+/* ═══════════════════════════════════════════════════════ */
+/* ══       RESPONSIVE MOBILE — VERSION COMPLÈTE       ══ */
+/* ═══════════════════════════════════════════════════════ */
+
+/* Nav mobile breakpoint */
 @media (max-width: 900px) {
   .nav-desktop { display: none !important; }
   .nav-mobile  { display: flex !important; }
+
+  /* Page contact — grille principale 1fr 1.6fr → 1 colonne sur mobile */
+  .contact-main-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
 }
 @media (min-width: 901px) {
   .nav-mobile  { display: none !important; }
   .nav-desktop { display: flex !important; }
 }
 
+/* Tablette et mobile — grilles 2 col → 1 col */
 @media (max-width: 768px) {
   .grid-2col { grid-template-columns: 1fr !important; }
   .hide-mobile { display: none !important; }
+
+  /* Form contact — padding réduit pour mobile */
+  .contact-form-card {
+    padding: 22px 18px !important;
+    border-radius: 6px !important;
+  }
+
+  /* Titre hero contact — taille réduite sur mobile */
+  .contact-hero-title {
+    font-size: clamp(38px, 11vw, 60px) !important;
+    line-height: 0.95 !important;
+  }
+
+  /* Partners band — masquer marquee, afficher grille statique 3x2 */
+  .partners-marquee {
+    display: none !important;
+  }
+  .partners-mobile-grid {
+    display: block !important;
+  }
+}
+
+/* Mobile strict */
+@media (max-width: 600px) {
+  /* Boutons CTA pleine largeur sur mobile */
+  .btn-orange,
+  .btn-green,
+  .btn-outline-white,
+  .btn-outline-orange {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 20px;
+    font-size: 12px !important;
+  }
+
+  /* Form contact — encore plus compact */
+  .contact-form-card {
+    padding: 20px 14px !important;
+  }
+
+  /* Hero principal — padding et taille réduits */
+  section {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}
+
+/* Très petit mobile (≤400px) — comme les screenshots */
+@media (max-width: 400px) {
+  .contact-form-card {
+    padding: 18px 12px !important;
+  }
+  /* Inputs en mobile — police 16px pour éviter le zoom auto iOS */
+  .contact-form-card input,
+  .contact-form-card textarea,
+  .contact-form-card select {
+    font-size: 16px !important;
+  }
 }
