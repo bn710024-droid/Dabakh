@@ -121,7 +121,7 @@ function ContactForm() {
         <label style={labelStyle}>Message *</label>
         <textarea name="message" value={form.message} onChange={handleChange} required rows={5} placeholder="Décrivez votre projet, vos besoins, le site d'installation..." style={{ ...inputStyle, resize: 'vertical', minHeight: '130px' }} onFocus={(e) => { (e.target as HTMLElement).style.borderColor = '#E8600A' }} onBlur={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(232,96,10,0.2)' }} />
       </div>
-      <button type="submit" disabled={sending} , background: '#E8600A', color: '#FFFFFF', fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, background: '#E8600A', color: '#FFFFFF', fontFamily: 'Rajdhani, sans-serif', fontWeight: 700 style={{ padding: '16px 32px', fontSize: '13px', borderRadius: '2px', border: 'none', cursor: sending ? 'wait' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', letterSpacing: '0.12em', opacity: sending ? 0.8 : 1 }}>
+      <button type="submit" disabled={sending} style={{ padding: '16px 32px', fontSize: '13px', borderRadius: '2px', border: 'none', cursor: sending ? 'wait' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', letterSpacing: '0.12em', opacity: sending ? 0.8 : 1, background: '#E8600A', color: '#FFFFFF', fontFamily: 'Rajdhani, sans-serif', fontWeight: 700 }}>
         {sending ? 'Envoi en cours...' : <><Send size={16} /> Envoyer la Demande</>}
       </button>
     </form>
