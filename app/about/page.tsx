@@ -48,7 +48,7 @@ export default function AboutPage() {
             DABAKH<br/><span style={{color:'#F97316'}}>GLOBAL SERVICES</span>
           </h1>
           <p style={{fontFamily:'Rajdhani, sans-serif',fontSize:'17px',color:'rgba(255,255,255,0.75)',maxWidth:'540px',lineHeight:1.7}}>
-            Une entreprise sénégalaise d&apos;ingénierie industrielle, au service des industries et des institutions d&apos;Afrique de l&apos;Ouest depuis plus de 15 ans.
+            Une entreprise sénégalaise d&apos;ingénierie industrielle, au service des industries et des institutions d&apos;Afrique de l&apos;Ouest depuis plus de 13 ans.
           </p>
         </div>
       </section>
