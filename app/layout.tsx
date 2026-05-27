@@ -9,6 +9,34 @@ export const metadata: Metadata = {
   title: 'Dabakh Global Services SARL | Ingénierie Industrielle & Sécurité',
   description: 'Leader en instrumentation industrielle, télésurveillance, sécurité incendie et systèmes intelligents au Sénégal. Partenaire Hikvision, Dahua, DETNOV, Fuji Electric.',
   keywords: 'instrumentation industrielle, télésurveillance, sécurité incendie, Hikvision, Dakar, Sénégal',
+  metadataBase: new URL('https://dabakhglobalservices.com'),
+  openGraph: {
+    title: 'Dabakh Global Services SARL | Ingénierie Industrielle & Sécurité',
+    description: 'Leader en instrumentation industrielle, télésurveillance et sécurité incendie au Sénégal. Solutions technologiques de niveau international pour l\'Afrique de l\'Ouest.',
+    url: 'https://dabakhglobalservices.com',
+    siteName: 'Dabakh Global Services',
+    images: [
+      {
+        url: '/images/real-supervision.png',
+        width: 1200,
+        height: 630,
+        alt: 'Dabakh Global Services — Ingénierie Industrielle & Sécurité',
+      },
+    ],
+    locale: 'fr_SN',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Dabakh Global Services SARL | Ingénierie Industrielle & Sécurité',
+    description: 'Leader en instrumentation industrielle, télésurveillance et sécurité incendie au Sénégal.',
+    images: ['/images/real-supervision.png'],
+  },
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -18,6 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
       <body>
         <ProgressBar />
