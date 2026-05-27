@@ -148,7 +148,8 @@ export default function ContactPage() {
                 {[
                   { icon: <Phone size={18} />, label: 'Téléphone', lines: ['+221 33 877 50 78', '+221 77 651 19 85'], href: 'tel:+221338775078' },
                   { icon: <Mail size={18} />, label: 'Email', lines: ['contact@dabakhglobalservices.com', 'dabakhglobalservices@yahoo.com'], href: 'mailto:contact@dabakhglobalservices.com' },
-                  { icon: { icon: <MapPin size={18} />, label: 'Adresse', lines: ['105 Golf Sud, Derrière Hopital Dalal Jam', 'Dakar — Sénégal'], href: '#' },
+                  { icon: <MapPin size={18} />, label: 'Adresse', lines: ['105 Golf Sud, Derrière Hopital Dalal Jam', 'Dakar — Sénégal'], href: '#' },
+                ].map((item) => (
                   <a key={item.label} href={item.href} style={{ display: 'flex', gap: '16px', marginBottom: '28px', textDecoration: 'none' }}>
                     <div style={{ width: '44px', height: '44px', border: '1px solid rgba(232,96,10,0.25)', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#E8600A', flexShrink: 0 }}>{item.icon}</div>
                     <div>
