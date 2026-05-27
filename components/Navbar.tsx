@@ -43,14 +43,14 @@ export default function Navbar() {
       }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           
-          {/* Logo */}
+          {/* Logo — mix-blend-mode pour rendre le fond blanc du PNG transparent */}
           <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '10px', textDecoration: 'none' }}>
-            <div style={{ width: '52px', height: '52px', position: 'relative', flexShrink: 0 }}>
+            <div style={{ width: '52px', height: '52px', position: 'relative', flexShrink: 0, borderRadius: '8px', overflow: 'hidden' }}>
               <Image
                 src="/images/logo-large.png"
                 alt="Dabakh Global Services"
                 fill
-                style={{ objectFit: 'contain' }}
+                style={{ objectFit: 'contain', mixBlendMode: 'multiply' }}
               />
             </div>
             <div style={{ borderLeft: '2px solid #E8600A', paddingLeft: '10px' }}>
