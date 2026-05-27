@@ -33,17 +33,24 @@ function ContactForm() {
     setForm(f => ({ ...f, [e.target.name]: e.target.value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+ const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setSending(true)
-    // Simulate send — in production connect to a real API/emailjs
-    setTimeout(() => { setSending(false); setSent(true) }, 1500)
+    try {
+      await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.nom,
+          email: form.email,
+          phone: form.telephone,
+          message: `Entreprise: ${form.entreprise}\nService: ${form.service}\n\n${form.message}`
+        })
+      })
+    } catch (e) {}
+    setSending(false)
+    setSent(true)
   }
-
-  const inputStyle = {
-    width: '100%',
-    background: 'rgba(20,20,20,0.8)',
-    border: '1px solid rgba(232,96,10,0.2)',
     borderRadius: '2px',
     color: '#F5F5F0',
     fontFamily: 'Rajdhani, sans-serif',
