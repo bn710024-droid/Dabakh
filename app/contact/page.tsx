@@ -92,7 +92,7 @@ function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+      <div className="grid-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
         <div>
           <label style={labelStyle}>Nom complet *</label>
           <input type="text" name="nom" value={form.nom} onChange={handleChange} required placeholder="Papa Ousmane Diop" style={inputStyle} onFocus={(e) => { (e.target as HTMLElement).style.borderColor = '#E8600A' }} onBlur={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(232,96,10,0.2)' }} />
@@ -102,7 +102,7 @@ function ContactForm() {
           <input type="text" name="entreprise" value={form.entreprise} onChange={handleChange} placeholder="Votre entreprise" style={inputStyle} onFocus={(e) => { (e.target as HTMLElement).style.borderColor = '#E8600A' }} onBlur={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(232,96,10,0.2)' }} />
         </div>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+      <div className="grid-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
         <div>
           <label style={labelStyle}>Téléphone *</label>
           <input type="tel" name="telephone" value={form.telephone} onChange={handleChange} required placeholder="+221 XX XXX XX XX" style={inputStyle} onFocus={(e) => { (e.target as HTMLElement).style.borderColor = '#E8600A' }} onBlur={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(232,96,10,0.2)' }} />
