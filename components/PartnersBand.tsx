@@ -22,7 +22,9 @@ export default function PartnersBand() {
           NOS PARTENAIRES MONDIAUX
         </h2>
       </div>
-      <div style={{ overflow: 'hidden', position: 'relative' }}>
+
+      {/* DESKTOP — marquee animée */}
+      <div className="partners-marquee" style={{ overflow: 'hidden', position: 'relative' }}>
         <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '100px', background: 'linear-gradient(90deg,#E8600A,transparent)', zIndex: 2 }} />
         <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '100px', background: 'linear-gradient(270deg,#F97316,transparent)', zIndex: 2 }} />
         <div style={{ display: 'flex', width: 'max-content' }} className="marquee-track">
@@ -34,6 +36,22 @@ export default function PartnersBand() {
               flexShrink: 0, boxShadow: '0 4px 20px rgba(0,0,0,0.12)',
             }}>
               <Image src={p.src} alt={p.name} width={165} height={62} style={{ objectFit: 'contain', maxHeight: '58px' }} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* MOBILE — grille statique 3x2 (les 6 logos sur la même page sans scroll) */}
+      <div className="partners-mobile-grid" style={{ display: 'none', maxWidth: '1280px', margin: '0 auto', padding: '0 16px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
+          {partners.map((p) => (
+            <div key={p.name} style={{
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              height: '70px',
+              background: 'white', borderRadius: '6px', padding: '8px 10px',
+              boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+            }}>
+              <Image src={p.src} alt={p.name} width={110} height={42} style={{ objectFit: 'contain', maxHeight: '50px', width: 'auto' }} />
             </div>
           ))}
         </div>
