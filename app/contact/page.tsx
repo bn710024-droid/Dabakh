@@ -54,10 +54,10 @@ function ContactForm() {
 
   const inputStyle = {
     width: '100%',
-    background: 'rgba(20,20,20,0.8)',
+    background: '#FFFFFF',
     border: '1px solid rgba(232,96,10,0.2)',
-    borderRadius: '2px',
-    color: '#F5F5F0',
+    borderRadius: '4px',
+    color: '#111111',
     fontFamily: 'Rajdhani, sans-serif',
     fontSize: '15px',
     letterSpacing: '0.03em',
@@ -72,17 +72,17 @@ function ContactForm() {
     fontWeight: 700,
     letterSpacing: '0.2em',
     textTransform: 'uppercase' as const,
-    color: 'rgba(245,245,240,0.45)',
+    color: '#555555',
     display: 'block',
     marginBottom: '8px',
   }
 
   if (sent) {
     return (
-      <div style={{ textAlign: 'center', padding: '60px 24px', border: '1px solid rgba(34,160,80,0.3)', borderRadius: '4px', background: 'rgba(34,160,80,0.05)' }}>
+      <div style={{ textAlign: 'center', padding: '60px 24px', border: '1px solid rgba(34,160,80,0.3)', borderRadius: '6px', background: 'rgba(34,160,80,0.05)' }}>
         <CheckCircle size={56} color="#22A050" style={{ margin: '0 auto 24px' }} />
-        <h3 style={{ fontFamily: 'Bebas Neue', fontSize: '32px', color: '#F5F5F0', letterSpacing: '0.05em', marginBottom: '16px' }}>MESSAGE ENVOYÉ !</h3>
-        <p style={{ fontFamily: 'Rajdhani', fontSize: '15px', color: 'rgba(245,245,240,0.55)', lineHeight: 1.7, letterSpacing: '0.03em' }}>
+        <h3 style={{ fontFamily: 'Bebas Neue', fontSize: '32px', color: '#111111', letterSpacing: '0.05em', marginBottom: '16px' }}>MESSAGE ENVOYÉ !</h3>
+        <p style={{ fontFamily: 'Rajdhani', fontSize: '15px', color: '#666', lineHeight: 1.7, letterSpacing: '0.03em' }}>
           Notre équipe vous contactera dans les plus brefs délais.<br />
           En cas d&apos;urgence, appelez directement le <strong style={{ color: '#E8600A' }}>+221 33 877 50 78</strong>
         </p>
@@ -130,19 +130,20 @@ function ContactForm() {
 
 export default function ContactPage() {
   return (
-    <div style={{ background: '#0A0A0A', paddingTop: '80px' }}>
-      <section style={{ position: 'relative', padding: '60px 20px 70px', overflow: 'hidden' }}>
-        <div className="bg-grid" style={{ position: 'absolute', inset: 0, opacity: 0.5 }} />
+    <div style={{ background: '#FFFFFF', paddingTop: '80px' }}>
+      {/* Hero vert */}
+      <section style={{ position: 'relative', padding: '60px 20px 70px', overflow: 'hidden', background: 'linear-gradient(135deg,#1A7A3C 0%,#0F5A2A 55%,#1A5C10 100%)' }}>
+        <div className="bg-grid-green" style={{ position: 'absolute', inset: 0 }} />
         <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
-          <div style={{ fontFamily: 'JetBrains Mono', fontSize: '11px', letterSpacing: '0.3em', color: '#E8600A', textTransform: 'uppercase', marginBottom: '16px' }}>— Contact</div>
+          <div style={{ fontFamily: 'JetBrains Mono', fontSize: '11px', letterSpacing: '0.3em', color: '#F97316', textTransform: 'uppercase', marginBottom: '16px' }}>— Contact</div>
           <h1 className="contact-hero-title" style={{ fontFamily: 'Bebas Neue', fontSize: 'clamp(42px, 8vw, 100px)', letterSpacing: '0.03em', lineHeight: 0.95, marginBottom: '24px' }}>
-            <span style={{ color: '#F5F5F0' }}>PARLONS</span><br /><span style={{ color: '#E8600A' }}>DE VOTRE</span><br /><span style={{ color: '#F5F5F0' }}>PROJET</span>
+            <span style={{ color: '#FFFFFF' }}>PARLONS</span><br /><span style={{ color: '#F97316' }}>DE VOTRE</span><br /><span style={{ color: '#FFFFFF' }}>PROJET</span>
           </h1>
         </div>
       </section>
-      <section style={{ padding: '0 0 80px' }}>
+      {/* Contenu */}
+      <section style={{ padding: '60px 0 80px', background: '#F8F8F6' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 20px' }}>
-          {/* Grille principale — passe à 1 colonne sur mobile via className contact-main-grid */}
           <div className="contact-main-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1.6fr', gap: '48px', alignItems: 'start' }}>
             <FadeIn>
               <div>
@@ -152,18 +153,18 @@ export default function ContactPage() {
                   { icon: <MapPin size={18} />, label: 'Adresse', lines: ['105 Golf Sud, Derrière Hopital Dalal Jam', 'Dakar — Sénégal'], href: '#' },
                 ].map((item) => (
                   <a key={item.label} href={item.href} style={{ display: 'flex', gap: '16px', marginBottom: '24px', textDecoration: 'none' }}>
-                    <div style={{ width: '44px', height: '44px', border: '1px solid rgba(232,96,10,0.25)', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#E8600A', flexShrink: 0 }}>{item.icon}</div>
+                    <div style={{ width: '44px', height: '44px', border: '1px solid rgba(232,96,10,0.25)', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#E8600A', flexShrink: 0, background: '#FFFFFF' }}>{item.icon}</div>
                     <div style={{ minWidth: 0, flex: 1 }}>
                       <div style={{ fontFamily: 'Rajdhani', fontWeight: 700, fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#E8600A', marginBottom: '4px' }}>{item.label}</div>
-                      {item.lines.map((line) => (<div key={line} style={{ fontFamily: 'Rajdhani', fontSize: '14px', color: 'rgba(245,245,240,0.7)', wordBreak: 'break-word' }}>{line}</div>))}
+                      {item.lines.map((line) => (<div key={line} style={{ fontFamily: 'Rajdhani', fontSize: '14px', color: '#555', wordBreak: 'break-word' }}>{line}</div>))}
                     </div>
                   </a>
                 ))}
               </div>
             </FadeIn>
             <FadeIn delay={0.1}>
-              <div className="contact-form-card" style={{ background: 'rgba(14,14,14,0.9)', border: '1px solid rgba(232,96,10,0.15)', borderRadius: '6px', padding: '32px' }}>
-                <h2 style={{ fontFamily: 'Bebas Neue', fontSize: 'clamp(26px, 4vw, 36px)', color: '#F5F5F0', letterSpacing: '0.05em', marginBottom: '24px' }}>DEMANDE DE DEVIS</h2>
+              <div className="contact-form-card" style={{ background: '#FFFFFF', border: '1px solid rgba(232,96,10,0.15)', borderRadius: '6px', padding: '32px', boxShadow: '0 4px 24px rgba(0,0,0,0.06)' }}>
+                <h2 style={{ fontFamily: 'Bebas Neue', fontSize: 'clamp(26px, 4vw, 36px)', color: '#111111', letterSpacing: '0.05em', marginBottom: '24px' }}>DEMANDE DE DEVIS</h2>
                 <Suspense fallback={<div style={{color:'#888'}}>Chargement...</div>}>
                   <ContactForm />
                 </Suspense>
