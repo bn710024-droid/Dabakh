@@ -130,7 +130,7 @@ const realisations = [
 
 const stats = [
   {val:'200+',label:'Projets réalisés'},
-  {val:'15+',label:"Années d'expérience"},
+  {val:'13',label:"Années d'expérience"},
   {val:'50+',label:'Clients actifs'},
   {val:'100%',label:'Satisfaction client'},
 ]
