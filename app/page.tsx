@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Shield, Zap, Eye, Gauge, Award, Users, Briefcase, Globe, CheckCircle, Phone } from 'lucide-react'
 
-function FadeIn({ children, delay=0, direction='up' }: { children:React.ReactNode; delay?:number; direction?:'up'|'left'|'right'|'none' }) {
+function FadeIn({ children, delay=0, direction='up', style: extStyle }: { children:React.ReactNode; delay?:number; direction?:'up'|'left'|'right'|'none'; style?: React.CSSProperties }) {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
   useEffect(() => {
@@ -13,7 +13,7 @@ function FadeIn({ children, delay=0, direction='up' }: { children:React.ReactNod
     return ()=>observer.disconnect()
   },[])
   const t:Record<string,string>={up:'translateY(36px)',left:'translateX(-36px)',right:'translateX(36px)',none:'none'}
-  return <div ref={ref} style={{opacity:visible?1:0,transform:visible?'none':t[direction],transition:`opacity 0.7s ease ${delay}s, transform 0.7s ease ${delay}s`}}>{children}</div>
+  return <div ref={ref} style={{opacity:visible?1:0,transform:visible?'none':t[direction],transition:`opacity 0.7s ease ${delay}s, transform 0.7s ease ${delay}s`,...extStyle}}>{children}</div>
 }
 
 function Counter({ target, suffix='' }: { target:number; suffix?:string }) {
@@ -56,10 +56,10 @@ const stats = [
 const whyUs = [
   { icon:<Award size={30} color="#E8600A"/>,        title:'Expertise Certifiée',    desc:'Plus de 13 ans d\'expérience dans l\'ingénierie industrielle et la sécurité électronique au Sénégal.' },
   { icon:<Phone size={30} color="#E8600A"/>,         title:'Réactivité 24/7',        desc:'Notre équipe technique est disponible à toute heure pour l\'installation, la maintenance et les urgences.' },
-  { icon:<Globe size={30} color="#1A7A3C"/>,         title:'Partenaires Mondiaux',   desc:'Distributeur agréé de Hikvision, Dahua, DETNOV, Fuji Electric, Lacroix et NIVUS.' },
-  { icon:<Zap size={30} color="#1A7A3C"/>,           title:'Clé en Main',            desc:'De l\'étude technique à l\'installation et la maintenance, nous prenons en charge votre projet dans sa totalité.' },
+  { icon:<Globe size={30} color="#E8600A"/>,         title:'Partenaires Mondiaux',   desc:'Distributeur agréé de Hikvision, Dahua, DETNOV, Fuji Electric, Lacroix et NIVUS.' },
+  { icon:<Zap size={30} color="#E8600A"/>,           title:'Clé en Main',            desc:'De l\'étude technique à l\'installation et la maintenance, nous prenons en charge votre projet dans sa totalité.' },
   { icon:<Gauge size={30} color="#E8600A"/>,         title:'Solutions Sur Mesure',   desc:'Nos ingénieurs conçoivent des solutions adaptées à vos contraintes industrielles spécifiques.' },
-  { icon:<CheckCircle size={30} color="#1A7A3C"/>,   title:'Qualité Garantie',       desc:'Tous nos équipements sont certifiés et testés. Qualité de nos installations et service après-vente garanti.' },
+  { icon:<CheckCircle size={30} color="#E8600A"/>,   title:'Qualité Garantie',       desc:'Tous nos équipements sont certifiés et testés. Qualité de nos installations et service après-vente garanti.' },
 ]
 
 const produits = [
@@ -85,10 +85,11 @@ export default function HomePage() {
       {/* ══ HERO ══ */}
       <section style={{position:'relative',minHeight:'100vh',display:'flex',alignItems:'center',overflow:'hidden',background:'linear-gradient(135deg,#1A7A3C 0%,#0F5A2A 55%,#1A5C10 100%)'}}>
         <div className="bg-grid-green" style={{position:'absolute',inset:0}}/>
-        <div style={{position:'absolute',right:0,top:0,bottom:0,width:'50%',opacity:0.18}}>
+        {/* IMAGE HERO — opacité augmentée à 0.40 pour bien voir les personnels */}
+        <div style={{position:'absolute',right:0,top:0,bottom:0,width:'50%',opacity:0.40}}>
           <Image src="/images/real-equipe-kms3.jpg" alt="" fill style={{objectFit:'cover'}} priority/>
         </div>
-        <div style={{position:'absolute',inset:0,background:'linear-gradient(90deg,rgba(26,122,60,0.97) 40%,rgba(26,122,60,0.25) 100%)'}}/>
+        <div style={{position:'absolute',inset:0,background:'linear-gradient(90deg,rgba(26,122,60,0.97) 40%,rgba(26,122,60,0.15) 100%)'}}/>
         <div style={{maxWidth:'1280px',margin:'0 auto',padding:'140px 24px 100px',position:'relative',zIndex:1,width:'100%'}}>
           <div style={{maxWidth:'700px'}}>
             <div style={{display:'inline-flex',alignItems:'center',gap:'10px',background:'rgba(255,255,255,0.1)',border:'1px solid rgba(255,255,255,0.22)',padding:'8px 18px',borderRadius:'40px',marginBottom:'28px'}}>
@@ -186,13 +187,14 @@ export default function HomePage() {
               </h2>
             </div>
           </FadeIn>
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(260px,1fr))',gap:'18px'}}>
+          {/* FIX: alignItems stretch + height 100% sur chaque card pour hauteur uniforme */}
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(260px,1fr))',gap:'18px',alignItems:'stretch'}}>
             {whyUs.map((item,i)=>(
-              <FadeIn key={item.title} delay={i*0.08}>
-                <div className="card-green" style={{padding:'26px',borderRadius:'6px'}}>
+              <FadeIn key={item.title} delay={i*0.08} style={{height:'100%'}}>
+                <div className="card-green" style={{padding:'26px',borderRadius:'6px',height:'100%',display:'flex',flexDirection:'column'}}>
                   <div style={{marginBottom:'14px'}}>{item.icon}</div>
                   <h3 style={{fontFamily:'Bebas Neue, sans-serif',fontSize:'20px',letterSpacing:'0.06em',color:'#FFFFFF',marginBottom:'8px'}}>{item.title}</h3>
-                  <p style={{fontFamily:'Rajdhani, sans-serif',fontSize:'14px',color:'rgba(255,255,255,0.7)',lineHeight:1.75}}>{item.desc}</p>
+                  <p style={{fontFamily:'Rajdhani, sans-serif',fontSize:'14px',color:'rgba(255,255,255,0.7)',lineHeight:1.75,flex:1}}>{item.desc}</p>
                 </div>
               </FadeIn>
             ))}
