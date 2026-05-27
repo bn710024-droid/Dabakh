@@ -47,14 +47,14 @@ const services = [
 ]
 
 const stats = [
-  { value:15,  suffix:'+', label:'Années d\'Expérience', icon:<Award size={26} color="white"/> },
+  { value:13,  suffix:'+', label:'Années d\'Expérience', icon:<Award size={26} color="white"/> },
   { value:200, suffix:'+', label:'Projets Réalisés',     icon:<Briefcase size={26} color="white"/> },
   { value:6,   suffix:'',  label:'Marques Partenaires',  icon:<Globe size={26} color="white"/> },
   { value:500, suffix:'+', label:'Clients Satisfaits',   icon:<Users size={26} color="white"/> },
 ]
 
 const whyUs = [
-  { icon:<Award size={30} color="#E8600A"/>,        title:'Expertise Certifiée',    desc:'Plus de 15 ans d\'expérience dans l\'ingénierie industrielle et la sécurité électronique au Sénégal.' },
+  { icon:<Award size={30} color="#E8600A"/>,        title:'Expertise Certifiée',    desc:'Plus de 13 ans d\'expérience dans l\'ingénierie industrielle et la sécurité électronique au Sénégal.' },
   { icon:<Phone size={30} color="#E8600A"/>,         title:'Réactivité 24/7',        desc:'Notre équipe technique est disponible à toute heure pour l\'installation, la maintenance et les urgences.' },
   { icon:<Globe size={30} color="#1A7A3C"/>,         title:'Partenaires Mondiaux',   desc:'Distributeur agréé de Hikvision, Dahua, DETNOV, Fuji Electric, Lacroix et NIVUS.' },
   { icon:<Zap size={30} color="#1A7A3C"/>,           title:'Clé en Main',            desc:'De l\'étude technique à l\'installation et la maintenance, nous prenons en charge votre projet dans sa totalité.' },
@@ -105,8 +105,8 @@ export default function HomePage() {
               <Link href="/contact" className="btn-orange" style={{fontSize:'13px'}}>Demander un Devis <ArrowRight size={16}/></Link>
               <Link href="/services" className="btn-outline-white" style={{fontSize:'13px'}}>Nos Services</Link>
             </div>
-            <div style={{display:'flex',gap:'36px',flexWrap:'wrap',paddingTop:'28px',borderTop:'1px solid rgba(255,255,255,0.15)'}}>
-              {[{v:'15+',l:"Ans d'expérience"},{v:'200+',l:'Projets réalisés'},{v:'6',l:'Marques partenaires'}].map(s=>(
+            <div style={{display:'flex',gap:'36px',flexWrap:'wrap',paddingTop:'28px',borderTop:'1px solid rgba(255,255,255,0.13)'}}>
+              {[{v:'13+',l:"Ans d'expérience"},{v:'200+',l:'Projets réalisés'},{v:'6',l:'Marques partenaires'}].map(s=>(
                 <div key={s.l}>
                   <div style={{fontFamily:'Bebas Neue, sans-serif',fontSize:'38px',color:'#F97316',lineHeight:1}}>{s.v}</div>
                   <div style={{fontFamily:'Rajdhani, sans-serif',fontSize:'11px',letterSpacing:'0.1em',color:'rgba(255,255,255,0.55)',textTransform:'uppercase'}}>{s.l}</div>
