@@ -33,14 +33,14 @@ export const metadata: Metadata = {
     images: ['/images/real-supervision.png'],
   },
   icons: {
-  icon: [
-    { url: '/favicon-32.png', sizes: '32x32', type: 'image/png' },
-    { url: '/favicon-192.png', sizes: '192x192', type: 'image/png' },
-    { url: '/favicon-512.png', sizes: '512x512', type: 'image/png' },
-  ],
-  shortcut: '/favicon-32.png',
-  apple: '/favicon-192.png',
-}
+    icon: [
+      { url: '/favicon-32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/favicon-512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    shortcut: '/favicon-32.png',
+    apple: '/favicon-192.png',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -51,10 +51,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
         <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
-<link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192" />
-<link rel="apple-touch-icon" href="/favicon-192.png" />
-<meta name="msvalidate.01" content="C39A4E066BDC02EFA6EACDCD13650187" />
-</head>
+        <link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192" />
+        <link rel="apple-touch-icon" href="/favicon-192.png" />
+        <meta name="msvalidate.01" content="C39A4E066BDC02EFA6EACDCD13650187" />
       </head>
       <body>
         <ProgressBar />
