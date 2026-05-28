@@ -43,7 +43,6 @@ function ContactForm() {
     e.preventDefault()
     setErrorMsg('')
 
-    // Validation côté client (UX uniquement — le serveur revalide)
     if (!form.nom.trim() || form.nom.trim().length < 2) {
       setErrorMsg('Le nom complet est requis (minimum 2 caractères).')
       return
@@ -74,7 +73,14 @@ function ContactForm() {
           message: `${form.entreprise ? `Entreprise: ${form.entreprise}\n` : ''}${form.message}`
         })
       })
-      const data = await res.json()
+
+      let data: { success?: boolean; error?: string } = {}
+      try {
+        data = await res.json()
+      } catch {
+        data = {}
+      }
+
       if (!res.ok) {
         setErrorMsg(data.error || "Une erreur est survenue. Veuillez réessayer.")
         setSending(false)
@@ -130,15 +136,12 @@ function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }} noValidate>
-
-      {/* Message d'erreur global */}
       {errorMsg && (
         <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', background: '#FFF5F5', border: '1px solid rgba(220,38,38,0.25)', borderRadius: '4px', padding: '12px 16px' }}>
           <AlertCircle size={16} color="#DC2626" style={{ flexShrink: 0, marginTop: '2px' }} />
           <p style={{ margin: 0, fontFamily: 'Rajdhani', fontSize: '14px', color: '#DC2626', letterSpacing: '0.02em' }}>{errorMsg}</p>
         </div>
       )}
-
       <div className="grid-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
         <div>
           <label style={labelStyle}>Nom complet *</label>
@@ -153,7 +156,6 @@ function ContactForm() {
             onBlur={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(232,96,10,0.2)' }} />
         </div>
       </div>
-
       <div className="grid-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
         <div>
           <label style={labelStyle}>Téléphone *</label>
@@ -168,50 +170,34 @@ function ContactForm() {
             onBlur={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(232,96,10,0.2)' }} />
         </div>
       </div>
-
       <div>
-        {/* Objet facultatif — généré automatiquement si vide */}
         <label style={labelStyle}>
           Objet de la demande
           <span style={{ fontWeight: 400, color: '#999', marginLeft: '6px', fontSize: '10px', letterSpacing: '0.1em' }}>(optionnel)</span>
         </label>
-        <input
-          type="text"
-          name="service"
-          value={form.service}
+        <input type="text" name="service" value={form.service}
           onChange={(e) => { handleChange(e); if (prefilledFromUrl) setPrefilledFromUrl(false) }}
-          placeholder="Ex: Demande de devis pour Caméra Hikvision"
-          style={inputStyle}
+          placeholder="Ex: Demande de devis pour Caméra Hikvision" style={inputStyle}
           onFocus={(e) => { (e.target as HTMLElement).style.borderColor = '#E8600A' }}
-          onBlur={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(232,96,10,0.2)' }}
-        />
-        {/* Indicateur seulement si pré-rempli depuis l'URL (pas si l'utilisateur tape) */}
+          onBlur={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(232,96,10,0.2)' }} />
         {prefilledFromUrl && form.service && (
           <div style={{ fontFamily: 'JetBrains Mono', fontSize: '10px', color: '#1A7A3C', letterSpacing: '0.1em', marginTop: '6px', display: 'flex', alignItems: 'center', gap: '4px' }}>
             <CheckCircle size={10} /> Pré-rempli depuis la page Services
           </div>
         )}
       </div>
-
       <div>
         <label style={labelStyle}>Message *</label>
-        <textarea name="message" value={form.message} onChange={handleChange} required rows={5}
+        <textarea name="message" value={form.message} onChange={handleChange} rows={5}
           placeholder="Décrivez votre projet, vos besoins, le site d'installation..."
           style={{ ...inputStyle, resize: 'vertical', minHeight: '130px' }}
           onFocus={(e) => { (e.target as HTMLElement).style.borderColor = '#E8600A' }}
           onBlur={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(232,96,10,0.2)' }} />
       </div>
-
-      <button
-        type="submit"
-        disabled={sending}
-        style={{ padding: '16px 32px', fontSize: '13px', borderRadius: '4px', border: 'none', cursor: sending ? 'wait' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', letterSpacing: '0.12em', opacity: sending ? 0.8 : 1, background: '#E8600A', color: '#FFFFFF', fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, width: '100%', transition: 'background 0.2s ease' }}
-        onMouseEnter={(e) => { if (!sending) (e.target as HTMLElement).style.background = '#C94E00' }}
-        onMouseLeave={(e) => { (e.target as HTMLElement).style.background = '#E8600A' }}
-      >
+      <button type="submit" disabled={sending}
+        style={{ padding: '16px 32px', fontSize: '13px', borderRadius: '4px', border: 'none', cursor: sending ? 'wait' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', letterSpacing: '0.12em', opacity: sending ? 0.8 : 1, background: '#E8600A', color: '#FFFFFF', fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, width: '100%' }}>
         {sending ? 'Envoi en cours...' : <><Send size={16} /> Envoyer la Demande</>}
       </button>
-
       <p style={{ margin: 0, fontFamily: 'Rajdhani', fontSize: '12px', color: '#999', letterSpacing: '0.05em', textAlign: 'center' }}>
         * Champs obligatoires. Vos données ne sont jamais partagées.
       </p>
@@ -222,7 +208,6 @@ function ContactForm() {
 export default function ContactPage() {
   return (
     <div style={{ background: '#FFFFFF', paddingTop: '80px' }}>
-      {/* Hero vert */}
       <section style={{ position: 'relative', padding: '60px 20px 70px', overflow: 'hidden', background: 'linear-gradient(135deg,#1A7A3C 0%,#0F5A2A 55%,#1A5C10 100%)' }}>
         <div className="bg-grid-green" style={{ position: 'absolute', inset: 0 }} />
         <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
@@ -232,8 +217,6 @@ export default function ContactPage() {
           </h1>
         </div>
       </section>
-
-      {/* Contenu */}
       <section style={{ padding: '60px 0 80px', background: '#F8F8F6' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 20px' }}>
           <div className="contact-main-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1.6fr', gap: '48px', alignItems: 'start' }}>
