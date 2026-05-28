@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useRef, useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { Phone, Mail, MapPin, Send, CheckCircle } from 'lucide-react'
+import { Phone, Mail, MapPin, Send, CheckCircle, AlertCircle } from 'lucide-react'
 
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -23,31 +23,68 @@ function ContactForm() {
   const [form, setForm] = useState({ nom: '', entreprise: '', telephone: '', email: '', service: '', message: '' })
   const [sent, setSent] = useState(false)
   const [sending, setSending] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
+  const [prefilledFromUrl, setPrefilledFromUrl] = useState(false)
 
   useEffect(() => {
     const serviceParam = searchParams.get('service')
-    if (serviceParam) setForm(f => ({ ...f, service: decodeURIComponent(serviceParam) }))
+    if (serviceParam) {
+      setForm(f => ({ ...f, service: decodeURIComponent(serviceParam) }))
+      setPrefilledFromUrl(true)
+    }
   }, [searchParams])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setForm(f => ({ ...f, [e.target.name]: e.target.value }))
+    if (errorMsg) setErrorMsg('')
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setErrorMsg('')
+
+    // Validation côté client (UX uniquement — le serveur revalide)
+    if (!form.nom.trim() || form.nom.trim().length < 2) {
+      setErrorMsg('Le nom complet est requis (minimum 2 caractères).')
+      return
+    }
+    if (!form.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+      setErrorMsg("Veuillez entrer une adresse email valide.")
+      return
+    }
+    if (!form.telephone.trim()) {
+      setErrorMsg("Le numéro de téléphone est requis.")
+      return
+    }
+    if (!form.message.trim() || form.message.trim().length < 10) {
+      setErrorMsg("Votre message est trop court (minimum 10 caractères).")
+      return
+    }
+
     setSending(true)
     try {
-      await fetch('/api/contact', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: form.nom,
           email: form.email,
           phone: form.telephone,
-          message: `Entreprise: ${form.entreprise}\nService: ${form.service}\n\n${form.message}`
+          subject: form.service,
+          message: `${form.entreprise ? `Entreprise: ${form.entreprise}\n` : ''}${form.message}`
         })
       })
-    } catch (e) {}
+      const data = await res.json()
+      if (!res.ok) {
+        setErrorMsg(data.error || "Une erreur est survenue. Veuillez réessayer.")
+        setSending(false)
+        return
+      }
+    } catch {
+      setErrorMsg("Erreur réseau. Vérifiez votre connexion et réessayez.")
+      setSending(false)
+      return
+    }
     setSending(false)
     setSent(true)
   }
@@ -64,6 +101,7 @@ function ContactForm() {
     padding: '14px 16px',
     outline: 'none',
     transition: 'border-color 0.3s ease',
+    boxSizing: 'border-box' as const,
   }
 
   const labelStyle = {
@@ -91,39 +129,92 @@ function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
+    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }} noValidate>
+
+      {/* Message d'erreur global */}
+      {errorMsg && (
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', background: '#FFF5F5', border: '1px solid rgba(220,38,38,0.25)', borderRadius: '4px', padding: '12px 16px' }}>
+          <AlertCircle size={16} color="#DC2626" style={{ flexShrink: 0, marginTop: '2px' }} />
+          <p style={{ margin: 0, fontFamily: 'Rajdhani', fontSize: '14px', color: '#DC2626', letterSpacing: '0.02em' }}>{errorMsg}</p>
+        </div>
+      )}
+
       <div className="grid-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
         <div>
           <label style={labelStyle}>Nom complet *</label>
-          <input type="text" name="nom" value={form.nom} onChange={handleChange} required placeholder="Papa Ousmane Diop" style={inputStyle} onFocus={(e) => { (e.target as HTMLElement).style.borderColor = '#E8600A' }} onBlur={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(232,96,10,0.2)' }} />
+          <input type="text" name="nom" value={form.nom} onChange={handleChange} placeholder="Papa Ousmane Diop" style={inputStyle}
+            onFocus={(e) => { (e.target as HTMLElement).style.borderColor = '#E8600A' }}
+            onBlur={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(232,96,10,0.2)' }} />
         </div>
         <div>
           <label style={labelStyle}>Entreprise</label>
-          <input type="text" name="entreprise" value={form.entreprise} onChange={handleChange} placeholder="Votre entreprise" style={inputStyle} onFocus={(e) => { (e.target as HTMLElement).style.borderColor = '#E8600A' }} onBlur={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(232,96,10,0.2)' }} />
+          <input type="text" name="entreprise" value={form.entreprise} onChange={handleChange} placeholder="Votre entreprise" style={inputStyle}
+            onFocus={(e) => { (e.target as HTMLElement).style.borderColor = '#E8600A' }}
+            onBlur={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(232,96,10,0.2)' }} />
         </div>
       </div>
+
       <div className="grid-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
         <div>
           <label style={labelStyle}>Téléphone *</label>
-          <input type="tel" name="telephone" value={form.telephone} onChange={handleChange} required placeholder="+221 XX XXX XX XX" style={inputStyle} onFocus={(e) => { (e.target as HTMLElement).style.borderColor = '#E8600A' }} onBlur={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(232,96,10,0.2)' }} />
+          <input type="tel" name="telephone" value={form.telephone} onChange={handleChange} placeholder="+221 XX XXX XX XX" style={inputStyle}
+            onFocus={(e) => { (e.target as HTMLElement).style.borderColor = '#E8600A' }}
+            onBlur={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(232,96,10,0.2)' }} />
         </div>
         <div>
-          <label style={labelStyle}>Email</label>
-          <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="votre@email.com" style={inputStyle} onFocus={(e) => { (e.target as HTMLElement).style.borderColor = '#E8600A' }} onBlur={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(232,96,10,0.2)' }} />
+          <label style={labelStyle}>Email *</label>
+          <input type="email" name="email" value={form.email} onChange={handleChange} placeholder="votre@email.com" style={inputStyle}
+            onFocus={(e) => { (e.target as HTMLElement).style.borderColor = '#E8600A' }}
+            onBlur={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(232,96,10,0.2)' }} />
         </div>
       </div>
+
       <div>
-        <label style={labelStyle}>Objet de la demande *</label>
-        <input type="text" name="service" value={form.service} onChange={handleChange} required placeholder="Ex: Demande de devis pour Caméra Hikvision" style={{ ...inputStyle, borderColor: form.service ? 'rgba(232,96,10,0.5)' : 'rgba(232,96,10,0.2)' }} onFocus={(e) => { (e.target as HTMLElement).style.borderColor = '#E8600A' }} onBlur={(e) => { (e.target as HTMLElement).style.borderColor = form.service ? 'rgba(232,96,10,0.5)' : 'rgba(232,96,10,0.2)' }} />
-        {form.service && (<div style={{ fontFamily: 'JetBrains Mono', fontSize: '10px', color: '#22A050', letterSpacing: '0.1em', marginTop: '6px' }}>✓ Objet pré-rempli automatiquement</div>)}
+        {/* Objet facultatif — généré automatiquement si vide */}
+        <label style={labelStyle}>
+          Objet de la demande
+          <span style={{ fontWeight: 400, color: '#999', marginLeft: '6px', fontSize: '10px', letterSpacing: '0.1em' }}>(optionnel)</span>
+        </label>
+        <input
+          type="text"
+          name="service"
+          value={form.service}
+          onChange={(e) => { handleChange(e); if (prefilledFromUrl) setPrefilledFromUrl(false) }}
+          placeholder="Ex: Demande de devis pour Caméra Hikvision"
+          style={inputStyle}
+          onFocus={(e) => { (e.target as HTMLElement).style.borderColor = '#E8600A' }}
+          onBlur={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(232,96,10,0.2)' }}
+        />
+        {/* Indicateur seulement si pré-rempli depuis l'URL (pas si l'utilisateur tape) */}
+        {prefilledFromUrl && form.service && (
+          <div style={{ fontFamily: 'JetBrains Mono', fontSize: '10px', color: '#1A7A3C', letterSpacing: '0.1em', marginTop: '6px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <CheckCircle size={10} /> Pré-rempli depuis la page Services
+          </div>
+        )}
       </div>
+
       <div>
         <label style={labelStyle}>Message *</label>
-        <textarea name="message" value={form.message} onChange={handleChange} required rows={5} placeholder="Décrivez votre projet, vos besoins, le site d'installation..." style={{ ...inputStyle, resize: 'vertical', minHeight: '130px' }} onFocus={(e) => { (e.target as HTMLElement).style.borderColor = '#E8600A' }} onBlur={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(232,96,10,0.2)' }} />
+        <textarea name="message" value={form.message} onChange={handleChange} required rows={5}
+          placeholder="Décrivez votre projet, vos besoins, le site d'installation..."
+          style={{ ...inputStyle, resize: 'vertical', minHeight: '130px' }}
+          onFocus={(e) => { (e.target as HTMLElement).style.borderColor = '#E8600A' }}
+          onBlur={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(232,96,10,0.2)' }} />
       </div>
-      <button type="submit" disabled={sending} style={{ padding: '16px 32px', fontSize: '13px', borderRadius: '4px', border: 'none', cursor: sending ? 'wait' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', letterSpacing: '0.12em', opacity: sending ? 0.8 : 1, background: '#E8600A', color: '#FFFFFF', fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, width: '100%' }}>
+
+      <button
+        type="submit"
+        disabled={sending}
+        style={{ padding: '16px 32px', fontSize: '13px', borderRadius: '4px', border: 'none', cursor: sending ? 'wait' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', letterSpacing: '0.12em', opacity: sending ? 0.8 : 1, background: '#E8600A', color: '#FFFFFF', fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, width: '100%', transition: 'background 0.2s ease' }}
+        onMouseEnter={(e) => { if (!sending) (e.target as HTMLElement).style.background = '#C94E00' }}
+        onMouseLeave={(e) => { (e.target as HTMLElement).style.background = '#E8600A' }}
+      >
         {sending ? 'Envoi en cours...' : <><Send size={16} /> Envoyer la Demande</>}
       </button>
+
+      <p style={{ margin: 0, fontFamily: 'Rajdhani', fontSize: '12px', color: '#999', letterSpacing: '0.05em', textAlign: 'center' }}>
+        * Champs obligatoires. Vos données ne sont jamais partagées.
+      </p>
     </form>
   )
 }
@@ -141,6 +232,7 @@ export default function ContactPage() {
           </h1>
         </div>
       </section>
+
       {/* Contenu */}
       <section style={{ padding: '60px 0 80px', background: '#F8F8F6' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 20px' }}>
