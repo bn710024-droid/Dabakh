@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
     await resend.emails.send({
       from: 'Contact Dabakh <contact@dabakhglobalservices.com>',
       to: 'contact@dabakhglobalservices.com',
-      replyTo: email,
+      reply_to: email,
       subject: `[Dabakh] ${subject}`,
       html: `
         <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;background:#f8f8f6;padding:32px;border-radius:8px;">
