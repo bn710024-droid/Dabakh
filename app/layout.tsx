@@ -54,6 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192" />
         <link rel="apple-touch-icon" href="/favicon-192.png" />
         <meta name="msvalidate.01" content="C39A4E066BDC02EFA6EACDCD13650187" />
+        <meta name="google-site-verification" content="-wVCk79Uk2CZ8Q2NfMzEj8QV-0Ig8puZkVWJNfdsowM" />
       </head>
       <body>
         <ProgressBar />
