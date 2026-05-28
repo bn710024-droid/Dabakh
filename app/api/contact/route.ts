@@ -40,6 +40,12 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Format de données invalide.' }, { status: 400 });
   }
 
+  // 🍯 HONEYPOT — si rempli c'est un bot
+  const honeypot = sanitize(body.website ?? '');
+  if (honeypot) {
+    return NextResponse.json({ success: true });
+  }
+
   const name = sanitize(body.name);
   const email = sanitize(body.email);
   const phone = sanitize(body.phone);
