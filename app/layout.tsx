@@ -33,10 +33,14 @@ export const metadata: Metadata = {
     images: ['/images/real-supervision.png'],
   },
   icons: {
-    icon: '/favicon.svg',
-    shortcut: '/favicon.svg',
-    apple: '/favicon.svg',
-  },
+  icon: [
+    { url: '/favicon-32.png', sizes: '32x32', type: 'image/png' },
+    { url: '/favicon-192.png', sizes: '192x192', type: 'image/png' },
+    { url: '/favicon-512.png', sizes: '512x512', type: 'image/png' },
+  ],
+  shortcut: '/favicon-32.png',
+  apple: '/favicon-192.png',
+}
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
