@@ -53,7 +53,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* DG + Story — responsive */}
+      {/* DG + Story */}
       <section style={{padding:'96px 0',borderBottom:'1px solid #f0f0f0'}}>
         <div style={{maxWidth:'1280px',margin:'0 auto',padding:'0 24px'}}>
           <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(280px,1fr))',gap:'60px',alignItems:'center'}}>
@@ -144,12 +144,12 @@ export default function AboutPage() {
               </h2>
             </div>
           </FadeIn>
-          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))',gap:'18px'}}>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(220px,1fr))',gap:'18px',alignItems:'stretch'}}>
             {values.map((v,i)=>(
               <FadeIn key={v.title} delay={i*0.1}>
-                <div style={{padding:'26px',borderRadius:'6px',background:'rgba(255,255,255,0.1)',border:'1px solid rgba(255,255,255,0.18)',borderTop:'3px solid rgba(255,255,255,0.45)'}}>
-                  <div style={{fontFamily:'Bebas Neue, sans-serif',fontSize:'24px',letterSpacing:'0.06em',color:'#FFFFFF',marginBottom:'10px'}}>{v.title}</div>
-                  <p style={{fontFamily:'Rajdhani, sans-serif',fontSize:'14px',color:'rgba(255,255,255,0.7)',lineHeight:1.75}}>{v.desc}</p>
+                <div style={{padding:'26px',borderRadius:'6px',background:'rgba(255,255,255,0.1)',border:'1px solid rgba(255,255,255,0.18)',borderTop:'3px solid #F97316',height:'100%',boxSizing:'border-box'}}>
+                  <div style={{fontFamily:'Bebas Neue, sans-serif',fontSize:'24px',letterSpacing:'0.06em',color:'#F97316',marginBottom:'10px'}}>{v.title}</div>
+                  <p style={{fontFamily:'Rajdhani, sans-serif',fontSize:'14px',color:'rgba(255,255,255,0.7)',lineHeight:1.75,margin:0}}>{v.desc}</p>
                 </div>
               </FadeIn>
             ))}
@@ -191,7 +191,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Partenaires — page À Propos */}
       <PartnersBand />
     </div>
   )
