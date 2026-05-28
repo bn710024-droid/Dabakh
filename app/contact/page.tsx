@@ -20,7 +20,7 @@ function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 
 function ContactForm() {
   const searchParams = useSearchParams()
-  const [form, setForm] = useState({ nom: '', entreprise: '', telephone: '', email: '', service: '', message: '' })
+  const [form, setForm] = useState({ nom: '', entreprise: '', telephone: '', email: '', service: '', message: '', website: '' })
   const [sent, setSent] = useState(false)
   const [sending, setSending] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
@@ -42,6 +42,13 @@ function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setErrorMsg('')
+
+    // 🍯 Honeypot côté client
+    if (form.website) {
+      setSending(false)
+      setSent(true)
+      return
+    }
 
     if (!form.nom.trim() || form.nom.trim().length < 2) {
       setErrorMsg('Le nom complet est requis (minimum 2 caractères).')
@@ -70,16 +77,13 @@ function ContactForm() {
           email: form.email,
           phone: form.telephone,
           subject: form.service,
+          website: form.website,
           message: `${form.entreprise ? `Entreprise: ${form.entreprise}\n` : ''}${form.message}`
         })
       })
 
       let data: { success?: boolean; error?: string } = {}
-      try {
-        data = await res.json()
-      } catch {
-        data = {}
-      }
+      try { data = await res.json() } catch { data = {} }
 
       if (!res.ok) {
         setErrorMsg(data.error || "Une erreur est survenue. Veuillez réessayer.")
@@ -136,12 +140,19 @@ function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }} noValidate>
+
+      {/* 🍯 Honeypot invisible */}
+      <div style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }} aria-hidden="true">
+        <input type="text" name="website" value={form.website} onChange={handleChange} tabIndex={-1} autoComplete="off" />
+      </div>
+
       {errorMsg && (
         <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', background: '#FFF5F5', border: '1px solid rgba(220,38,38,0.25)', borderRadius: '4px', padding: '12px 16px' }}>
           <AlertCircle size={16} color="#DC2626" style={{ flexShrink: 0, marginTop: '2px' }} />
           <p style={{ margin: 0, fontFamily: 'Rajdhani', fontSize: '14px', color: '#DC2626', letterSpacing: '0.02em' }}>{errorMsg}</p>
         </div>
       )}
+
       <div className="grid-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
         <div>
           <label style={labelStyle}>Nom complet *</label>
@@ -156,6 +167,7 @@ function ContactForm() {
             onBlur={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(232,96,10,0.2)' }} />
         </div>
       </div>
+
       <div className="grid-2col" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
         <div>
           <label style={labelStyle}>Téléphone *</label>
@@ -170,6 +182,7 @@ function ContactForm() {
             onBlur={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(232,96,10,0.2)' }} />
         </div>
       </div>
+
       <div>
         <label style={labelStyle}>
           Objet de la demande
@@ -186,6 +199,7 @@ function ContactForm() {
           </div>
         )}
       </div>
+
       <div>
         <label style={labelStyle}>Message *</label>
         <textarea name="message" value={form.message} onChange={handleChange} rows={5}
@@ -194,10 +208,12 @@ function ContactForm() {
           onFocus={(e) => { (e.target as HTMLElement).style.borderColor = '#E8600A' }}
           onBlur={(e) => { (e.target as HTMLElement).style.borderColor = 'rgba(232,96,10,0.2)' }} />
       </div>
+
       <button type="submit" disabled={sending}
         style={{ padding: '16px 32px', fontSize: '13px', borderRadius: '4px', border: 'none', cursor: sending ? 'wait' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', letterSpacing: '0.12em', opacity: sending ? 0.8 : 1, background: '#E8600A', color: '#FFFFFF', fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, width: '100%' }}>
         {sending ? 'Envoi en cours...' : <><Send size={16} /> Envoyer la Demande</>}
       </button>
+
       <p style={{ margin: 0, fontFamily: 'Rajdhani', fontSize: '12px', color: '#999', letterSpacing: '0.05em', textAlign: 'center' }}>
         * Champs obligatoires. Vos données ne sont jamais partagées.
       </p>
