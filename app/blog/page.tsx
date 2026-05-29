@@ -20,7 +20,7 @@ function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
 
 const articles = [
   {
-    slug: '#',
+    slug: '/blog/comment-choisir-systeme-cctv',
     category: 'Télésurveillance',
     categoryColor: '#E8600A',
     title: 'Comment choisir le bon système CCTV pour votre site industriel ?',
