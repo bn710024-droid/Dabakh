@@ -34,7 +34,7 @@ const articles = [
     category: 'Sécurité Incendie',
     categoryColor: '#1A7A3C',
     title: 'Normes de sécurité incendie au Sénégal : ce que dit la réglementation',
-    excerpt: 'Toute installation industrielle est soumise à des obligations légales en matière de détection et protection incendie. Voici ce qu'il faut savoir pour être en conformité.',
+    excerpt: "Toute installation industrielle est soumise à des obligations légales en matière de détection et protection incendie. Voici ce qu'il faut savoir pour être en conformité.",
     date: '2 Mai 2026',
     readTime: '8 min',
     image: '/images/real-detecteur-install.png',
