@@ -32,6 +32,7 @@ const expertise=[
   'PID & vannes de régulation',
   'Contrôle d\'accès biométrique',
   'Télégestion à distance (Lacroix/IGEL)',
+  'Réseau & câblage structuré',
   'Maintenance industrielle préventive',
   'Systèmes industriels intelligents',
 ]
