@@ -100,7 +100,7 @@ export default function HomePage() {
               SÉCURITÉ<br/><span style={{color:'#F97316'}}>& CONTRÔLE</span><br/>INDUSTRIEL
             </h1>
             <p style={{fontFamily:'Rajdhani, sans-serif',fontSize:'clamp(15px,2vw,18px)',color:'rgba(255,255,255,0.8)',lineHeight:1.75,maxWidth:'520px',marginBottom:'44px',letterSpacing:'0.03em'}}>
-              Leader en instrumentation industrielle, télésurveillance et sécurité incendie au Sénégal. Solutions technologiques de niveau international pour l&apos;Afrique de l&apos;Ouest.
+              Leader en instrumentation industrielle, télésurveillance et sécurité incendie au Sénégal. Solutions technologiques de niveau national et international.
             </p>
             <div style={{display:'flex',gap:'14px',flexWrap:'wrap',marginBottom:'56px'}}>
               <Link href="/contact" className="btn-orange" style={{fontSize:'13px'}}>Demander un Devis <ArrowRight size={16}/></Link>
