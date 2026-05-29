@@ -15,6 +15,9 @@ const clients = [
   { src: '/images/client-css.png',     name: 'CSS' },
   { src: '/images/client-sococim.png', name: 'SOCOCIM' },
   { src: '/images/client-ics.png',     name: 'ICS' },
+  { src: '/images/client-cde.png',     name: 'CDE' },
+  { src: '/images/client-ofor.png',    name: 'OFOR' },
+  { src: '/images/client-ussein.png',  name: 'USSEIN' },
 ]
 
 export default function PartnersSection() {

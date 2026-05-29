@@ -61,7 +61,7 @@ export default function Footer() {
           {/* Navigation */}
           <div>
             <div style={{ fontFamily: 'Bebas Neue, sans-serif', fontSize: '16px', letterSpacing: '0.1em', color: '#E8600A', marginBottom: '16px', paddingBottom: '10px', borderBottom: '1px solid rgba(232,96,10,0.25)' }}>Navigation</div>
-            {[{ href: '/', label: 'Accueil' }, { href: '/about', label: 'À Propos' }, { href: '/services', label: 'Services' }, { href: '/products', label: 'Produits' }, { href: '/realisations', label: 'Réalisations' }, { href: '/contact', label: 'Contact' }].map(l => (
+            {[{ href: '/', label: 'Accueil' }, { href: '/about', label: 'À Propos' }, { href: '/services', label: 'Services' }, { href: '/products', label: 'Produits' }, { href: '/realisations', label: 'Réalisations' }, { href: '/blog', label: 'Blog' }, { href: '/contact', label: 'Contact' }].map(l => (
               <Link key={l.href} href={l.href} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontFamily: 'Rajdhani, sans-serif', fontSize: '13px', color: 'rgba(255,255,255,0.45)', textDecoration: 'none', padding: '4px 0' }}>
                 <span style={{ color: '#E8600A', fontSize: '8px' }}>▸</span> {l.label}
               </Link>

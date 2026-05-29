@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Shield, Zap, Eye, Gauge, Award, Users, Briefcase, Globe, CheckCircle, Phone } from 'lucide-react'
+import PartnersSection from '@/components/PartnersSection'
 
 function FadeIn({ children, delay=0, direction='up', style: extStyle }: { children:React.ReactNode; delay?:number; direction?:'up'|'left'|'right'|'none'; style?: React.CSSProperties }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -32,7 +33,7 @@ function Counter({ target, suffix='' }: { target:number; suffix?:string }) {
         }
         requestAnimationFrame(tick)
       }
-    }, {threshold:0.3})
+    }, {threshold:0.1})
     if(ref.current) observer.observe(ref.current)
     return ()=>observer.disconnect()
   },[target])
@@ -269,6 +270,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ══ PARTENAIRES & CLIENTS ══ */}
+      <PartnersSection />
 
       {/* ══ CTA FINAL ══ */}
       <section style={{padding:'96px 24px',background:'linear-gradient(135deg,#111111 0%,#1A1A1A 100%)',textAlign:'center'}}>
