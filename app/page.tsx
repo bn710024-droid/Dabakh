@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Shield, Zap, Eye, Gauge, Award, Users, Briefcase, Globe, CheckCircle, Phone } from 'lucide-react'
-import PartnersBand from '@/components/PartnersBand'
 
 function FadeIn({ children, delay=0, direction='up', style: extStyle }: { children:React.ReactNode; delay?:number; direction?:'up'|'left'|'right'|'none'; style?: React.CSSProperties }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -270,9 +269,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* ══ PARTENAIRES ══ */}
-      <PartnersBand />
 
       {/* ══ CTA FINAL ══ */}
       <section style={{padding:'96px 24px',background:'linear-gradient(135deg,#111111 0%,#1A1A1A 100%)',textAlign:'center'}}>
