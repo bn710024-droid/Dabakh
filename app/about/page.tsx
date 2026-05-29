@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, CheckCircle } from 'lucide-react'
 import PartnersBand from '@/components/PartnersBand'
+import ClientsBand from '@/components/ClientsBand'
 
 function FadeIn({ children, delay=0, direction='up' }: { children:React.ReactNode; delay?:number; direction?:'up'|'left'|'right'|'none' }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -192,6 +193,7 @@ export default function AboutPage() {
       </section>
 
       <PartnersBand />
+      <ClientsBand />
     </div>
   )
 }
