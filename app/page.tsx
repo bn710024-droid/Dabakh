@@ -65,7 +65,7 @@ const whyUs = [
 const produits = [
   { src:'/images/cam-turret-black.png', label:'Caméra Turret Hikvision',   brand:'Hikvision' },
   { src:'/images/cam-dahua-color.png',  label:'Caméra Dahua Full Color',   brand:'Dahua' },
-  { src:'/images/real-nvr-screen.jpg',  label:'NVR Hikvision — Enregistreur Numérique', brand:'Hikvision' },
+  { src:'/images/nvr-hikvision.png',    label:'NVR Hikvision — Enregistreur Numérique', brand:'Hikvision' },
   { src:'/images/camera-ptz.png',       label:'Caméra PTZ Speed Dome',     brand:'Hikvision' },
   { src:'/images/camera-dome.png',      label:'Caméra Dôme Hikvision',     brand:'Hikvision' },
   { src:'/images/access-control.png',   label:'Terminal Biométrique',      brand:'Hikvision' },
