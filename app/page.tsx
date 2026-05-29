@@ -74,7 +74,7 @@ const produits = [
 
 const realisationPhotos = [
   { src:'/images/real-equipe-kms3.jpg',    label:'Station KMS3',           cat:'Instrumentation' },
-  { src:'/images/real-sococim-cctv.jpg',   label:'Site SOCOCIM — 16 cam', cat:'Télésurveillance' },
+  { src:'/images/real-sococim-cctv.jpg',   label:'Site ICS — 16 cam',     cat:'Télésurveillance' },
   { src:'/images/real-equipe-orange.png',  label:'Équipe Terrain',        cat:'Métrologie' },
   { src:'/images/real-armoire.png',        label:'Armoire de Contrôle',   cat:'Télégestion' },
 ]

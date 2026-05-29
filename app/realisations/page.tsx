@@ -28,12 +28,12 @@ const realisations = [
     color:'#1A7A3C',
   },
   {
-    title:'Supervision CCTV — Site SOCOCIM Industries',
+    title:'Supervision CCTV — ICS (Industries Chimiques du Sénégal)',
     category:'Télésurveillance',
-    location:'SOCOCIM Industries, Sénégal',
+    location:'ICS — Industries Chimiques du Sénégal',
     img:'/images/real-sococim-cctv.jpg',
-    desc:'Déploiement d\'un système de vidéosurveillance complet sur le site industriel SOCOCIM. 16 caméras couvrant la totalité du site : pont bascule, portes, zones soufre et charbon, magasins et postes de garde.',
-    tags:['SOCOCIM','Hikvision','16 caméras','Industriel'],
+    desc:'Déploiement d\'un système de vidéosurveillance complet sur le site industriel ICS (Industries Chimiques du Sénégal). 16 caméras couvrant la totalité du site : pont bascule, portes, zones soufre et charbon, magasins et postes de garde.',
+    tags:['ICS','Hikvision','16 caméras','Industriel'],
     color:'#E8600A',
   },
   {
