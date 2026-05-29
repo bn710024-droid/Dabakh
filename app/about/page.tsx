@@ -29,6 +29,7 @@ const expertise=[
   'Instrumentation industrielle & métrologie',
   'Systèmes de télésurveillance CCTV',
   'Sécurité incendie & détection DETNOV',
+  'Système de détection d\'incendie et d\'extinction',
   'PID & vannes de régulation',
   'Contrôle d\'accès biométrique',
   'Télégestion à distance (Lacroix/IGEL)',
