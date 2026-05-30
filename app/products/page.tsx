@@ -79,7 +79,7 @@ const hikProducts: Product[] = [
   },
   {
     name: 'PTZ 4MP 42x DarkFighter',
-    ref: 'DS-2DF8442IXS-AELW',
+    ref: 'DS-2DF8442IXS-AELW(T2)',
     img: '/images/hik-cam-8.jpeg',
     desc: 'Caméra PTZ haut de gamme avec zoom 42x, essuie-glace intégré et portée infrarouge de 200m.',
     specs: ['Résolution 4MP', 'Zoom 42x', 'IR 200m', 'IP66 + IK10', 'Essuie-glace'],
