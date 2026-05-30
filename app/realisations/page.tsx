@@ -68,7 +68,7 @@ const realisations: {title:string;category:string;location:string;img:string;pos
   {
     title:'Centre de Supervision CCTV Multi-Sites',
     category:'Télésurveillance',
-    location:'Dakar, Sénégal',
+    location:'Sen\'Eau — KMS1-2',
     img:'/images/real-supervision.png',
     pos:'center center',
     desc:'Déploiement d\'un centre de supervision avec écran multi-caméras Hikvision iVMS-4200. Surveillance en temps réel de plusieurs sites industriels et commerciaux.',
