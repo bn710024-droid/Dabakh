@@ -253,21 +253,22 @@ function Carousel({ products, color, brand, onOpenModal, onQuote }: {
           <div
             key={product.name + i}
             onClick={() => 'ref' in product ? onOpenModal(product) : undefined}
-            onMouseEnter={() => setPaused(true)}
-            onMouseLeave={() => setPaused(false)}
             style={{
               background:'#FFFFFF', border:`1px solid rgba(${color==='#E8600A'?'232,96,10':'26,122,60'},0.15)`,
               borderRadius:'8px', overflow:'hidden', display:'flex', flexDirection:'column',
               cursor:'ref' in product ? 'pointer' : 'default',
-              transition:'all 0.35s ease', boxShadow:'0 2px 12px rgba(0,0,0,0.05)',
+              transition:'transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.5s ease, border-color 0.5s ease',
+              boxShadow:'0 2px 12px rgba(0,0,0,0.05)',
             }}
-            onMouseOver={e => {
+            onMouseEnter={e => {
+              setPaused(true)
               const el = e.currentTarget as HTMLElement
-              el.style.transform = 'scale(1.03)'
-              el.style.boxShadow = '0 12px 36px rgba(0,0,0,0.14)'
+              el.style.transform = 'scale(1.04)'
+              el.style.boxShadow = '0 16px 48px rgba(0,0,0,0.16)'
               el.style.borderColor = color
             }}
-            onMouseOut={e => {
+            onMouseLeave={e => {
+              setPaused(false)
               const el = e.currentTarget as HTMLElement
               el.style.transform = 'scale(1)'
               el.style.boxShadow = '0 2px 12px rgba(0,0,0,0.05)'
