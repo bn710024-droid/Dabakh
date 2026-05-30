@@ -59,7 +59,7 @@ const realisations: {title:string;category:string;location:string;img:string;pos
   {
     title:'Installation Canalisation — Débitmétrie',
     category:'Métrologie',
-    location:'Station hydraulique',
+    location:'Station d\'eau traitée Sen\'Eau — KMS1-2',
     img:'/images/real-canalisation-bleue.jpg',
     desc:'Installation de capteurs de débit sur grande canalisation DN600. Intervention de nos techniciens pour la pose et le raccordement d\'instruments de mesure ultrasonique sur réseau hydraulique principal.',
     tags:['Débit','DN600','Ultrasonique','Hydraulique'],
