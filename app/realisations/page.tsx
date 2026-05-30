@@ -90,7 +90,6 @@ const realisations: {title:string;category:string;location:string;img:string;bef
     category:'Télégestion',
     location:'CSS — Compagnie Sucrière Sénégalaise',
     img:'/images/real-sofrel.png',
-    beforeImg:'/images/real-sofrel-avant.jpeg',
     pos:'center center',
     desc:'Installation d\'une unité de télégestion Sofrel Box Lacroix pour supervision à distance des installations d\'eau et d\'assainissement. Configuration complète et mise en réseau.',
     tags:['CSS','Lacroix','Sofrel','Télégestion','SCADA'],
