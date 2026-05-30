@@ -173,15 +173,13 @@ const dahProducts: Product[] = [
   },
 ]
 
-const allSurveillanceProducts = [...hikProducts, ...dahProducts]
-
 const categories = [
   {
     id: 'surveillance',
     label: 'Télésurveillance',
     color: '#E8600A',
     brand: 'Hikvision · Dahua',
-    products: allSurveillanceProducts,
+    products: hikProducts,
   },
   {
     id: 'access',
@@ -381,22 +379,60 @@ export default function ProductsPage() {
       {/* ══ Products ══ */}
       <section style={{ padding: '80px 0', background: '#F8F8F6' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 24px' }}>
-          <FadeIn>
-            <div style={{ marginBottom: '48px' }}>
-              <div style={{ fontFamily: 'JetBrains Mono', fontSize: '10px', letterSpacing: '0.25em', color: activeData.color, textTransform: 'uppercase', marginBottom: '8px' }}>{activeData.brand}</div>
-              <h2 style={{ fontFamily: 'Bebas Neue', fontSize: 'clamp(36px, 5vw, 60px)', color: '#111111', letterSpacing: '0.04em' }}>
-                {activeData.label} <span style={{ color: activeData.color }}>({activeData.products.length} produits)</span>
-              </h2>
-            </div>
-          </FadeIn>
 
-          <Carousel
-            products={activeData.products as Product[]}
-            color={activeData.color}
-            brand={activeData.brand}
-            onOpenModal={openModal}
-            onQuote={requestQuote}
-          />
+          {activeCategory === 'surveillance' ? (
+            <>
+              {/* Hikvision */}
+              <FadeIn>
+                <div style={{ marginBottom: '36px' }}>
+                  <div style={{ display:'flex', alignItems:'center', gap:'16px', marginBottom:'6px' }}>
+                    <div style={{ fontFamily:'JetBrains Mono', fontSize:'10px', letterSpacing:'0.25em', color:'#E8600A', textTransform:'uppercase' }}>Hikvision</div>
+                    <div style={{ flex:1, height:'1px', background:'rgba(232,96,10,0.2)' }}/>
+                    <div style={{ fontFamily:'Rajdhani', fontSize:'12px', color:'#999', fontWeight:600 }}>{hikProducts.length} produits</div>
+                  </div>
+                  <h2 style={{ fontFamily:'Bebas Neue', fontSize:'clamp(28px,4vw,48px)', color:'#111', letterSpacing:'0.04em' }}>
+                    CAMÉRAS <span style={{ color:'#E8600A' }}>HIKVISION</span>
+                  </h2>
+                </div>
+              </FadeIn>
+              <Carousel products={hikProducts} color='#E8600A' brand='Hikvision' onOpenModal={openModal} onQuote={requestQuote} />
+
+              {/* Séparateur */}
+              <div style={{ margin:'64px 0 48px', display:'flex', alignItems:'center', gap:'20px' }}>
+                <div style={{ flex:1, height:'1px', background:'#eee' }}/>
+                <div style={{ fontFamily:'JetBrains Mono', fontSize:'10px', letterSpacing:'0.2em', color:'#bbb', textTransform:'uppercase' }}>Dahua Technology</div>
+                <div style={{ flex:1, height:'1px', background:'#eee' }}/>
+              </div>
+
+              {/* Dahua */}
+              <FadeIn>
+                <div style={{ marginBottom:'36px' }}>
+                  <div style={{ display:'flex', alignItems:'center', gap:'16px', marginBottom:'6px' }}>
+                    <div style={{ fontFamily:'JetBrains Mono', fontSize:'10px', letterSpacing:'0.25em', color:'#E8600A', textTransform:'uppercase' }}>Dahua</div>
+                    <div style={{ flex:1, height:'1px', background:'rgba(232,96,10,0.2)' }}/>
+                    <div style={{ fontFamily:'Rajdhani', fontSize:'12px', color:'#999', fontWeight:600 }}>{dahProducts.length} produits</div>
+                  </div>
+                  <h2 style={{ fontFamily:'Bebas Neue', fontSize:'clamp(28px,4vw,48px)', color:'#111', letterSpacing:'0.04em' }}>
+                    CAMÉRAS <span style={{ color:'#E8600A' }}>DAHUA</span>
+                  </h2>
+                </div>
+              </FadeIn>
+              <Carousel products={dahProducts} color='#E8600A' brand='Dahua' onOpenModal={openModal} onQuote={requestQuote} />
+            </>
+          ) : (
+            <>
+              <FadeIn>
+                <div style={{ marginBottom: '48px' }}>
+                  <div style={{ fontFamily: 'JetBrains Mono', fontSize: '10px', letterSpacing: '0.25em', color: activeData.color, textTransform: 'uppercase', marginBottom: '8px' }}>{activeData.brand}</div>
+                  <h2 style={{ fontFamily: 'Bebas Neue', fontSize: 'clamp(36px, 5vw, 60px)', color: '#111111', letterSpacing: '0.04em' }}>
+                    {activeData.label} <span style={{ color: activeData.color }}>({activeData.products.length} produits)</span>
+                  </h2>
+                </div>
+              </FadeIn>
+              <Carousel products={activeData.products as Product[]} color={activeData.color} brand={activeData.brand} onOpenModal={openModal} onQuote={requestQuote} />
+            </>
+          )}
+
         </div>
       </section>
 
