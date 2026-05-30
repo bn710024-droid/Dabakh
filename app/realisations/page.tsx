@@ -33,8 +33,8 @@ const realisations: {title:string;category:string;location:string;img:string;pos
     location:'ICS — Industries Chimiques du Sénégal',
     img:'/images/real-sococim-cctv.jpg',
     pos:'center center',
-    desc:'Déploiement d\'un système de vidéosurveillance complet sur le site industriel ICS (Industries Chimiques du Sénégal). 16 caméras couvrant la totalité du site : pont bascule, portes, zones soufre et charbon, magasins et postes de garde.',
-    tags:['ICS','Hikvision','16 caméras','Industriel'],
+    desc:'Déploiement d\'un système de vidéosurveillance complet sur les sites industriels ICS (Industries Chimiques du Sénégal). Plus de 300 caméras couvrant la totalité des sites : Mines Darou, MBAO PORT, Cité Mbaye Mbaye.',
+    tags:['ICS','Hikvision','300+ caméras','Industriel','Safety IA Camera'],
     color:'#E8600A',
   },
   {
