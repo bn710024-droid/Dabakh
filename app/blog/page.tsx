@@ -70,7 +70,7 @@ const articles = [
     image: '/images/real-nvr-screen.jpg',
   },
   {
-    slug: '#',
+    slug: '/blog/smart-building-telegestion-infrastructures',
     category: 'Télégestion',
     categoryColor: '#1A7A3C',
     title: 'Smart Building : comment la télégestion transforme la gestion des infrastructures',
