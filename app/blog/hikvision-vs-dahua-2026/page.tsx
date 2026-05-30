@@ -54,8 +54,9 @@ export default function ArticleHikvisionDahua() {
         <h2 style={{ fontFamily: 'Bebas Neue', fontSize: 'clamp(20px,2.5vw,30px)', letterSpacing: '0.05em', color: '#111', marginBottom: '20px', paddingBottom: '10px', borderBottom: '2px solid #F0F0F0' }}>Présentation des deux leaders</h2>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '40px' }}>
           <div style={{ border: '2px solid #E8600A', borderRadius: '8px', overflow: 'hidden' }}>
-            <div style={{ background: '#E8600A', padding: '14px 20px' }}>
-              <img src="/images/logo-hikvision.png" alt="Hikvision" style={{ height: '32px', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
+            <div style={{ background: '#E8600A', padding: '14px 20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <img src="/images/logo-hikvision.png" alt="Hikvision" style={{ height: '28px', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
+              <span style={{ fontFamily: 'Bebas Neue', fontSize: '22px', letterSpacing: '0.1em', color: '#FFFFFF' }}>HIKVISION</span>
             </div>
             <div style={{ padding: '20px' }}>
               <ul style={{ margin: 0, padding: '0 0 0 16px' }}>
@@ -66,8 +67,9 @@ export default function ArticleHikvisionDahua() {
             </div>
           </div>
           <div style={{ border: '2px solid #1A7A3C', borderRadius: '8px', overflow: 'hidden' }}>
-            <div style={{ background: '#1A7A3C', padding: '14px 20px' }}>
-              <img src="/images/logo-dahua.png" alt="Dahua" style={{ height: '32px', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
+            <div style={{ background: '#1A7A3C', padding: '14px 20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <img src="/images/logo-dahua.png" alt="Dahua" style={{ height: '28px', objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
+              <span style={{ fontFamily: 'Bebas Neue', fontSize: '22px', letterSpacing: '0.1em', color: '#FFFFFF' }}>DAHUA</span>
             </div>
             <div style={{ padding: '20px' }}>
               <ul style={{ margin: 0, padding: '0 0 0 16px' }}>
