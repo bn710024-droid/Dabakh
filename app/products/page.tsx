@@ -141,6 +141,104 @@ const categories = [
   },
 ]
 
+function Carousel({ products, color, brand, onOpenModal, onQuote }: {
+  products: Product[]
+  color: string
+  brand: string
+  onOpenModal: (p: Product) => void
+  onQuote: (name: string) => void
+}) {
+  const [current, setCurrent] = useState(0)
+  const [paused, setPaused] = useState(false)
+  const total = products.length
+  const visible = 4
+
+  useEffect(() => {
+    if (paused) return
+    const t = setInterval(() => {
+      setCurrent(c => (c + 1) % total)
+    }, 5000)
+    return () => clearInterval(t)
+  }, [paused, total])
+
+  const prev = () => setCurrent(c => (c - 1 + total) % total)
+  const next = () => setCurrent(c => (c + 1) % total)
+
+  // 4 produits visibles en boucle
+  const visible4 = Array.from({ length: visible }, (_, i) => products[(current + i) % total])
+
+  return (
+    <div style={{ position: 'relative' }}>
+      {/* Flèches */}
+      <button onClick={prev} style={{ position:'absolute', left:'-20px', top:'50%', transform:'translateY(-50%)', zIndex:10, background:'white', border:'1px solid #ddd', borderRadius:'50%', width:'40px', height:'40px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'0 2px 8px rgba(0,0,0,0.12)', fontSize:'18px' }}>‹</button>
+      <button onClick={next} style={{ position:'absolute', right:'-20px', top:'50%', transform:'translateY(-50%)', zIndex:10, background:'white', border:'1px solid #ddd', borderRadius:'50%', width:'40px', height:'40px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'0 2px 8px rgba(0,0,0,0.12)', fontSize:'18px' }}>›</button>
+
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:'20px', overflow:'hidden' }}>
+        {visible4.map((product, i) => (
+          <div
+            key={product.name + i}
+            onClick={() => 'ref' in product ? onOpenModal(product) : undefined}
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+            style={{
+              background:'#FFFFFF', border:`1px solid rgba(${color==='#E8600A'?'232,96,10':'26,122,60'},0.15)`,
+              borderRadius:'8px', overflow:'hidden', display:'flex', flexDirection:'column',
+              cursor:'ref' in product ? 'pointer' : 'default',
+              transition:'all 0.35s ease', boxShadow:'0 2px 12px rgba(0,0,0,0.05)',
+            }}
+            onMouseOver={e => {
+              const el = e.currentTarget as HTMLElement
+              el.style.transform = 'scale(1.03)'
+              el.style.boxShadow = '0 12px 36px rgba(0,0,0,0.14)'
+              el.style.borderColor = color
+            }}
+            onMouseOut={e => {
+              const el = e.currentTarget as HTMLElement
+              el.style.transform = 'scale(1)'
+              el.style.boxShadow = '0 2px 12px rgba(0,0,0,0.05)'
+              el.style.borderColor = `rgba(${color==='#E8600A'?'232,96,10':'26,122,60'},0.15)`
+            }}
+          >
+            <div style={{ position:'relative', height:'200px', background:'#F5F5F3' }}>
+              <Image src={product.img} alt={product.name} fill style={{ objectFit:'contain', padding:'16px', transition:'transform 0.35s ease' }} />
+              {'ref' in product && (product as Product).ref && (
+                <div style={{ position:'absolute', top:'10px', left:'10px', background:'#E8600A', color:'white', fontFamily:'JetBrains Mono', fontSize:'9px', letterSpacing:'0.08em', padding:'3px 8px', borderRadius:'2px' }}>
+                  {(product as Product).ref}
+                </div>
+              )}
+            </div>
+            <div style={{ padding:'16px 18px 20px', display:'flex', flexDirection:'column', flex:1 }}>
+              <div style={{ fontFamily:'JetBrains Mono', fontSize:'9px', letterSpacing:'0.18em', color:color, textTransform:'uppercase', marginBottom:'5px' }}>{brand.split('·')[0].trim()}</div>
+              <h3 style={{ fontFamily:'Bebas Neue', fontSize:'18px', letterSpacing:'0.05em', color:'#111', marginBottom:'8px', lineHeight:1.1 }}>{product.name}</h3>
+              <p style={{ fontFamily:'Rajdhani', fontSize:'12px', color:'#666', lineHeight:1.65, marginBottom:'16px', flex:1 }}>{product.desc}</p>
+              <button
+                onClick={e => { e.stopPropagation(); onQuote(product.name) }}
+                style={{
+                  display:'flex', alignItems:'center', justifyContent:'center', gap:'6px',
+                  background:color, color:'white', border:'none', cursor:'pointer',
+                  fontFamily:'Rajdhani', fontWeight:700, fontSize:'11px', letterSpacing:'0.1em', textTransform:'uppercase',
+                  padding:'10px', borderRadius:'4px', transition:'opacity 0.2s ease', width:'100%',
+                }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity='0.85' }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity='1' }}
+              >
+                <ShoppingCart size={12} /> Demander un Devis
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Dots */}
+      <div style={{ display:'flex', justifyContent:'center', gap:'8px', marginTop:'24px' }}>
+        {Array.from({ length: total }).map((_, i) => (
+          <button key={i} onClick={() => setCurrent(i)} style={{ width: i===current?'20px':'8px', height:'8px', borderRadius:'4px', border:'none', cursor:'pointer', background: i===current ? color : '#ddd', transition:'all 0.3s ease', padding:0 }} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export default function ProductsPage() {
   const router = useRouter()
   const [activeCategory, setActiveCategory] = useState('surveillance')
@@ -216,96 +314,13 @@ export default function ProductsPage() {
             </div>
           </FadeIn>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '24px' }}>
-            {activeData.products.map((product, i) => (
-              <FadeIn key={product.name} delay={i * 0.06}>
-                <div
-                  onClick={() => 'ref' in product ? openModal(product as Product) : undefined}
-                  style={{
-                    background: '#FFFFFF',
-                    border: `1px solid rgba(${activeData.color === '#E8600A' ? '232,96,10' : '26,122,60'},0.15)`,
-                    borderRadius: '6px',
-                    overflow: 'hidden',
-                    display: 'flex', flexDirection: 'column',
-                    transition: 'all 0.35s ease',
-                    height: '100%',
-                    boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
-                    cursor: 'ref' in product ? 'pointer' : 'default',
-                  }}
-                  onMouseEnter={(e) => {
-                    const el = e.currentTarget as HTMLElement
-                    el.style.borderColor = activeData.color
-                    el.style.transform = 'translateY(-4px)'
-                    el.style.boxShadow = `0 12px 36px rgba(0,0,0,0.12)`
-                  }}
-                  onMouseLeave={(e) => {
-                    const el = e.currentTarget as HTMLElement
-                    el.style.borderColor = `rgba(${activeData.color === '#E8600A' ? '232,96,10' : '26,122,60'},0.15)`
-                    el.style.transform = 'none'
-                    el.style.boxShadow = '0 2px 12px rgba(0,0,0,0.04)'
-                  }}
-                >
-                  {/* Image */}
-                  <div style={{ position: 'relative', height: '220px', background: '#F0F0EE' }}>
-                    <Image src={product.img} alt={product.name} fill style={{ objectFit: 'contain', padding: '16px' }} />
-                    {'ref' in product && (product as Product).ref && (
-                      <div style={{ position: 'absolute', top: '10px', left: '10px', background: '#E8600A', color: 'white', fontFamily: 'JetBrains Mono', fontSize: '9px', letterSpacing: '0.1em', padding: '3px 8px', borderRadius: '2px' }}>
-                        {(product as Product).ref}
-                      </div>
-                    )}
-                    <div style={{ position: 'absolute', top: '12px', right: '12px', background: activeData.color, width: '3px', height: '24px' }} />
-                  </div>
-
-                  {/* Info */}
-                  <div style={{ padding: '20px 24px 24px', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                    <div style={{ fontFamily: 'JetBrains Mono', fontSize: '10px', letterSpacing: '0.2em', color: activeData.color, textTransform: 'uppercase', marginBottom: '6px' }}>{activeData.brand.split('·')[0].trim()}</div>
-                    <h3 style={{ fontFamily: 'Bebas Neue', fontSize: '20px', letterSpacing: '0.06em', color: '#111111', marginBottom: '10px', lineHeight: 1.1 }}>{product.name}</h3>
-                    <p style={{ fontFamily: 'Rajdhani', fontSize: '13px', color: '#666', lineHeight: 1.7, marginBottom: '20px', flex: 1 }}>{product.desc}</p>
-                    <button
-                      onClick={(e) => { e.stopPropagation(); requestQuote(product.name) }}
-                      style={{
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
-                        background: activeData.color, color: 'white', border: 'none', cursor: 'pointer',
-                        fontFamily: 'Rajdhani', fontWeight: 700, fontSize: '12px', letterSpacing: '0.12em', textTransform: 'uppercase',
-                        padding: '11px 20px', borderRadius: '4px', transition: 'opacity 0.3s ease', width: '100%',
-                      }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.opacity = '0.85' }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.opacity = '1' }}
-                    >
-                      <ShoppingCart size={14} /> Demander un Devis
-                    </button>
-                  </div>
-                </div>
-              </FadeIn>
-            ))}
-
-            {/* Produit spécifique */}
-            <FadeIn delay={0.3}>
-              <div
-                onClick={() => requestQuote('Demande de produit spécifique')}
-                style={{
-                  borderRadius: '6px', border: '2px dashed rgba(232,96,10,0.4)',
-                  background: 'rgba(232,96,10,0.04)', cursor: 'pointer',
-                  display: 'flex', flexDirection: 'column', alignItems: 'center',
-                  justifyContent: 'center', minHeight: '260px', padding: '32px 20px',
-                  transition: 'all 0.3s ease', textAlign: 'center',
-                }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'rgba(232,96,10,0.09)'; el.style.borderColor = '#E8600A' }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'rgba(232,96,10,0.04)'; el.style.borderColor = 'rgba(232,96,10,0.4)' }}
-              >
-                <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(232,96,10,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
-                  <Search size={26} color="#E8600A" />
-                </div>
-                <div style={{ fontFamily: 'Bebas Neue, sans-serif', fontSize: '20px', letterSpacing: '0.08em', color: '#E8600A', marginBottom: '10px' }}>PRODUIT SPÉCIFIQUE ?</div>
-                <p style={{ fontFamily: 'Rajdhani, sans-serif', fontSize: '13px', color: '#666', lineHeight: 1.65, marginBottom: '20px' }}>
-                  Vous cherchez un équipement précis ? Contactez-nous, nous le trouvons pour vous.
-                </p>
-                <div style={{ fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, fontSize: '12px', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#E8600A', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  Nous Contacter <ArrowRight size={14} />
-                </div>
-              </div>
-            </FadeIn>
-          </div>
+          <Carousel
+            products={activeData.products as Product[]}
+            color={activeData.color}
+            brand={activeData.brand}
+            onOpenModal={openModal}
+            onQuote={requestQuote}
+          />
         </div>
       </section>
 
