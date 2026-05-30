@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, Eye, Shield, Gauge, Zap, Settings, Radio, Wrench, Cpu } from 'lucide-react'
+import { ArrowRight, Eye, Shield, Gauge, Zap, Settings, Radio, Wrench, Cpu, Network } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
@@ -74,6 +74,15 @@ const services = [
     color: '#1A7A3C',
     desc: 'Solutions de télégestion et de supervision à distance pour vos installations industrielles dispersées. Monitoring en temps réel, alertes automatiques et tableaux de bord centralisés.',
     features: ['Supervision à distance', 'Alertes temps réel', 'Tableaux de bord', 'Acquisition de données', 'Protocoles industriels', 'Archivage historique'],
+  },
+  {
+    icon: <Network size={36} />,
+    title: 'Réseau & Câblage Structuré',
+    subtitle: 'Multi-marques',
+    img: '/images/real-rack.jpg',
+    color: '#E8600A',
+    desc: 'Conception, installation et maintenance de réseaux informatiques et de câblage structuré pour les sites industriels et tertiaires. Solutions fiables et conformes aux normes pour vos infrastructures de communication.',
+    features: ['Câblage RJ45 Cat6/Cat7', 'Fibre optique', 'Armoires de brassage', 'Switch réseau', 'Wi-Fi industriel', 'Certification réseau'],
   },
   {
     icon: <Wrench size={36} />,
