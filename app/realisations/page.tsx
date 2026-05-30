@@ -42,6 +42,7 @@ const realisations: {title:string;category:string;location:string;img:string;pos
     category:'Télésurveillance',
     location:'Site industriel, Sénégal',
     img:'/images/real-equipe-fresque.jpg',
+    pos:'center 20%',
     desc:'Nos techniciens en mission terrain pour l\'installation de systèmes de télésurveillance sur site industriel. Câblage, pose caméras et paramétrage complet du système.',
     tags:['CCTV','Installation','Terrain','Câblage'],
     color:'#E8600A',
@@ -195,7 +196,7 @@ export default function RealisationsPage() {
                 >
                   {/* Image */}
                   <div className="img-shimmer" style={{position:'relative',minHeight:'320px',order:i%2===0?0:1,overflow:'hidden'}}>
-                    <Image src={real.img} alt={real.title} fill style={{objectFit:'cover',objectPosition:'center center',transition:'transform 0.6s ease'}}
+                    <Image src={real.img} alt={real.title} fill style={{objectFit:'cover',objectPosition:(real as {pos?:string}).pos||'center center',transition:'transform 0.6s ease'}}
                     />
                     <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg,rgba(0,0,0,0.04) 0%,rgba(0,0,0,0.3) 100%)'}}/>
                     <div style={{position:'absolute',top:'16px',left:'16px'}}>
