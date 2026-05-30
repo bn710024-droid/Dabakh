@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { ArrowRight, ShoppingCart, Search } from 'lucide-react'
+import { ArrowRight, ShoppingCart, Search, X } from 'lucide-react'
 
 function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -19,18 +19,94 @@ function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
   )
 }
 
+type Product = {
+  name: string
+  img: string
+  ref?: string
+  desc: string
+  specs?: string[]
+}
+
+const hikProducts: Product[] = [
+  {
+    name: 'Dôme 4MP ColorVu AcuSense',
+    ref: 'DS-2CD2147G2-SU',
+    img: '/images/hik-cam-1.png',
+    desc: 'Caméra dôme extérieure ColorVu avec détection humaine AcuSense, micro intégré et vision couleur totale la nuit.',
+    specs: ['Résolution 4MP', 'Vision couleur nuit', 'Micro intégré', 'IP67 + IK10', 'IR 60m'],
+  },
+  {
+    name: 'Dôme 4MP AcuSense Noir',
+    ref: 'DS-2CD2143G2-IS',
+    img: '/images/hik-cam-2.png',
+    desc: 'Caméra dôme noire avec audio bidirectionnel, détection intelligente AcuSense et compression H.265+.',
+    specs: ['Résolution 4MP', 'Audio bidirectionnel', 'IP67 + IK10', 'IR 40m', 'H.265+'],
+  },
+  {
+    name: 'Bullet 4MP ColorVu Sirène',
+    ref: 'DS-2CD2T47G2-LSU/SL',
+    img: '/images/hik-cam-3.jpeg',
+    desc: 'Caméra bullet dissuasive avec sirène intégrée, lumière stroboscopique et vision couleur nuit sur 60m.',
+    specs: ['Résolution 4MP', 'Sirène intégrée', 'Lumière stroboscopique', 'IP67', 'Lumière blanche 60m'],
+  },
+  {
+    name: 'Bullet 4MP ColorVu AcuSense',
+    ref: 'DS-2CD2T47G2-L',
+    img: '/images/hik-cam-4.jpeg',
+    desc: 'Caméra bullet longue portée avec technologie ColorVu pour une image couleur nette de nuit.',
+    specs: ['Résolution 4MP', 'ColorVu nuit', 'Objectif 4mm', 'IP67', 'H.265+'],
+  },
+  {
+    name: 'Turret 8MP 4K ColorVu',
+    ref: 'DS-2CD2087G2-LU',
+    img: '/images/hik-cam-5.jpeg',
+    desc: 'Caméra turret 4K ultra haute définition avec micro intégré et LED blanche pour une vision couleur parfaite.',
+    specs: ['Résolution 8MP 4K', 'Micro intégré', 'LED blanche 30m', 'IP67', 'Coloris noir'],
+  },
+  {
+    name: 'Bullet 4MP DarkFighter',
+    ref: 'DS-2CD2T46G2-2I',
+    img: '/images/hik-cam-6.jpeg',
+    desc: 'Caméra bullet à ultra faible luminosité avec technologie DarkFighter pour des images nettes en conditions extrêmes.',
+    specs: ['Résolution 4MP', 'Ultra faible luminosité', 'IR 60m', 'IP67', 'Blanc et noir'],
+  },
+  {
+    name: 'PTZ 4MP 25x Zoom',
+    ref: 'DS-2DE4425IW-DE',
+    img: '/images/hik-cam-7.jpeg',
+    desc: 'Caméra PTZ professionnelle avec zoom optique 25x et rotation 360° pour une couverture totale.',
+    specs: ['Résolution 4MP', 'Zoom optique 25x', 'Rotation 360°', 'IR 100m', 'IP66'],
+  },
+  {
+    name: 'PTZ 4MP 42x DarkFighter',
+    ref: 'DS-2DF8442IXS-AELW',
+    img: '/images/hik-cam-8.jpeg',
+    desc: 'Caméra PTZ haut de gamme avec zoom 42x, essuie-glace intégré et portée infrarouge de 200m.',
+    specs: ['Résolution 4MP', 'Zoom 42x', 'IR 200m', 'IP66 + IK10', 'Essuie-glace'],
+  },
+  {
+    name: 'Turret 4MP ColorVu',
+    ref: 'DS-2CD2347G2-LU',
+    img: '/images/hik-cam-9.jpeg',
+    desc: 'Caméra turret ColorVu avec LED blanche longue portée et compression H.265+ pour stockage optimisé.',
+    specs: ['Résolution 4MP', 'ColorVu nuit', 'LED blanche 60m', 'IP67', 'H.265+'],
+  },
+  {
+    name: 'Turret 8MP DarkFighter Gris',
+    ref: 'DS-2CD2386G2-IU',
+    img: '/images/hik-cam-10.jpeg',
+    desc: 'Caméra turret 4K avec micro intégré et technologie DarkFighter pour les environnements à faible éclairage.',
+    specs: ['Résolution 8MP 4K', 'Micro intégré', 'IR 60m', 'IP67', 'Coloris gris'],
+  },
+]
+
 const categories = [
   {
     id: 'surveillance',
     label: 'Télésurveillance',
     color: '#E8600A',
     brand: 'Hikvision · Dahua',
-    products: [
-      { name: 'Caméra Bullet Hikvision', img: '/images/camera-bullet.png', desc: 'Caméra IP extérieure HD 4MP, vision nocturne 50m, résistante aux intempéries IP67' },
-      { name: 'Caméra Dôme Hikvision', img: '/images/camera-dome.png', desc: 'Caméra dôme intérieure/extérieure 4MP, anti-vandalisme, objectif varifocal 2.8–12mm' },
-      { name: 'Caméra PTZ Speed Dome', img: '/images/camera-ptz.png', desc: 'Caméra PTZ zoom optique 36x, suivi automatique, surveillance longue portée 200m' },
-      { name: 'Kit CCTV Complet', img: '/images/cctv-kit.png', desc: 'Kit de surveillance complet : NVR 8 voies + 4 caméras HD + câbles + alimentation' },
-    ],
+    products: hikProducts,
   },
   {
     id: 'access',
@@ -68,6 +144,18 @@ const categories = [
 export default function ProductsPage() {
   const router = useRouter()
   const [activeCategory, setActiveCategory] = useState('surveillance')
+  const [modalProduct, setModalProduct] = useState<Product | null>(null)
+  const [modalVisible, setModalVisible] = useState(false)
+
+  const openModal = (product: Product) => {
+    setModalProduct(product)
+    setTimeout(() => setModalVisible(true), 10)
+  }
+
+  const closeModal = () => {
+    setModalVisible(false)
+    setTimeout(() => setModalProduct(null), 300)
+  }
 
   const requestQuote = (productName: string) => {
     router.push(`/contact?service=${encodeURIComponent(`Demande de devis pour : ${productName}`)}`)
@@ -78,7 +166,7 @@ export default function ProductsPage() {
   return (
     <div style={{ background: '#FFFFFF', paddingTop: '80px' }}>
 
-      {/* ══ HERO — fond vert ══ */}
+      {/* ══ HERO ══ */}
       <section style={{ position: 'relative', padding: '80px 24px 100px', overflow: 'hidden', background: 'linear-gradient(135deg,#1A7A3C 0%,#0F5A2A 55%,#1A5C10 100%)' }}>
         <div className="bg-grid-green" style={{ position: 'absolute', inset: 0 }} />
         <div style={{ position: 'absolute', bottom: '-100px', right: '-100px', width: '500px', height: '500px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(249,115,22,0.12) 0%, transparent 70%)', pointerEvents: 'none' }} />
@@ -95,7 +183,7 @@ export default function ProductsPage() {
         </div>
       </section>
 
-      {/* ══ Category Tabs ══ */}
+      {/* ══ Tabs ══ */}
       <section style={{ position: 'sticky', top: '70px', zIndex: 100, background: 'rgba(255,255,255,0.97)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(232,96,10,0.18)', padding: '0 24px', boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', gap: '0', overflowX: 'auto' }}>
           {categories.map((cat) => (
@@ -128,58 +216,58 @@ export default function ProductsPage() {
             </div>
           </FadeIn>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '24px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '24px' }}>
             {activeData.products.map((product, i) => (
-              <FadeIn key={product.name} delay={i * 0.08}>
-                <div style={{
-                  background: '#FFFFFF',
-                  border: `1px solid rgba(${activeData.color === '#E8600A' ? '232,96,10' : '26,122,60'},0.15)`,
-                  borderRadius: '6px',
-                  overflow: 'hidden',
-                  display: 'flex', flexDirection: 'column',
-                  transition: 'all 0.4s ease',
-                  height: '100%',
-                  boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
-                }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget as HTMLElement
-                  el.style.borderColor = activeData.color
-                  el.style.transform = 'translateY(-4px)'
-                  el.style.boxShadow = `0 12px 36px rgba(0,0,0,0.12)`
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget as HTMLElement
-                  el.style.borderColor = `rgba(${activeData.color === '#E8600A' ? '232,96,10' : '26,122,60'},0.15)`
-                  el.style.transform = 'none'
-                  el.style.boxShadow = '0 2px 12px rgba(0,0,0,0.04)'
-                }}
+              <FadeIn key={product.name} delay={i * 0.06}>
+                <div
+                  onClick={() => 'ref' in product ? openModal(product as Product) : undefined}
+                  style={{
+                    background: '#FFFFFF',
+                    border: `1px solid rgba(${activeData.color === '#E8600A' ? '232,96,10' : '26,122,60'},0.15)`,
+                    borderRadius: '6px',
+                    overflow: 'hidden',
+                    display: 'flex', flexDirection: 'column',
+                    transition: 'all 0.35s ease',
+                    height: '100%',
+                    boxShadow: '0 2px 12px rgba(0,0,0,0.04)',
+                    cursor: 'ref' in product ? 'pointer' : 'default',
+                  }}
+                  onMouseEnter={(e) => {
+                    const el = e.currentTarget as HTMLElement
+                    el.style.borderColor = activeData.color
+                    el.style.transform = 'translateY(-4px)'
+                    el.style.boxShadow = `0 12px 36px rgba(0,0,0,0.12)`
+                  }}
+                  onMouseLeave={(e) => {
+                    const el = e.currentTarget as HTMLElement
+                    el.style.borderColor = `rgba(${activeData.color === '#E8600A' ? '232,96,10' : '26,122,60'},0.15)`
+                    el.style.transform = 'none'
+                    el.style.boxShadow = '0 2px 12px rgba(0,0,0,0.04)'
+                  }}
                 >
-                  {/* Product image */}
-                  <div style={{ position: 'relative', height: '220px', background: '#F8F8F6' }}>
-                    <Image
-                      src={product.img}
-                      alt={product.name}
-                      fill
-                      style={{ objectFit: 'contain', padding: '16px' }}
-                    />
+                  {/* Image */}
+                  <div style={{ position: 'relative', height: '220px', background: '#F0F0EE' }}>
+                    <Image src={product.img} alt={product.name} fill style={{ objectFit: 'contain', padding: '16px' }} />
+                    {'ref' in product && (product as Product).ref && (
+                      <div style={{ position: 'absolute', top: '10px', left: '10px', background: '#E8600A', color: 'white', fontFamily: 'JetBrains Mono', fontSize: '9px', letterSpacing: '0.1em', padding: '3px 8px', borderRadius: '2px' }}>
+                        {(product as Product).ref}
+                      </div>
+                    )}
                     <div style={{ position: 'absolute', top: '12px', right: '12px', background: activeData.color, width: '3px', height: '24px' }} />
                   </div>
 
                   {/* Info */}
-                  <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', flex: 1 }}>
-                    <div style={{ fontFamily: 'JetBrains Mono', fontSize: '10px', letterSpacing: '0.2em', color: activeData.color, textTransform: 'uppercase', marginBottom: '8px' }}>{activeData.brand.split('·')[0].trim()}</div>
-                    <h3 style={{ fontFamily: 'Bebas Neue', fontSize: '22px', letterSpacing: '0.06em', color: '#111111', marginBottom: '12px', lineHeight: 1.1 }}>{product.name}</h3>
-                    <p style={{ fontFamily: 'Rajdhani', fontSize: '13px', color: '#666', lineHeight: 1.75, letterSpacing: '0.02em', marginBottom: '24px', flex: 1 }}>{product.desc}</p>
+                  <div style={{ padding: '20px 24px 24px', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                    <div style={{ fontFamily: 'JetBrains Mono', fontSize: '10px', letterSpacing: '0.2em', color: activeData.color, textTransform: 'uppercase', marginBottom: '6px' }}>{activeData.brand.split('·')[0].trim()}</div>
+                    <h3 style={{ fontFamily: 'Bebas Neue', fontSize: '20px', letterSpacing: '0.06em', color: '#111111', marginBottom: '10px', lineHeight: 1.1 }}>{product.name}</h3>
+                    <p style={{ fontFamily: 'Rajdhani', fontSize: '13px', color: '#666', lineHeight: 1.7, marginBottom: '20px', flex: 1 }}>{product.desc}</p>
                     <button
-                      onClick={() => requestQuote(product.name)}
+                      onClick={(e) => { e.stopPropagation(); requestQuote(product.name) }}
                       style={{
                         display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
-                        background: activeData.color,
-                        color: 'white', border: 'none', cursor: 'pointer',
+                        background: activeData.color, color: 'white', border: 'none', cursor: 'pointer',
                         fontFamily: 'Rajdhani', fontWeight: 700, fontSize: '12px', letterSpacing: '0.12em', textTransform: 'uppercase',
-                        padding: '12px 20px', borderRadius: '4px',
-                        transition: 'opacity 0.3s ease',
-                        width: '100%',
+                        padding: '11px 20px', borderRadius: '4px', transition: 'opacity 0.3s ease', width: '100%',
                       }}
                       onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.opacity = '0.85' }}
                       onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.opacity = '1' }}
@@ -190,33 +278,33 @@ export default function ProductsPage() {
                 </div>
               </FadeIn>
             ))}
-          {/* Carte produit spécifique */}
-          <FadeIn delay={0.3}>
-            <div
-              onClick={() => requestQuote('Demande de produit spécifique')}
-              style={{
-                borderRadius:'6px',border:'2px dashed rgba(232,96,10,0.4)',
-                background:'rgba(232,96,10,0.04)',cursor:'pointer',
-                display:'flex',flexDirection:'column',alignItems:'center',
-                justifyContent:'center',minHeight:'260px',padding:'32px 20px',
-                transition:'all 0.3s ease',textAlign:'center',
-              }}
-              onMouseEnter={e=>{const el=e.currentTarget as HTMLElement;el.style.background='rgba(232,96,10,0.09)';el.style.borderColor='#E8600A'}}
-              onMouseLeave={e=>{const el=e.currentTarget as HTMLElement;el.style.background='rgba(232,96,10,0.04)';el.style.borderColor='rgba(232,96,10,0.4)'}}
-            >
-              <div style={{width:'60px',height:'60px',borderRadius:'50%',background:'rgba(232,96,10,0.12)',display:'flex',alignItems:'center',justifyContent:'center',marginBottom:'16px'}}>
-                <Search size={26} color="#E8600A"/>
-              </div>
-              <div style={{fontFamily:'Bebas Neue, sans-serif',fontSize:'20px',letterSpacing:'0.08em',color:'#E8600A',marginBottom:'10px'}}>PRODUIT SPÉCIFIQUE ?</div>
-              <p style={{fontFamily:'Rajdhani, sans-serif',fontSize:'13px',color:'#666',lineHeight:1.65,marginBottom:'20px'}}>
-                Vous cherchez un équipement précis que vous ne trouvez pas ici ? Contactez-nous, nous le trouvons pour vous.
-              </p>
-              <div style={{fontFamily:'Rajdhani, sans-serif',fontWeight:700,fontSize:'12px',letterSpacing:'0.1em',textTransform:'uppercase',color:'#E8600A',display:'flex',alignItems:'center',gap:'6px'}}>
-                Nous Contacter <ArrowRight size={14}/>
-              </div>
-            </div>
-          </FadeIn>
 
+            {/* Produit spécifique */}
+            <FadeIn delay={0.3}>
+              <div
+                onClick={() => requestQuote('Demande de produit spécifique')}
+                style={{
+                  borderRadius: '6px', border: '2px dashed rgba(232,96,10,0.4)',
+                  background: 'rgba(232,96,10,0.04)', cursor: 'pointer',
+                  display: 'flex', flexDirection: 'column', alignItems: 'center',
+                  justifyContent: 'center', minHeight: '260px', padding: '32px 20px',
+                  transition: 'all 0.3s ease', textAlign: 'center',
+                }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'rgba(232,96,10,0.09)'; el.style.borderColor = '#E8600A' }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'rgba(232,96,10,0.04)'; el.style.borderColor = 'rgba(232,96,10,0.4)' }}
+              >
+                <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'rgba(232,96,10,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
+                  <Search size={26} color="#E8600A" />
+                </div>
+                <div style={{ fontFamily: 'Bebas Neue, sans-serif', fontSize: '20px', letterSpacing: '0.08em', color: '#E8600A', marginBottom: '10px' }}>PRODUIT SPÉCIFIQUE ?</div>
+                <p style={{ fontFamily: 'Rajdhani, sans-serif', fontSize: '13px', color: '#666', lineHeight: 1.65, marginBottom: '20px' }}>
+                  Vous cherchez un équipement précis ? Contactez-nous, nous le trouvons pour vous.
+                </p>
+                <div style={{ fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, fontSize: '12px', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#E8600A', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  Nous Contacter <ArrowRight size={14} />
+                </div>
+              </div>
+            </FadeIn>
           </div>
         </div>
       </section>
@@ -244,18 +332,8 @@ export default function ProductsPage() {
                     textAlign: 'left', width: '100%', transition: 'all 0.3s ease',
                     boxShadow: '0 2px 10px rgba(0,0,0,0.04)',
                   }}
-                  onMouseEnter={(e) => {
-                    const el = e.currentTarget as HTMLElement
-                    el.style.borderColor = cat.color
-                    el.style.transform = 'translateY(-3px)'
-                    el.style.boxShadow = '0 8px 24px rgba(0,0,0,0.1)'
-                  }}
-                  onMouseLeave={(e) => {
-                    const el = e.currentTarget as HTMLElement
-                    el.style.borderColor = `rgba(${cat.color === '#E8600A' ? '232,96,10' : '26,122,60'},0.2)`
-                    el.style.transform = 'none'
-                    el.style.boxShadow = '0 2px 10px rgba(0,0,0,0.04)'
-                  }}
+                  onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.borderColor = cat.color; el.style.transform = 'translateY(-3px)'; el.style.boxShadow = '0 8px 24px rgba(0,0,0,0.1)' }}
+                  onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.borderColor = `rgba(${cat.color === '#E8600A' ? '232,96,10' : '26,122,60'},0.2)`; el.style.transform = 'none'; el.style.boxShadow = '0 2px 10px rgba(0,0,0,0.04)' }}
                 >
                   <div style={{ fontFamily: 'Bebas Neue', fontSize: '22px', letterSpacing: '0.06em', color: cat.color }}>{cat.label}</div>
                   <div style={{ fontFamily: 'JetBrains Mono', fontSize: '10px', letterSpacing: '0.15em', color: '#888', textTransform: 'uppercase' }}>{cat.brand}</div>
@@ -268,6 +346,113 @@ export default function ProductsPage() {
           </div>
         </div>
       </section>
+
+      {/* ══ MODAL ══ */}
+      {modalProduct && (
+        <div
+          onClick={closeModal}
+          style={{
+            position: 'fixed', inset: 0, zIndex: 1000,
+            background: modalVisible ? 'rgba(0,0,0,0.55)' : 'rgba(0,0,0,0)',
+            backdropFilter: modalVisible ? 'blur(4px)' : 'none',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            padding: '24px',
+            transition: 'background 0.3s ease, backdrop-filter 0.3s ease',
+          }}
+        >
+          <div
+            onClick={e => e.stopPropagation()}
+            style={{
+              background: '#FFFFFF',
+              borderRadius: '10px',
+              maxWidth: '560px',
+              width: '100%',
+              overflow: 'hidden',
+              boxShadow: '0 32px 80px rgba(0,0,0,0.25)',
+              opacity: modalVisible ? 1 : 0,
+              transform: modalVisible ? 'scale(1) translateY(0)' : 'scale(0.92) translateY(20px)',
+              transition: 'opacity 0.3s ease, transform 0.3s ease',
+            }}
+          >
+            {/* Image */}
+            <div style={{ position: 'relative', height: '280px', background: '#F0F0EE' }}>
+              <Image src={modalProduct.img} alt={modalProduct.name} fill style={{ objectFit: 'contain', padding: '24px' }} />
+              {/* Badge référence */}
+              <div style={{ position: 'absolute', top: '16px', left: '16px', background: '#E8600A', color: 'white', fontFamily: 'JetBrains Mono', fontSize: '11px', letterSpacing: '0.1em', padding: '5px 12px', borderRadius: '3px', fontWeight: 700 }}>
+                {modalProduct.ref}
+              </div>
+              {/* Bouton fermer */}
+              <button
+                onClick={closeModal}
+                style={{
+                  position: 'absolute', top: '12px', right: '12px',
+                  background: 'rgba(0,0,0,0.5)', border: 'none', borderRadius: '50%',
+                  width: '36px', height: '36px', cursor: 'pointer',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  transition: 'background 0.2s ease',
+                }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(0,0,0,0.8)' }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(0,0,0,0.5)' }}
+              >
+                <X size={18} color="white" />
+              </button>
+            </div>
+
+            {/* Contenu */}
+            <div style={{ padding: '28px 32px 32px' }}>
+              <h2 style={{ fontFamily: 'Bebas Neue', fontSize: '28px', letterSpacing: '0.06em', color: '#111', marginBottom: '10px', lineHeight: 1.1 }}>
+                {modalProduct.name}
+              </h2>
+              <p style={{ fontFamily: 'Rajdhani', fontSize: '14px', color: '#555', lineHeight: 1.75, marginBottom: '20px' }}>
+                {modalProduct.desc}
+              </p>
+
+              {/* Specs */}
+              {modalProduct.specs && (
+                <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  {modalProduct.specs.map(spec => (
+                    <li key={spec} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontFamily: 'Rajdhani', fontSize: '13px', color: '#333', fontWeight: 600 }}>
+                      <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#E8600A', flexShrink: 0 }} />
+                      {spec}
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {/* Boutons */}
+              <div style={{ display: 'flex', gap: '12px' }}>
+                <button
+                  onClick={() => { closeModal(); requestQuote(modalProduct.name) }}
+                  style={{
+                    flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
+                    background: '#E8600A', color: 'white', border: 'none', cursor: 'pointer',
+                    fontFamily: 'Rajdhani', fontWeight: 700, fontSize: '13px', letterSpacing: '0.12em', textTransform: 'uppercase',
+                    padding: '13px 20px', borderRadius: '4px', transition: 'opacity 0.3s ease',
+                  }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = '0.85' }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = '1' }}
+                >
+                  <ShoppingCart size={15} /> Demander un Devis
+                </button>
+                <button
+                  onClick={closeModal}
+                  style={{
+                    padding: '13px 20px', borderRadius: '4px', border: '1px solid #ddd',
+                    background: 'white', color: '#666', cursor: 'pointer',
+                    fontFamily: 'Rajdhani', fontWeight: 700, fontSize: '13px', letterSpacing: '0.1em', textTransform: 'uppercase',
+                    transition: 'all 0.2s ease',
+                  }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = '#999'; el.style.color = '#333' }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = '#ddd'; el.style.color = '#666' }}
+                >
+                  Fermer
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   )
 }

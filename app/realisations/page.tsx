@@ -90,7 +90,7 @@ const realisations: {title:string;category:string;location:string;img:string;bef
     category:'Télégestion',
     location:'CSS — Compagnie Sucrière Sénégalaise',
     img:'/images/real-sofrel.png',
-    beforeImg:'/images/real-sofrel-avant.jpg',
+    beforeImg:'/images/real-sofrel-avant.jpeg',
     pos:'center center',
     desc:'Installation d\'une unité de télégestion Sofrel Box Lacroix pour supervision à distance des installations d\'eau et d\'assainissement. Configuration complète et mise en réseau.',
     tags:['CSS','Lacroix','Sofrel','Télégestion','SCADA'],
@@ -183,7 +183,7 @@ export default function RealisationsPage() {
               <FadeIn key={real.title} delay={0.04}>
                 <div style={{
                   display:'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                  gridTemplateColumns: real.beforeImg ? '1fr 1fr' : 'repeat(auto-fit, minmax(280px, 1fr))',
                   gap:'0',
                   border:'1px solid #f0f0f0',
                   borderRadius:'8px',
@@ -196,31 +196,34 @@ export default function RealisationsPage() {
                 onMouseLeave={e=>{const el=e.currentTarget as HTMLElement;el.style.boxShadow='0 2px 20px rgba(0,0,0,0.05)';el.style.transform='none'}}
                 >
                   {/* Image — avant/après si beforeImg, sinon simple */}
-                  <div className="img-shimmer" style={{position:'relative',minHeight:'320px',order:i%2===0?0:1,overflow:'hidden'}}>
-                    {real.beforeImg ? (
-                      <div style={{display:'grid',gridTemplateRows:'1fr 1fr',height:'100%',minHeight:'320px'}}>
-                        <div style={{position:'relative',overflow:'hidden'}}>
-                          <Image src={real.beforeImg} alt="Avant" fill style={{objectFit:'cover'}}/>
-                          <div style={{position:'absolute',inset:0,background:'rgba(0,0,0,0.35)'}}/>
-                          <div style={{position:'absolute',top:'10px',left:'12px',background:'#DC2626',color:'white',fontFamily:'Bebas Neue',fontSize:'13px',letterSpacing:'0.15em',padding:'3px 10px',borderRadius:'2px'}}>AVANT</div>
-                        </div>
-                        <div style={{position:'relative',overflow:'hidden'}}>
-                          <Image src={real.img} alt="Après" fill style={{objectFit:'cover',objectPosition:real.pos||'center center'}}/>
-                          <div style={{position:'absolute',inset:0,background:'rgba(0,0,0,0.15)'}}/>
-                          <div style={{position:'absolute',top:'10px',left:'12px',background:'#1A7A3C',color:'white',fontFamily:'Bebas Neue',fontSize:'13px',letterSpacing:'0.15em',padding:'3px 10px',borderRadius:'2px'}}>APRÈS</div>
+                  {real.beforeImg ? (
+                    <div style={{order:i%2===0?0:1,display:'flex',flexDirection:'column'}}>
+                      {/* AVANT */}
+                      <div style={{position:'relative',height:'300px',overflow:'hidden'}}>
+                        <Image src={real.beforeImg} alt="Avant" fill style={{objectFit:'cover',objectPosition:'center center'}}/>
+                        <div style={{position:'absolute',inset:0,background:'rgba(0,0,0,0.25)'}}/>
+                        <div style={{position:'absolute',top:'14px',left:'16px',background:'#DC2626',color:'white',fontFamily:'Bebas Neue',fontSize:'15px',letterSpacing:'0.15em',padding:'5px 14px',borderRadius:'2px',zIndex:3}}>AVANT</div>
+                      </div>
+                      {/* APRÈS */}
+                      <div style={{position:'relative',height:'300px',overflow:'hidden'}}>
+                        <Image src={real.img} alt="Après" fill style={{objectFit:'cover',objectPosition:real.pos||'center center'}}/>
+                        <div style={{position:'absolute',inset:0,background:'rgba(0,0,0,0.08)'}}/>
+                        <div style={{position:'absolute',top:'14px',left:'16px',background:'#1A7A3C',color:'white',fontFamily:'Bebas Neue',fontSize:'15px',letterSpacing:'0.15em',padding:'5px 14px',borderRadius:'2px',zIndex:3}}>APRÈS</div>
+                        <div style={{position:'absolute',bottom:'16px',left:'16px',zIndex:3}}>
+                          <span style={{fontFamily:'Rajdhani, sans-serif',fontWeight:700,fontSize:'11px',letterSpacing:'0.12em',textTransform:'uppercase',background:real.color,color:'white',padding:'5px 12px',borderRadius:'2px'}}>{real.category}</span>
                         </div>
                       </div>
-                    ) : (
-                      <>
-                        <Image src={real.img} alt={real.title} fill style={{objectFit:'cover',objectPosition:(real as {pos?:string}).pos||'center center',transition:'transform 0.6s ease'}}/>
-                        <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg,rgba(0,0,0,0.04) 0%,rgba(0,0,0,0.3) 100%)'}}/>
-                      </>
-                    )}
-                    <div style={{position:'absolute',top:'16px',left:'16px', zIndex:2}}>
-                      <span style={{fontFamily:'Rajdhani, sans-serif',fontWeight:700,fontSize:'11px',letterSpacing:'0.12em',textTransform:'uppercase',background:real.color,color:'white',padding:'5px 12px',borderRadius:'2px'}}>{real.category}</span>
                     </div>
-                    <div style={{position:'absolute',top:0,left:i%2===0?'auto':0,right:i%2===0?0:'auto',width:'4px',height:'100%',background:`linear-gradient(180deg,${real.color},transparent)`, zIndex:2}}/>
-                  </div>
+                  ) : (
+                    <div className="img-shimmer" style={{position:'relative',minHeight:'320px',order:i%2===0?0:1,overflow:'hidden'}}>
+                      <Image src={real.img} alt={real.title} fill style={{objectFit:'cover',objectPosition:(real as {pos?:string}).pos||'center center',transition:'transform 0.6s ease'}}/>
+                      <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg,rgba(0,0,0,0.04) 0%,rgba(0,0,0,0.3) 100%)'}}/>
+                      <div style={{position:'absolute',top:'16px',left:'16px',zIndex:2}}>
+                        <span style={{fontFamily:'Rajdhani, sans-serif',fontWeight:700,fontSize:'11px',letterSpacing:'0.12em',textTransform:'uppercase',background:real.color,color:'white',padding:'5px 12px',borderRadius:'2px'}}>{real.category}</span>
+                      </div>
+                      <div style={{position:'absolute',top:0,left:i%2===0?'auto':0,right:i%2===0?0:'auto',width:'4px',height:'100%',background:`linear-gradient(180deg,${real.color},transparent)`,zIndex:2}}/>
+                    </div>
+                  )}
 
                   {/* Texte */}
                   <div style={{padding:'40px',order:i%2===0?1:0,display:'flex',flexDirection:'column',justifyContent:'center'}}>
