@@ -23,7 +23,7 @@ const realisations: {title:string;category:string;location:string;img:string;pos
     category:'Instrumentation',
     location:'Station KMS3, Sénégal',
     img:'/images/real-equipe-kms3.jpg',
-    desc:'L\'équipe Dabakh Global Services en intervention sur la station de pompage KMS3. Installation et mise en service des instruments de mesure débit et pression pour le réseau d\'eau traitée.',
+    desc:'L\'équipe Dabakh Global Services en intervention sur la station de pompage KMS3. Installation de la télésurveillance et du contrôle d\'accès.',
     tags:['Sen\'Eau','KMS3','Instrumentation','Eau traitée'],
     color:'#1A7A3C',
   },
