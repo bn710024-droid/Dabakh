@@ -88,7 +88,7 @@ const services = [
     icon: <Cpu size={36} />,
     title: 'Systèmes Intelligents',
     subtitle: 'IoT · SCADA · BMS',
-    img: '/images/IOT.png',
+    img: '/images/iot-industrial.png',
     color: '#1A7A3C',
     desc: 'Intégration de systèmes industriels intelligents : IoT, BMS (Building Management System), SCADA et solutions d\'automatisation pour optimiser vos processus et réduire vos coûts.',
     features: ['IoT industriel', 'BMS bâtiment', 'Automatisation', 'Intégration SCADA', 'Analyse de données', 'Optimisation énergie'],
