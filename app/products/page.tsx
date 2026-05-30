@@ -31,14 +31,14 @@ const hikProducts: Product[] = [
   {
     name: 'Dôme 4MP ColorVu AcuSense',
     ref: 'DS-2CD2147G2-SU',
-    img: '/images/hik-cam-1.png',
+    img: '/images/hik-cam-1..png',
     desc: 'Caméra dôme extérieure ColorVu avec détection humaine AcuSense, micro intégré et vision couleur totale la nuit.',
     specs: ['Résolution 4MP', 'Vision couleur nuit', 'Micro intégré', 'IP67 + IK10', 'IR 60m'],
   },
   {
     name: 'Dôme 4MP AcuSense Noir',
     ref: 'DS-2CD2143G2-IS',
-    img: '/images/hik-cam-2.png',
+    img: '/images/hik-cam-2..png',
     desc: 'Caméra dôme noire avec audio bidirectionnel, détection intelligente AcuSense et compression H.265+.',
     specs: ['Résolution 4MP', 'Audio bidirectionnel', 'IP67 + IK10', 'IR 40m', 'H.265+'],
   },
