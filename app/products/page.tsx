@@ -223,37 +223,68 @@ function Carousel({ products, color, brand, onOpenModal, onQuote }: {
 }) {
   const [current, setCurrent] = useState(0)
   const [paused, setPaused] = useState(false)
+  const [cols, setCols] = useState(4)
   const total = products.length
-  const visible = 4
 
+  // Responsive : détecter la taille écran
+  useEffect(() => {
+    const update = () => {
+      if (window.innerWidth < 640) setCols(1)
+      else if (window.innerWidth < 1024) setCols(2)
+      else setCols(4)
+    }
+    update()
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
+  }, [])
+
+  // Auto-défilement
   useEffect(() => {
     if (paused) return
-    const t = setInterval(() => {
-      setCurrent(c => (c + 1) % total)
-    }, 5000)
+    const t = setInterval(() => setCurrent(c => (c + 1) % total), 5000)
     return () => clearInterval(t)
   }, [paused, total])
 
   const prev = () => setCurrent(c => (c - 1 + total) % total)
   const next = () => setCurrent(c => (c + 1) % total)
 
-  // 4 produits visibles en boucle
-  const visible4 = Array.from({ length: visible }, (_, i) => products[(current + i) % total])
+  const visibleProducts = Array.from({ length: cols }, (_, i) => products[(current + i) % total])
+
+  const cardBorder = `rgba(${color==='#E8600A'?'232,96,10':'26,122,60'},0.15)`
 
   return (
-    <div style={{ position: 'relative' }}>
-      {/* Flèches */}
-      <button onClick={prev} style={{ position:'absolute', left:'-20px', top:'50%', transform:'translateY(-50%)', zIndex:10, background:'white', border:'1px solid #ddd', borderRadius:'50%', width:'40px', height:'40px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'0 2px 8px rgba(0,0,0,0.12)', fontSize:'18px' }}>‹</button>
-      <button onClick={next} style={{ position:'absolute', right:'-20px', top:'50%', transform:'translateY(-50%)', zIndex:10, background:'white', border:'1px solid #ddd', borderRadius:'50%', width:'40px', height:'40px', cursor:'pointer', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'0 2px 8px rgba(0,0,0,0.12)', fontSize:'18px' }}>›</button>
+    <div style={{ position:'relative' }}>
+      {/* Flèche gauche */}
+      <button onClick={prev} style={{
+        position:'absolute', left: cols===1?'8px':'-20px', top:'40%', transform:'translateY(-50%)',
+        zIndex:10, background:'white', border:'1px solid #ddd', borderRadius:'50%',
+        width:'40px', height:'40px', cursor:'pointer', display:'flex', alignItems:'center',
+        justifyContent:'center', boxShadow:'0 2px 8px rgba(0,0,0,0.12)', fontSize:'20px', lineHeight:1,
+      }}>‹</button>
+      {/* Flèche droite */}
+      <button onClick={next} style={{
+        position:'absolute', right: cols===1?'8px':'-20px', top:'40%', transform:'translateY(-50%)',
+        zIndex:10, background:'white', border:'1px solid #ddd', borderRadius:'50%',
+        width:'40px', height:'40px', cursor:'pointer', display:'flex', alignItems:'center',
+        justifyContent:'center', boxShadow:'0 2px 8px rgba(0,0,0,0.12)', fontSize:'20px', lineHeight:1,
+      }}>›</button>
 
-      <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:'20px', overflow:'hidden' }}>
-        {visible4.map((product, i) => (
+      {/* Grille responsive */}
+      <div style={{
+        display:'grid',
+        gridTemplateColumns:`repeat(${cols}, 1fr)`,
+        gap: cols===1?'0':'20px',
+        padding: cols===1?'0 52px':'0',
+      }}>
+        {visibleProducts.map((product, i) => (
           <div
-            key={product.name + i}
+            key={product.name + current + i}
             onClick={() => 'ref' in product ? onOpenModal(product) : undefined}
             style={{
-              background:'#FFFFFF', border:`1px solid rgba(${color==='#E8600A'?'232,96,10':'26,122,60'},0.15)`,
-              borderRadius:'8px', overflow:'hidden', display:'flex', flexDirection:'column',
+              background:'#FFFFFF',
+              border:`1px solid ${cardBorder}`,
+              borderRadius:'8px', overflow:'hidden',
+              display:'flex', flexDirection:'column',
               cursor:'ref' in product ? 'pointer' : 'default',
               transition:'transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.5s ease, border-color 0.5s ease',
               boxShadow:'0 2px 12px rgba(0,0,0,0.05)',
@@ -270,11 +301,11 @@ function Carousel({ products, color, brand, onOpenModal, onQuote }: {
               const el = e.currentTarget as HTMLElement
               el.style.transform = 'scale(1)'
               el.style.boxShadow = '0 2px 12px rgba(0,0,0,0.05)'
-              el.style.borderColor = `rgba(${color==='#E8600A'?'232,96,10':'26,122,60'},0.15)`
+              el.style.borderColor = cardBorder
             }}
           >
-            <div style={{ position:'relative', height:'200px', background:'#F5F5F3' }}>
-              <Image src={product.img} alt={product.name} fill style={{ objectFit:'contain', padding:'16px', transition:'transform 0.35s ease' }} />
+            <div style={{ position:'relative', height: cols===1?'240px':'200px', background:'#F5F5F3' }}>
+              <Image src={product.img} alt={product.name} fill style={{ objectFit:'contain', padding:'16px' }} />
               {'ref' in product && (product as Product).ref && (
                 <div style={{ position:'absolute', top:'10px', left:'10px', background:'#E8600A', color:'white', fontFamily:'JetBrains Mono', fontSize:'9px', letterSpacing:'0.08em', padding:'3px 8px', borderRadius:'2px' }}>
                   {(product as Product).ref}
@@ -282,21 +313,21 @@ function Carousel({ products, color, brand, onOpenModal, onQuote }: {
               )}
             </div>
             <div style={{ padding:'16px 18px 20px', display:'flex', flexDirection:'column', flex:1 }}>
-              <div style={{ fontFamily:'JetBrains Mono', fontSize:'9px', letterSpacing:'0.18em', color:color, textTransform:'uppercase', marginBottom:'5px' }}>{brand.split('·')[0].trim()}</div>
-              <h3 style={{ fontFamily:'Bebas Neue', fontSize:'18px', letterSpacing:'0.05em', color:'#111', marginBottom:'8px', lineHeight:1.1 }}>{product.name}</h3>
-              <p style={{ fontFamily:'Rajdhani', fontSize:'12px', color:'#666', lineHeight:1.65, marginBottom:'16px', flex:1 }}>{product.desc}</p>
+              <div style={{ fontFamily:'JetBrains Mono', fontSize:'9px', letterSpacing:'0.18em', color, textTransform:'uppercase', marginBottom:'5px' }}>{brand.split('·')[0].trim()}</div>
+              <h3 style={{ fontFamily:'Bebas Neue', fontSize: cols===1?'22px':'18px', letterSpacing:'0.05em', color:'#111', marginBottom:'8px', lineHeight:1.15 }}>{product.name}</h3>
+              <p style={{ fontFamily:'Rajdhani', fontSize: cols===1?'14px':'12px', color:'#666', lineHeight:1.65, marginBottom:'16px', flex:1 }}>{product.desc}</p>
               <button
                 onClick={e => { e.stopPropagation(); onQuote(product.name) }}
                 style={{
                   display:'flex', alignItems:'center', justifyContent:'center', gap:'6px',
                   background:color, color:'white', border:'none', cursor:'pointer',
-                  fontFamily:'Rajdhani', fontWeight:700, fontSize:'11px', letterSpacing:'0.1em', textTransform:'uppercase',
-                  padding:'10px', borderRadius:'4px', transition:'opacity 0.2s ease', width:'100%',
+                  fontFamily:'Rajdhani', fontWeight:700, fontSize:'12px', letterSpacing:'0.1em', textTransform:'uppercase',
+                  padding:'12px', borderRadius:'4px', transition:'opacity 0.2s ease', width:'100%',
                 }}
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity='0.85' }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity='1' }}
               >
-                <ShoppingCart size={12} /> Demander un Devis
+                <ShoppingCart size={13} /> Demander un Devis
               </button>
             </div>
           </div>
@@ -304,9 +335,14 @@ function Carousel({ products, color, brand, onOpenModal, onQuote }: {
       </div>
 
       {/* Dots */}
-      <div style={{ display:'flex', justifyContent:'center', gap:'8px', marginTop:'24px' }}>
+      <div style={{ display:'flex', justifyContent:'center', gap:'6px', marginTop:'20px', flexWrap:'wrap' }}>
         {Array.from({ length: total }).map((_, i) => (
-          <button key={i} onClick={() => setCurrent(i)} style={{ width: i===current?'20px':'8px', height:'8px', borderRadius:'4px', border:'none', cursor:'pointer', background: i===current ? color : '#ddd', transition:'all 0.3s ease', padding:0 }} />
+          <button key={i} onClick={() => setCurrent(i)} style={{
+            width: i===current?'20px':'8px', height:'8px', borderRadius:'4px',
+            border:'none', cursor:'pointer', padding:0,
+            background: i===current ? color : '#ddd',
+            transition:'all 0.3s ease',
+          }} />
         ))}
       </div>
     </div>
