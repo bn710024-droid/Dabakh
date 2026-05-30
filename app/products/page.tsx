@@ -138,7 +138,7 @@ const dahProducts: Product[] = [
   },
   {
     name: 'Turret 8MP TiOC Full Color Noir',
-    ref: 'IPC-HDW3849H-AS-PV-S4',
+    ref: 'IPC-HDW3849H-AS-PV-0280B-S4',
     img: '/images/dah-cam-6.jpeg',
     desc: 'Caméra turret noire Full Color nuit avec dissuasion active, audio intégré et détection AI humain/véhicule.',
     specs: ['Résolution 8MP', 'Full Color nuit', 'Dissuasion active', 'Audio intégré', 'IP67, AI humain/véhicule'],
