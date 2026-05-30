@@ -17,7 +17,7 @@ function FadeIn({ children, delay=0, direction='up' }: { children:React.ReactNod
   return <div ref={ref} style={{opacity:visible?1:0,transform:visible?'none':t[direction],transition:`opacity 0.75s ease ${delay}s, transform 0.75s ease ${delay}s`}}>{children}</div>
 }
 
-const realisations = [
+const realisations: {title:string;category:string;location:string;img:string;pos?:string;desc:string;tags:string[];color:string}[] = [
   {
     title:'Équipe Dabakh — Station KMS3',
     category:'Instrumentation',
@@ -32,6 +32,7 @@ const realisations = [
     category:'Télésurveillance',
     location:'ICS — Industries Chimiques du Sénégal',
     img:'/images/real-sococim-cctv.jpg',
+    pos:'center center',
     desc:'Déploiement d\'un système de vidéosurveillance complet sur le site industriel ICS (Industries Chimiques du Sénégal). 16 caméras couvrant la totalité du site : pont bascule, portes, zones soufre et charbon, magasins et postes de garde.',
     tags:['ICS','Hikvision','16 caméras','Industriel'],
     color:'#E8600A',
@@ -68,6 +69,7 @@ const realisations = [
     category:'Télésurveillance',
     location:'Dakar, Sénégal',
     img:'/images/real-supervision.png',
+    pos:'center center',
     desc:'Déploiement d\'un centre de supervision avec écran multi-caméras Hikvision iVMS-4200. Surveillance en temps réel de plusieurs sites industriels et commerciaux.',
     tags:['Hikvision','iVMS-4200','Multi-sites','IP'],
     color:'#E8600A',
@@ -77,6 +79,7 @@ const realisations = [
     category:'Instrumentation',
     location:'Sénégal',
     img:'/images/real-kms3.png',
+    pos:'center center',
     desc:'Instrumentation complète d\'une station de pompage eau traitée. Capteurs de débit, pression et niveau avec télégestion à distance pour suivi permanent.',
     tags:['Fuji Electric','NIVUS','Débit','Eau'],
     color:'#1A7A3C',
@@ -86,6 +89,7 @@ const realisations = [
     category:'Télégestion',
     location:'Sénégal',
     img:'/images/real-sofrel.png',
+    pos:'center center',
     desc:'Installation d\'une unité de télégestion Sofrel Box Lacroix pour supervision à distance des installations d\'eau et d\'assainissement. Configuration complète et mise en réseau.',
     tags:['Lacroix','Sofrel','Télégestion','SCADA'],
     color:'#E8600A',
@@ -95,6 +99,7 @@ const realisations = [
     category:'Sécurité Incendie',
     location:'Baie de Hann, Dakar',
     img:'/images/real-detnov-centrale.png',
+    pos:'center center',
     desc:'Installation et configuration d\'une centrale d\'alarme incendie DETNOV pour un site industriel côtier. Système opérationnel 24h/24 avec surveillance de 18 zones.',
     tags:['DETNOV','Alarme','Incendie','18 zones'],
     color:'#E8600A',
@@ -113,6 +118,7 @@ const realisations = [
     category:'Instrumentation',
     location:'Site industriel',
     img:'/images/real-armoire.png',
+    pos:'center center',
     desc:'Câblage et mise en service d\'une armoire de contrôle-commande avec automate programmable Lacroix pour automatisation de procédés industriels complexes.',
     tags:['Lacroix','Automate','Câblage','PLC'],
     color:'#1A7A3C',
@@ -189,7 +195,7 @@ export default function RealisationsPage() {
                 >
                   {/* Image */}
                   <div className="img-shimmer" style={{position:'relative',minHeight:'320px',order:i%2===0?0:1,overflow:'hidden'}}>
-                    <Image src={real.img} alt={real.title} fill style={{objectFit:'cover',objectPosition:'center center',transition:'transform 0.6s ease'}}
+                    <Image src={real.img} alt={real.title} fill style={{objectFit:'cover',objectPosition:real.pos||'center top',transition:'transform 0.6s ease'}}
                     />
                     <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg,rgba(0,0,0,0.04) 0%,rgba(0,0,0,0.3) 100%)'}}/>
                     <div style={{position:'absolute',top:'16px',left:'16px'}}>
