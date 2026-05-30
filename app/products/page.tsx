@@ -100,13 +100,88 @@ const hikProducts: Product[] = [
   },
 ]
 
+const dahProducts: Product[] = [
+  {
+    name: 'Dôme 8MP Smart Dual Light WizSense',
+    ref: 'IPC-HDW2849TM-S-IL',
+    img: '/images/dah-cam-1.jpeg',
+    desc: 'Caméra dôme 8MP noire avec double éclairage IR + blanc et détection intelligente des humains et véhicules.',
+    specs: ['Résolution 8MP', 'Smart Dual Light IR + blanc', 'WizSense AI humain/véhicule', 'IP67', 'H.265+, 2.8mm'],
+  },
+  {
+    name: 'Turret 8MP TiOC Full Color Active Deterrence',
+    ref: 'IPC-HDW3849H-AS-PV',
+    img: '/images/dah-cam-2.jpeg',
+    desc: 'Caméra turret Full Color 24h/24 avec sirène intégrée, lumière stroboscopique et audio bidirectionnel pour dissuasion active.',
+    specs: ['Résolution 8MP', 'Full Color 24h/24', 'Sirène intégrée', 'Lumière stroboscopique', 'IP67, audio bidirectionnel'],
+  },
+  {
+    name: 'Bullet 8MP Smart Dual Light WizSense',
+    ref: 'IPC-HFW2849S-S-IL',
+    img: '/images/dah-cam-3.jpeg',
+    desc: 'Caméra bullet noire 8MP avec double éclairage IR 30m + blanc 30m et intelligence artificielle WizSense.',
+    specs: ['Résolution 8MP', 'IR 30m + blanc 30m', 'WizSense AI', 'IP67', 'H.265+, 2.8mm'],
+  },
+  {
+    name: 'Bullet 8MP TiOC Pro Double Objectif',
+    ref: 'IPC-HFW3849T1-AS-PV-PRO',
+    img: '/images/dah-cam-4.jpeg',
+    desc: 'Caméra bullet haut de gamme avec double objectif panoramique, sirène, stroboscope rouge/bleu et Full Color.',
+    specs: ['Résolution 8MP', 'Double objectif panoramique', 'Sirène + stroboscope rouge/bleu', 'Full Color', 'IP67, AI intégré'],
+  },
+  {
+    name: 'Bullet 8MP Dual Light Compact',
+    ref: 'DH-IPC-HFW2849S-S-IL',
+    img: '/images/dah-cam-5.jpeg',
+    desc: 'Caméra bullet compacte noire 8MP avec IR et lumière blanche intégrés, idéale pour petits espaces.',
+    specs: ['Résolution 8MP', 'Format compact', 'IR + lumière blanche', 'WizSense', 'IP67, H.265+'],
+  },
+  {
+    name: 'Turret 8MP TiOC Full Color Noir',
+    ref: 'IPC-HDW3849H-AS-PV-S4',
+    img: '/images/dah-cam-6.jpeg',
+    desc: 'Caméra turret noire Full Color nuit avec dissuasion active, audio intégré et détection AI humain/véhicule.',
+    specs: ['Résolution 8MP', 'Full Color nuit', 'Dissuasion active', 'Audio intégré', 'IP67, AI humain/véhicule'],
+  },
+  {
+    name: 'Turret 8MP Lite IR Fixe',
+    ref: 'DH-IPC-HDW2831T-AS-S2',
+    img: '/images/dah-cam-7.jpeg',
+    desc: 'Caméra turret blanche 8MP compacte avec micro intégré et IR 30m, parfaite pour les installations intérieures/extérieures.',
+    specs: ['Résolution 8MP', 'IR 30m', 'Fixe 2.8mm', 'Micro intégré', 'IP67, H.265+'],
+  },
+  {
+    name: 'PTZ 4MP 25x Zoom AI WizSense',
+    ref: 'DH-SD49425XB-HNR-S3',
+    img: '/images/dah-cam-8.jpeg',
+    desc: 'Caméra PTZ intelligente 4MP avec zoom optique 25x, WizSense AI et rotation 360° pour surveillance totale.',
+    specs: ['Résolution 4MP', 'Zoom optique 25x', 'WizSense AI', 'Rotation 360°, IR 100m', 'IP66, H.265+'],
+  },
+  {
+    name: 'PTZ 8MP 4K 25x Starlight',
+    ref: 'SD49825XB-HNR',
+    img: '/images/dah-cam-9.jpeg',
+    desc: 'Caméra PTZ 4K ultra haute définition avec technologie Starlight pour des images nettes en ultra faible luminosité.',
+    specs: ['Résolution 8MP 4K', 'Zoom optique 25x', 'Starlight ultra faible luminosité', 'IR 100m', 'IP66, H.265+'],
+  },
+  {
+    name: 'Fisheye 12MP Panoramique 360°',
+    ref: 'IPC-EBW81230',
+    img: '/images/dah-cam-10.jpeg',
+    desc: 'Caméra fisheye 12MP avec objectif grand angle pour une couverture totale 360° en un seul point d\'installation.',
+    specs: ['Résolution 12MP', 'Objectif fisheye 1.98mm', 'Couverture 360°', 'IR 10m', 'IP66, installation plafond'],
+  },
+]
+
+const allSurveillanceProducts = [...hikProducts, ...dahProducts]
+
 const categories = [
   {
     id: 'surveillance',
     label: 'Télésurveillance',
     color: '#E8600A',
     brand: 'Hikvision · Dahua',
-    products: hikProducts,
+    products: allSurveillanceProducts,
   },
   {
     id: 'access',
