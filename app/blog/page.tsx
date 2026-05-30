@@ -60,7 +60,7 @@ const articles = [
     image: '/images/real-armoire.png',
   },
   {
-    slug: '#',
+    slug: '/blog/hikvision-vs-dahua-2026',
     category: 'Produits',
     categoryColor: '#E8600A',
     title: 'Hikvision vs Dahua 2026 : quel système CCTV pour l\'Afrique de l\'Ouest ?',
