@@ -173,6 +173,82 @@ const dahProducts: Product[] = [
   },
 ]
 
+const hikAccessProducts: Product[] = [
+  {
+    name: 'Terminal Facial + Empreinte + RFID',
+    ref: 'DS-K1T342EFWX',
+    img: '/images/acc-cam-1.jpeg',
+    desc: 'Terminal multimodal avec reconnaissance faciale, empreinte digitale et RFID pour une sécurité maximale.',
+    specs: ['Reconnaissance faciale', 'Empreinte digitale', 'RFID', 'Écran tactile couleur', 'TCP/IP', 'Capacité 6000 visages'],
+  },
+  {
+    name: 'Terminal Facial 3D 8MP',
+    ref: 'DS-K1T671TM-3XF',
+    img: '/images/acc-cam-2.jpeg',
+    desc: 'Terminal facial haute précision 8MP avec reconnaissance 3D, détection masque et large capacité.',
+    specs: ['Caméra 8MP', 'Reconnaissance faciale 3D', 'Détection masque', 'Écran 4"', 'TCP/IP', 'Capacité 20000 visages'],
+  },
+  {
+    name: 'Contrôleur Double Porte',
+    ref: 'DS-K2602',
+    img: '/images/acc-cam-3.jpeg',
+    desc: 'Contrôleur d\'accès pour deux portes avec anti-passback, alarme intégrée et grande capacité de cartes.',
+    specs: ['2 portes', '100000 cartes', 'TCP/IP', 'Anti-passback', 'Alarme intégrée', 'Alimentation 12V'],
+  },
+  {
+    name: 'Terminal Empreinte + RFID + Clavier',
+    ref: 'DS-K1T804MF',
+    img: '/images/acc-cam-4.jpeg',
+    desc: 'Terminal biométrique combinant empreinte digitale, RFID Mifare et clavier tactile pour une triple authentification.',
+    specs: ['Empreinte digitale', 'RFID Mifare', 'Clavier tactile', 'Écran LCD', 'TCP/IP', '3000 empreintes'],
+  },
+  {
+    name: 'Serrure Magnétique 500kg',
+    ref: 'DS-K4H450S',
+    img: '/images/acc-cam-5.jpeg',
+    desc: 'Serrure magnétique haute résistance 500kg pour portes sécurisées, avec LED de statut et résistance aux intempéries.',
+    specs: ['Force 500kg', 'Alimentation 12V DC', 'LED statut', 'Résistante intempéries', 'Installation encastrée'],
+  },
+]
+
+const dahAccessProducts: Product[] = [
+  {
+    name: 'Terminal Facial + Température',
+    ref: 'ASI7213X-V1-T1',
+    img: '/images/acc-cam-6.jpeg',
+    desc: 'Terminal intelligent avec reconnaissance faciale, mesure de température corporelle et accès multi-modal.',
+    specs: ['Reconnaissance faciale', 'Mesure température corporelle', 'PIN + carte RFID', 'Écran tactile 5"', 'TCP/IP', 'Capacité 10000 visages'],
+  },
+  {
+    name: 'Contrôleur DIN Rail 2 Portes',
+    ref: 'ASC1202B-S',
+    img: '/images/acc-cam-7.jpeg',
+    desc: 'Contrôleur d\'accès compact montage DIN rail pour 2 portes avec anti-passback et alarmes.',
+    specs: ['2 portes', 'Montage DIN rail', '100000 cartes', 'TCP/IP', 'Anti-passback', 'Entrées/sorties alarme'],
+  },
+  {
+    name: 'Lecteur Inscription Carte EM USB',
+    ref: 'DHI-ASM100-D-V1',
+    img: '/images/acc-cam-8.jpeg',
+    desc: 'Lecteur USB plug & play pour inscription et lecture de cartes EM 125kHz, compatible DSS/SmartPSS.',
+    specs: ['Connexion USB', 'Carte EM 125kHz', 'Compatible DSS/SmartPSS', 'Plug and play'],
+  },
+  {
+    name: 'Interphone IP Vidéo 2 Fils PoE',
+    ref: 'VTO2202F-P-S2',
+    img: '/images/acc-cam-9.jpeg',
+    desc: 'Interphone IP vidéo PoE avec caméra grand angle 180°, résistant aux intempéries et audio bidirectionnel.',
+    specs: ['Caméra grand angle 180°', 'PoE 48V', 'IP65', 'Audio bidirectionnel', 'Compatible VTH Dahua'],
+  },
+  {
+    name: 'Terminal Autonome Empreinte + Carte',
+    ref: 'ASI1212F-D',
+    img: '/images/acc-cam-10.jpeg',
+    desc: 'Terminal autonome sans serveur combinant empreinte digitale et carte ID avec écran LCD 2.8".',
+    specs: ['Empreinte digitale', 'Carte ID', 'Écran LCD 2.8"', 'TCP/IP', '3000 empreintes', 'Autonome sans serveur'],
+  },
+]
+
 const categories = [
   {
     id: 'surveillance',
@@ -185,10 +261,8 @@ const categories = [
     id: 'access',
     label: 'Contrôle d\'Accès',
     color: '#1A7A3C',
-    brand: 'Hikvision',
-    products: [
-      { name: 'Terminal Biométrique DS-K1T804', img: '/images/access-control.png', desc: 'Terminal de contrôle d\'accès biométrique — empreintes digitales + RFID + clavier, écran couleur TFT' },
-    ],
+    brand: 'Hikvision · Dahua',
+    products: hikAccessProducts,
   },
   {
     id: 'fire',
@@ -418,29 +492,22 @@ export default function ProductsPage() {
 
           {activeCategory === 'surveillance' ? (
             <>
-              {/* Hikvision */}
               <FadeIn>
-                <div style={{ marginBottom: '36px' }}>
+                <div style={{ marginBottom:'36px' }}>
                   <div style={{ display:'flex', alignItems:'center', gap:'16px', marginBottom:'6px' }}>
                     <div style={{ fontFamily:'JetBrains Mono', fontSize:'10px', letterSpacing:'0.25em', color:'#E8600A', textTransform:'uppercase' }}>Hikvision</div>
                     <div style={{ flex:1, height:'1px', background:'rgba(232,96,10,0.2)' }}/>
                     <div style={{ fontFamily:'Rajdhani', fontSize:'12px', color:'#999', fontWeight:600 }}>{hikProducts.length} produits</div>
                   </div>
-                  <h2 style={{ fontFamily:'Bebas Neue', fontSize:'clamp(28px,4vw,48px)', color:'#111', letterSpacing:'0.04em' }}>
-                    CAMÉRAS <span style={{ color:'#E8600A' }}>HIKVISION</span>
-                  </h2>
+                  <h2 style={{ fontFamily:'Bebas Neue', fontSize:'clamp(28px,4vw,48px)', color:'#111', letterSpacing:'0.04em' }}>CAMÉRAS <span style={{ color:'#E8600A' }}>HIKVISION</span></h2>
                 </div>
               </FadeIn>
               <Carousel products={hikProducts} color='#E8600A' brand='Hikvision' onOpenModal={openModal} onQuote={requestQuote} />
-
-              {/* Séparateur */}
               <div style={{ margin:'64px 0 48px', display:'flex', alignItems:'center', gap:'20px' }}>
                 <div style={{ flex:1, height:'1px', background:'#eee' }}/>
                 <div style={{ fontFamily:'JetBrains Mono', fontSize:'10px', letterSpacing:'0.2em', color:'#bbb', textTransform:'uppercase' }}>Dahua Technology</div>
                 <div style={{ flex:1, height:'1px', background:'#eee' }}/>
               </div>
-
-              {/* Dahua */}
               <FadeIn>
                 <div style={{ marginBottom:'36px' }}>
                   <div style={{ display:'flex', alignItems:'center', gap:'16px', marginBottom:'6px' }}>
@@ -448,12 +515,40 @@ export default function ProductsPage() {
                     <div style={{ flex:1, height:'1px', background:'rgba(232,96,10,0.2)' }}/>
                     <div style={{ fontFamily:'Rajdhani', fontSize:'12px', color:'#999', fontWeight:600 }}>{dahProducts.length} produits</div>
                   </div>
-                  <h2 style={{ fontFamily:'Bebas Neue', fontSize:'clamp(28px,4vw,48px)', color:'#111', letterSpacing:'0.04em' }}>
-                    CAMÉRAS <span style={{ color:'#E8600A' }}>DAHUA</span>
-                  </h2>
+                  <h2 style={{ fontFamily:'Bebas Neue', fontSize:'clamp(28px,4vw,48px)', color:'#111', letterSpacing:'0.04em' }}>CAMÉRAS <span style={{ color:'#E8600A' }}>DAHUA</span></h2>
                 </div>
               </FadeIn>
               <Carousel products={dahProducts} color='#E8600A' brand='Dahua' onOpenModal={openModal} onQuote={requestQuote} />
+            </>
+          ) : activeCategory === 'access' ? (
+            <>
+              <FadeIn>
+                <div style={{ marginBottom:'36px' }}>
+                  <div style={{ display:'flex', alignItems:'center', gap:'16px', marginBottom:'6px' }}>
+                    <div style={{ fontFamily:'JetBrains Mono', fontSize:'10px', letterSpacing:'0.25em', color:'#1A7A3C', textTransform:'uppercase' }}>Hikvision</div>
+                    <div style={{ flex:1, height:'1px', background:'rgba(26,122,60,0.2)' }}/>
+                    <div style={{ fontFamily:'Rajdhani', fontSize:'12px', color:'#999', fontWeight:600 }}>{hikAccessProducts.length} produits</div>
+                  </div>
+                  <h2 style={{ fontFamily:'Bebas Neue', fontSize:'clamp(28px,4vw,48px)', color:'#111', letterSpacing:'0.04em' }}>CONTRÔLE D'ACCÈS <span style={{ color:'#1A7A3C' }}>HIKVISION</span></h2>
+                </div>
+              </FadeIn>
+              <Carousel products={hikAccessProducts} color='#1A7A3C' brand='Hikvision' onOpenModal={openModal} onQuote={requestQuote} />
+              <div style={{ margin:'64px 0 48px', display:'flex', alignItems:'center', gap:'20px' }}>
+                <div style={{ flex:1, height:'1px', background:'#eee' }}/>
+                <div style={{ fontFamily:'JetBrains Mono', fontSize:'10px', letterSpacing:'0.2em', color:'#bbb', textTransform:'uppercase' }}>Dahua Technology</div>
+                <div style={{ flex:1, height:'1px', background:'#eee' }}/>
+              </div>
+              <FadeIn>
+                <div style={{ marginBottom:'36px' }}>
+                  <div style={{ display:'flex', alignItems:'center', gap:'16px', marginBottom:'6px' }}>
+                    <div style={{ fontFamily:'JetBrains Mono', fontSize:'10px', letterSpacing:'0.25em', color:'#1A7A3C', textTransform:'uppercase' }}>Dahua</div>
+                    <div style={{ flex:1, height:'1px', background:'rgba(26,122,60,0.2)' }}/>
+                    <div style={{ fontFamily:'Rajdhani', fontSize:'12px', color:'#999', fontWeight:600 }}>{dahAccessProducts.length} produits</div>
+                  </div>
+                  <h2 style={{ fontFamily:'Bebas Neue', fontSize:'clamp(28px,4vw,48px)', color:'#111', letterSpacing:'0.04em' }}>CONTRÔLE D'ACCÈS <span style={{ color:'#1A7A3C' }}>DAHUA</span></h2>
+                </div>
+              </FadeIn>
+              <Carousel products={dahAccessProducts} color='#1A7A3C' brand='Dahua' onOpenModal={openModal} onQuote={requestQuote} />
             </>
           ) : (
             <>
