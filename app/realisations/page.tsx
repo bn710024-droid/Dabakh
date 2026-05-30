@@ -17,7 +17,7 @@ function FadeIn({ children, delay=0, direction='up' }: { children:React.ReactNod
   return <div ref={ref} style={{opacity:visible?1:0,transform:visible?'none':t[direction],transition:`opacity 0.75s ease ${delay}s, transform 0.75s ease ${delay}s`}}>{children}</div>
 }
 
-const realisations: {title:string;category:string;location:string;img:string;pos?:string;desc:string;tags:string[];color:string}[] = [
+const realisations: {title:string;category:string;location:string;img:string;beforeImg?:string;pos?:string;desc:string;tags:string[];color:string}[] = [
   {
     title:'Équipe Dabakh — Station KMS3',
     category:'Instrumentation',
@@ -88,11 +88,12 @@ const realisations: {title:string;category:string;location:string;img:string;pos
   {
     title:'Sofrel Box Lacroix — Télégestion',
     category:'Télégestion',
-    location:'Sénégal',
+    location:'CSS — Compagnie Sucrière Sénégalaise',
     img:'/images/real-sofrel.png',
+    beforeImg:'/images/real-sofrel-avant.jpg',
     pos:'center center',
     desc:'Installation d\'une unité de télégestion Sofrel Box Lacroix pour supervision à distance des installations d\'eau et d\'assainissement. Configuration complète et mise en réseau.',
-    tags:['Lacroix','Sofrel','Télégestion','SCADA'],
+    tags:['CSS','Lacroix','Sofrel','Télégestion','SCADA'],
     color:'#E8600A',
   },
   {
@@ -194,15 +195,31 @@ export default function RealisationsPage() {
                 onMouseEnter={e=>{const el=e.currentTarget as HTMLElement;el.style.boxShadow='0 16px 56px rgba(0,0,0,0.11)';el.style.transform='translateY(-4px)'}}
                 onMouseLeave={e=>{const el=e.currentTarget as HTMLElement;el.style.boxShadow='0 2px 20px rgba(0,0,0,0.05)';el.style.transform='none'}}
                 >
-                  {/* Image */}
+                  {/* Image — avant/après si beforeImg, sinon simple */}
                   <div className="img-shimmer" style={{position:'relative',minHeight:'320px',order:i%2===0?0:1,overflow:'hidden'}}>
-                    <Image src={real.img} alt={real.title} fill style={{objectFit:'cover',objectPosition:(real as {pos?:string}).pos||'center center',transition:'transform 0.6s ease'}}
-                    />
-                    <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg,rgba(0,0,0,0.04) 0%,rgba(0,0,0,0.3) 100%)'}}/>
-                    <div style={{position:'absolute',top:'16px',left:'16px'}}>
+                    {real.beforeImg ? (
+                      <div style={{display:'grid',gridTemplateRows:'1fr 1fr',height:'100%',minHeight:'320px'}}>
+                        <div style={{position:'relative',overflow:'hidden'}}>
+                          <Image src={real.beforeImg} alt="Avant" fill style={{objectFit:'cover'}}/>
+                          <div style={{position:'absolute',inset:0,background:'rgba(0,0,0,0.35)'}}/>
+                          <div style={{position:'absolute',top:'10px',left:'12px',background:'#DC2626',color:'white',fontFamily:'Bebas Neue',fontSize:'13px',letterSpacing:'0.15em',padding:'3px 10px',borderRadius:'2px'}}>AVANT</div>
+                        </div>
+                        <div style={{position:'relative',overflow:'hidden'}}>
+                          <Image src={real.img} alt="Après" fill style={{objectFit:'cover',objectPosition:real.pos||'center center'}}/>
+                          <div style={{position:'absolute',inset:0,background:'rgba(0,0,0,0.15)'}}/>
+                          <div style={{position:'absolute',top:'10px',left:'12px',background:'#1A7A3C',color:'white',fontFamily:'Bebas Neue',fontSize:'13px',letterSpacing:'0.15em',padding:'3px 10px',borderRadius:'2px'}}>APRÈS</div>
+                        </div>
+                      </div>
+                    ) : (
+                      <>
+                        <Image src={real.img} alt={real.title} fill style={{objectFit:'cover',objectPosition:(real as {pos?:string}).pos||'center center',transition:'transform 0.6s ease'}}/>
+                        <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg,rgba(0,0,0,0.04) 0%,rgba(0,0,0,0.3) 100%)'}}/>
+                      </>
+                    )}
+                    <div style={{position:'absolute',top:'16px',left:'16px', zIndex:2}}>
                       <span style={{fontFamily:'Rajdhani, sans-serif',fontWeight:700,fontSize:'11px',letterSpacing:'0.12em',textTransform:'uppercase',background:real.color,color:'white',padding:'5px 12px',borderRadius:'2px'}}>{real.category}</span>
                     </div>
-                    <div style={{position:'absolute',top:0,left:i%2===0?'auto':0,right:i%2===0?0:'auto',width:'4px',height:'100%',background:`linear-gradient(180deg,${real.color},transparent)`}}/>
+                    <div style={{position:'absolute',top:0,left:i%2===0?'auto':0,right:i%2===0?0:'auto',width:'4px',height:'100%',background:`linear-gradient(180deg,${real.color},transparent)`, zIndex:2}}/>
                   </div>
 
                   {/* Texte */}
