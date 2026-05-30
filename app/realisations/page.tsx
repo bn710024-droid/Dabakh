@@ -195,7 +195,7 @@ export default function RealisationsPage() {
                 >
                   {/* Image */}
                   <div className="img-shimmer" style={{position:'relative',minHeight:'320px',order:i%2===0?0:1,overflow:'hidden'}}>
-                    <Image src={real.img} alt={real.title} fill style={{objectFit:'cover',objectPosition:real.pos||'center top',transition:'transform 0.6s ease'}}
+                    <Image src={real.img} alt={real.title} fill style={{objectFit:'cover',objectPosition:'center center',transition:'transform 0.6s ease'}}
                     />
                     <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg,rgba(0,0,0,0.04) 0%,rgba(0,0,0,0.3) 100%)'}}/>
                     <div style={{position:'absolute',top:'16px',left:'16px'}}>
