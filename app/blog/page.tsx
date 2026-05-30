@@ -40,7 +40,7 @@ const articles = [
     image: '/images/real-detecteur-install.png',
   },
   {
-    slug: '#',
+    slug: '/blog/capteurs-essentiels-industrie-petroliere',
     category: 'Instrumentation',
     categoryColor: '#E8600A',
     title: 'Les capteurs essentiels pour l\'industrie pétrolière et chimique',
