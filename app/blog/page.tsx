@@ -30,7 +30,7 @@ const articles = [
     image: '/images/real-sococim-cctv.jpg',
   },
   {
-    slug: '#',
+    slug: '/blog/normes-securite-incendie-senegal',
     category: 'Sécurité Incendie',
     categoryColor: '#1A7A3C',
     title: 'Normes de sécurité incendie au Sénégal : ce que dit la réglementation',
