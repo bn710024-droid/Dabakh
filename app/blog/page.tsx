@@ -50,7 +50,7 @@ const articles = [
     image: '/images/real-debitmetre.png',
   },
   {
-    slug: '#',
+    slug: '/blog/maintenance-preventive-vs-curative',
     category: 'Maintenance',
     categoryColor: '#1A7A3C',
     title: 'Maintenance préventive vs curative : quel plan pour vos équipements de sécurité ?',
