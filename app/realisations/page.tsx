@@ -262,23 +262,6 @@ export default function RealisationsPage() {
       {/* ILS NOUS FONT CONFIANCE — dans la page réalisations */}
       <ClientsBand />
 
-      {/* CTA */}
-      <section style={{padding:'100px 24px',textAlign:'center',background:'linear-gradient(135deg,#1A7A3C 0%,#0F5A2A 100%)'}}>
-        <FadeIn>
-          <div style={{maxWidth:'600px',margin:'0 auto'}}>
-            <div className="accent-line-white" style={{margin:'0 auto 20px'}}/>
-            <h2 style={{fontFamily:'Bebas Neue, sans-serif',fontSize:'clamp(36px,6vw,68px)',color:'#FFFFFF',letterSpacing:'0.04em',lineHeight:1,marginBottom:'20px'}}>
-              VOTRE PROJET<br/><span style={{color:'#F97316'}}>SERA LE PROCHAIN</span>
-            </h2>
-            <p style={{fontFamily:'Rajdhani, sans-serif',fontSize:'16px',color:'rgba(255,255,255,0.7)',lineHeight:1.7,marginBottom:'36px'}}>
-              Rejoignez les entreprises qui nous font confiance pour leurs projets industriels au Sénégal.
-            </p>
-            <Link href="/contact" className="btn-orange" style={{fontSize:'13px'}}>
-              Démarrer Mon Projet <ArrowRight size={16}/>
-            </Link>
-          </div>
-        </FadeIn>
-      </section>
     </div>
   )
 }
