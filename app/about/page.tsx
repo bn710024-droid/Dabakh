@@ -118,7 +118,7 @@ export default function AboutPage() {
                 <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg,transparent 40%,rgba(0,0,0,0.75) 100%)'}}/>
                 <div style={{position:'absolute',bottom:'16px',left:'16px'}}>
                   <div style={{fontFamily:'Bebas Neue, sans-serif',fontSize:'18px',color:'white',letterSpacing:'0.06em'}}>Visite Officielle NIVUS</div>
-                  <div style={{fontFamily:'Rajdhani, sans-serif',fontSize:'12px',color:'rgba(255,255,255,0.7)'}}>Allemagne — Partenaire Débitmétrie</div>
+                  <div style={{fontFamily:'Rajdhani, sans-serif',fontSize:'12px',color:'rgba(255,255,255,0.7)'}}>Allemagne</div>
                 </div>
               </div>
             </FadeIn>
