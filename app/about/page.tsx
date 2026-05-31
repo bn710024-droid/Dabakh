@@ -171,7 +171,7 @@ export default function AboutPage() {
                 <div style={{position:'absolute',inset:0,background:'linear-gradient(135deg,rgba(232,96,10,0.12) 0%,rgba(10,10,10,0.4) 100%)'}}/>
                 <div style={{position:'absolute',bottom:'20px',left:'20px'}}>
                   <div style={{fontFamily:'JetBrains Mono, monospace',fontSize:'10px',color:'rgba(255,255,255,0.6)',textTransform:'uppercase',marginBottom:'2px'}}>Expertise confirmée</div>
-                  <div style={{fontFamily:'Bebas Neue, sans-serif',fontSize:'40px',color:'#F97316',letterSpacing:'0.05em'}}>15+ ANS</div>
+                  <div style={{fontFamily:'Bebas Neue, sans-serif',fontSize:'40px',color:'#F97316',letterSpacing:'0.05em'}}>+11 ANS</div>
                 </div>
               </div>
             </FadeIn>
