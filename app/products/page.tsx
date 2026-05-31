@@ -631,7 +631,6 @@ export default function ProductsPage() {
                   <div style={{ display:'flex', alignItems:'center', gap:'16px', marginBottom:'6px' }}>
                     <div style={{ fontFamily:'JetBrains Mono', fontSize:'10px', letterSpacing:'0.25em', color:'#E8600A', textTransform:'uppercase' }}>Hikvision</div>
                     <div style={{ flex:1, height:'1px', background:'rgba(232,96,10,0.2)' }}/>
-                    <div style={{ fontFamily:'Rajdhani', fontSize:'12px', color:'#999', fontWeight:600 }}>{hikProducts.length} produits</div>
                   </div>
                   <h2 style={{ fontFamily:'Bebas Neue', fontSize:'clamp(28px,4vw,48px)', color:'#111', letterSpacing:'0.04em' }}>CAMÉRAS <span style={{ color:'#E8600A' }}>HIKVISION</span></h2>
                 </div>
@@ -647,7 +646,6 @@ export default function ProductsPage() {
                   <div style={{ display:'flex', alignItems:'center', gap:'16px', marginBottom:'6px' }}>
                     <div style={{ fontFamily:'JetBrains Mono', fontSize:'10px', letterSpacing:'0.25em', color:'#E8600A', textTransform:'uppercase' }}>Dahua</div>
                     <div style={{ flex:1, height:'1px', background:'rgba(232,96,10,0.2)' }}/>
-                    <div style={{ fontFamily:'Rajdhani', fontSize:'12px', color:'#999', fontWeight:600 }}>{dahProducts.length} produits</div>
                   </div>
                   <h2 style={{ fontFamily:'Bebas Neue', fontSize:'clamp(28px,4vw,48px)', color:'#111', letterSpacing:'0.04em' }}>CAMÉRAS <span style={{ color:'#E8600A' }}>DAHUA</span></h2>
                 </div>
@@ -661,7 +659,6 @@ export default function ProductsPage() {
                   <div style={{ display:'flex', alignItems:'center', gap:'16px', marginBottom:'6px' }}>
                     <div style={{ fontFamily:'JetBrains Mono', fontSize:'10px', letterSpacing:'0.25em', color:'#1A7A3C', textTransform:'uppercase' }}>Hikvision</div>
                     <div style={{ flex:1, height:'1px', background:'rgba(26,122,60,0.2)' }}/>
-                    <div style={{ fontFamily:'Rajdhani', fontSize:'12px', color:'#999', fontWeight:600 }}>{hikAccessProducts.length} produits</div>
                   </div>
                   <h2 style={{ fontFamily:'Bebas Neue', fontSize:'clamp(28px,4vw,48px)', color:'#111', letterSpacing:'0.04em' }}>CONTRÔLE D'ACCÈS <span style={{ color:'#1A7A3C' }}>HIKVISION</span></h2>
                 </div>
@@ -677,7 +674,6 @@ export default function ProductsPage() {
                   <div style={{ display:'flex', alignItems:'center', gap:'16px', marginBottom:'6px' }}>
                     <div style={{ fontFamily:'JetBrains Mono', fontSize:'10px', letterSpacing:'0.25em', color:'#1A7A3C', textTransform:'uppercase' }}>Dahua</div>
                     <div style={{ flex:1, height:'1px', background:'rgba(26,122,60,0.2)' }}/>
-                    <div style={{ fontFamily:'Rajdhani', fontSize:'12px', color:'#999', fontWeight:600 }}>{dahAccessProducts.length} produits</div>
                   </div>
                   <h2 style={{ fontFamily:'Bebas Neue', fontSize:'clamp(28px,4vw,48px)', color:'#111', letterSpacing:'0.04em' }}>CONTRÔLE D'ACCÈS <span style={{ color:'#1A7A3C' }}>DAHUA</span></h2>
                 </div>
@@ -690,7 +686,7 @@ export default function ProductsPage() {
                 <div style={{ marginBottom: '48px' }}>
                   <div style={{ fontFamily: 'JetBrains Mono', fontSize: '10px', letterSpacing: '0.25em', color: activeData.color, textTransform: 'uppercase', marginBottom: '8px' }}>{activeData.brand}</div>
                   <h2 style={{ fontFamily: 'Bebas Neue', fontSize: 'clamp(36px, 5vw, 60px)', color: '#111111', letterSpacing: '0.04em' }}>
-                    {activeData.label} <span style={{ color: activeData.color }}>({activeData.products.length} produits)</span>
+                    {activeData.label}
                   </h2>
                 </div>
               </FadeIn>
@@ -730,7 +726,7 @@ export default function ProductsPage() {
                   <div style={{ fontFamily: 'Bebas Neue', fontSize: '22px', letterSpacing: '0.06em', color: cat.color }}>{cat.label}</div>
                   <div style={{ fontFamily: 'JetBrains Mono', fontSize: '10px', letterSpacing: '0.15em', color: '#888', textTransform: 'uppercase' }}>{cat.brand}</div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '8px', color: cat.color, fontFamily: 'Rajdhani', fontSize: '12px', letterSpacing: '0.1em', fontWeight: 700, textTransform: 'uppercase' }}>
-                    {cat.products.length} produits <ArrowRight size={12} />
+                    Voir les produits <ArrowRight size={12} />
                   </div>
                 </button>
               </FadeIn>
