@@ -191,21 +191,6 @@ export default function BlogPage() {
         </div>
       </section>
 
-      {/* ══ CTA ══ */}
-      <section style={{ background: 'linear-gradient(135deg,#1A7A3C 0%,#0F5A2A 100%)', padding: '64px 20px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
-        <div className="bg-grid-green" style={{ position: 'absolute', inset: 0 }} />
-        <div style={{ position: 'relative', zIndex: 1, maxWidth: '600px', margin: '0 auto' }}>
-          <div style={{ fontFamily: 'Bebas Neue', fontSize: 'clamp(28px,5vw,52px)', color: '#FFFFFF', letterSpacing: '0.05em', marginBottom: '14px' }}>
-            UN PROJET EN TÊTE ?
-          </div>
-          <p style={{ fontFamily: 'Rajdhani, sans-serif', fontSize: '15px', color: 'rgba(255,255,255,0.75)', marginBottom: '28px', lineHeight: 1.7 }}>
-            Nos ingénieurs répondent à vos questions et vous proposent une étude gratuite.
-          </p>
-          <Link href="/contact" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#E8600A', color: 'white', fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, fontSize: '13px', letterSpacing: '0.12em', textTransform: 'uppercase', padding: '14px 32px', borderRadius: '4px', textDecoration: 'none' }}>
-            Demander un Devis Gratuit <ArrowRight size={16} />
-          </Link>
-        </div>
-      </section>
 
       <style jsx global>{`
         .blog-featured { transition: box-shadow 0.3s ease; }

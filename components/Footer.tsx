@@ -16,11 +16,27 @@ export default function Footer() {
             Consultation gratuite — Réponse sous 24h
           </p>
           <Link href="/contact" style={{
-            display: 'inline-block', padding: '12px 32px',
+            display: 'inline-flex', alignItems: 'center', gap: '8px',
+            padding: '14px 36px',
             background: '#E8600A', color: 'white', textDecoration: 'none',
             fontFamily: 'Rajdhani, sans-serif', fontWeight: 700, fontSize: '13px',
-            letterSpacing: '0.12em', textTransform: 'uppercase', borderRadius: '2px',
-          }}>Demander un Devis Gratuit</Link>
+            letterSpacing: '0.12em', textTransform: 'uppercase', borderRadius: '4px',
+            transition: 'transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.4s ease, background 0.3s ease',
+            boxShadow: '0 4px 15px rgba(232,96,10,0.3)',
+          }}
+          onMouseEnter={e => {
+            const el = e.currentTarget as HTMLElement
+            el.style.transform = 'scale(1.07)'
+            el.style.background = '#FF7A1A'
+            el.style.boxShadow = '0 8px 30px rgba(232,96,10,0.55)'
+          }}
+          onMouseLeave={e => {
+            const el = e.currentTarget as HTMLElement
+            el.style.transform = 'scale(1)'
+            el.style.background = '#E8600A'
+            el.style.boxShadow = '0 4px 15px rgba(232,96,10,0.3)'
+          }}
+          >Demander un Devis Gratuit</Link>
         </div>
       </div>
 
