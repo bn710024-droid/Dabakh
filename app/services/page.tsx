@@ -46,7 +46,7 @@ const services = [
     img: '/images/instrumentation.png',
     color: '#E8600A',
     desc: 'Équipements de mesure et de contrôle pour les processus industriels. Capteurs de pression, température, débit, niveau. Solutions pour l\'industrie pétrolière, chimique et agroalimentaire.',
-    features: ['Capteurs de pression', 'Débitmètres', 'Analyseurs de gaz', 'Capteurs de niveau', 'Métrologie légale', 'Étalonnage certifié'],
+    features: ['Capteurs de pression', 'Débitmètres', 'Capteurs de niveau', 'Analyseurs de gaz', 'Métrologie légale', 'Étalonnage certifié'],
   },
   {
     icon: <Zap size={36} />,

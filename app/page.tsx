@@ -36,7 +36,7 @@ function Counter({ target, suffix='' }: { target:number; suffix?:string }) {
     if(ref.current) observer.observe(ref.current)
     return ()=>observer.disconnect()
   },[target])
-  return <div ref={ref}>{count}{suffix}</div>
+  return <div ref={ref}>{suffix}{count}</div>
 }
 
 const services = [
@@ -107,7 +107,7 @@ export default function HomePage() {
               <Link href="/services" className="btn-outline-white" style={{fontSize:'13px'}}>Nos Services</Link>
             </div>
             <div style={{display:'flex',gap:'36px',flexWrap:'wrap',paddingTop:'28px',borderTop:'1px solid rgba(255,255,255,0.13)'}}>
-              {[{v:'+11',l:"Ans d'expérience"},{v:'200+',l:'Projets réalisés'},{v:'6',l:'Marques partenaires'}].map(s=>(
+              {[{v:'+11',l:"Ans d'expérience"},{v:'+200',l:'Projets réalisés'},{v:'6',l:'Marques partenaires'}].map(s=>(
                 <div key={s.l}>
                   <div style={{fontFamily:'Bebas Neue, sans-serif',fontSize:'38px',color:'#F97316',lineHeight:1}}>{s.v}</div>
                   <div style={{fontFamily:'Rajdhani, sans-serif',fontSize:'11px',letterSpacing:'0.1em',color:'rgba(255,255,255,0.55)',textTransform:'uppercase'}}>{s.l}</div>

@@ -136,9 +136,9 @@ const realisations: {title:string;category:string;location:string;img:string;bef
 ]
 
 const stats = [
-  {val:'200+',label:'Projets réalisés'},
+  {val:'+200',label:'Projets réalisés'},
   {val:'+11',label:"Années d'expérience"},
-  {val:'50+',label:'Clients actifs'},
+  {val:'+50',label:'Clients actifs'},
   {val:'100%',label:'Satisfaction client'},
 ]
 
