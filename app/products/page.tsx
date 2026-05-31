@@ -173,6 +173,85 @@ const dahProducts: Product[] = [
   },
 ]
 
+const hikNvrProducts: Product[] = [
+  {
+    name: 'NVR 4 Ports PoE Hikvision',
+    ref: 'DS-7604NI-K1/4P',
+    img: '/images/nvr-cam-1.jpeg',
+    desc: 'Enregistreur réseau 4 canaux PoE intégrés, résolution jusqu\'à 8MP, compression H.265+.',
+    specs: ['4 canaux IP PoE', 'Résolution 8MP', '1 baie disque dur SATA', 'Sortie HDMI + VGA', 'H.265+'],
+  },
+  {
+    name: 'NVR 8 Ports PoE Hikvision',
+    ref: 'DS-7608NI-K2/8P',
+    img: '/images/nvr-cam-2.jpeg',
+    desc: 'Enregistreur réseau 8 canaux PoE intégrés, 2 baies disque dur, résolution jusqu\'à 8MP.',
+    specs: ['8 canaux IP PoE', 'Résolution 8MP', '2 baies disque dur SATA', 'Sortie HDMI + VGA', 'H.265+'],
+  },
+  {
+    name: 'NVR 16 Ports PoE Hikvision',
+    ref: 'DS-7616NI-K2/16P',
+    img: '/images/nvr-cam-3 .jpeg',
+    desc: 'Enregistreur réseau 16 canaux PoE, 2 baies disque dur, idéal pour les sites industriels étendus.',
+    specs: ['16 canaux IP PoE', 'Résolution 8MP', '2 baies disque dur SATA', 'Sortie HDMI + VGA', 'H.265+'],
+  },
+]
+
+const dahNvrProducts: Product[] = [
+  {
+    name: 'NVR 4 Ports PoE Dahua',
+    ref: 'DHI-NVR2104HS-P-4KS3',
+    img: '/images/nvr-cam-4.jpeg',
+    desc: 'Enregistreur réseau Dahua 4 canaux PoE 4K, compact et performant pour petites installations.',
+    specs: ['4 canaux IP PoE', 'Résolution 8MP 4K', '1 baie disque dur SATA', 'Sortie HDMI + VGA', 'H.265+'],
+  },
+  {
+    name: 'NVR 8 Ports PoE Dahua',
+    ref: 'NVR4108HS-8P-4KS3',
+    img: '/images/nvr-cam-5.jpeg',
+    desc: 'Enregistreur réseau Dahua 8 canaux PoE 4K avec sortie HDMI/VGA et compression H.265+.',
+    specs: ['8 canaux IP PoE', 'Résolution 8MP 4K', '1 baie disque dur SATA', 'Sortie HDMI + VGA', 'H.265+'],
+  },
+  {
+    name: 'NVR 16 Ports PoE Dahua',
+    ref: 'DHI-NVR4216-16P-4KS2/L',
+    img: '/images/nvr-cam-6.jpeg',
+    desc: 'Enregistreur réseau Dahua 16 canaux PoE 4K, 2 baies disque dur pour sites de grande envergure.',
+    specs: ['16 canaux IP PoE', 'Résolution 8MP 4K', '2 baies disque dur SATA', 'Sortie HDMI + VGA', 'H.265+'],
+  },
+]
+
+const kitProducts: Product[] = [
+  {
+    name: 'Kit 4 Caméras Dôme Hikvision',
+    ref: 'KIT-HIK-4D',
+    img: '/images/nvr-cam-7.jpeg',
+    desc: 'Kit complet plug & play : 4 caméras dôme HD + NVR 4 ports PoE + disque dur + câbles.',
+    specs: ['4 caméras dôme HD', 'NVR 4 ports PoE inclus', 'Disque dur inclus', 'Câbles + alimentation', 'Plug & play'],
+  },
+  {
+    name: 'Kit 8 Caméras Bullet IP 4MP Hikvision',
+    ref: 'KIT-HIK-8B',
+    img: '/images/nvr-cam-8.jpeg',
+    desc: 'Kit 8 caméras bullet IP 4MP DS-2CD1043G0-I avec NVR 7108NI-Q1/8P et disque dur WD Purple.',
+    specs: ['8 caméras bullet IP 4MP', 'NVR 7108NI-Q1/8P', 'Disque dur WD Purple', 'Câbles + accessoires', 'H.265+'],
+  },
+  {
+    name: 'Kit 4 Caméras Dôme Dahua',
+    ref: 'KIT-DAH-4D',
+    img: '/images/nvr-cam-9.jpeg',
+    desc: 'Kit complet Dahua : 4 caméras dôme FHD 2MP + NVR 4 ports + disque dur WD Blue + câbles.',
+    specs: ['4 caméras dôme FHD 2MP', 'NVR 4 ports inclus', 'Disque dur WD Blue', 'Câbles + accessoires', 'Plug & play'],
+  },
+  {
+    name: 'Kit 8 Caméras Dôme HDCVI Dahua',
+    ref: 'KIT-DAH-8D',
+    img: '/images/nvr-cam-10.jpeg',
+    desc: 'Kit 8 caméras dôme 1080p HDCVI Dahua avec DVR 8 ports, câbles et accessoires inclus.',
+    specs: ['8 caméras dôme 1080p', 'NVR/DVR 8 ports inclus', 'Câbles + accessoires', 'Plug & play'],
+  },
+]
+
 const hikAccessProducts: Product[] = [
   {
     name: 'Terminal Facial + Empreinte + RFID',
@@ -651,6 +730,57 @@ export default function ProductsPage() {
                 </div>
               </FadeIn>
               <Carousel products={dahProducts} color='#E8600A' brand='Dahua' onOpenModal={openModal} onQuote={requestQuote} />
+
+              {/* NVR Hikvision */}
+              <div style={{ margin:'64px 0 48px', display:'flex', alignItems:'center', gap:'20px' }}>
+                <div style={{ flex:1, height:'1px', background:'#eee' }}/>
+                <div style={{ fontFamily:'JetBrains Mono', fontSize:'10px', letterSpacing:'0.2em', color:'#bbb', textTransform:'uppercase' }}>Enregistreurs NVR</div>
+                <div style={{ flex:1, height:'1px', background:'#eee' }}/>
+              </div>
+              <FadeIn>
+                <div style={{ marginBottom:'36px' }}>
+                  <div style={{ display:'flex', alignItems:'center', gap:'16px', marginBottom:'6px' }}>
+                    <div style={{ fontFamily:'JetBrains Mono', fontSize:'10px', letterSpacing:'0.25em', color:'#E8600A', textTransform:'uppercase' }}>Hikvision</div>
+                    <div style={{ flex:1, height:'1px', background:'rgba(232,96,10,0.2)' }}/>
+                  </div>
+                  <h2 style={{ fontFamily:'Bebas Neue', fontSize:'clamp(28px,4vw,48px)', color:'#111', letterSpacing:'0.04em' }}>NVR <span style={{ color:'#E8600A' }}>HIKVISION</span></h2>
+                </div>
+              </FadeIn>
+              <Carousel products={hikNvrProducts} color='#E8600A' brand='Hikvision' onOpenModal={openModal} onQuote={requestQuote} />
+
+              {/* NVR Dahua */}
+              <div style={{ margin:'48px 0', display:'flex', alignItems:'center', gap:'20px' }}>
+                <div style={{ flex:1, height:'1px', background:'#eee' }}/>
+                <div style={{ fontFamily:'JetBrains Mono', fontSize:'10px', letterSpacing:'0.2em', color:'#bbb', textTransform:'uppercase' }}>Dahua Technology</div>
+                <div style={{ flex:1, height:'1px', background:'#eee' }}/>
+              </div>
+              <FadeIn>
+                <div style={{ marginBottom:'36px' }}>
+                  <div style={{ display:'flex', alignItems:'center', gap:'16px', marginBottom:'6px' }}>
+                    <div style={{ fontFamily:'JetBrains Mono', fontSize:'10px', letterSpacing:'0.25em', color:'#E8600A', textTransform:'uppercase' }}>Dahua</div>
+                    <div style={{ flex:1, height:'1px', background:'rgba(232,96,10,0.2)' }}/>
+                  </div>
+                  <h2 style={{ fontFamily:'Bebas Neue', fontSize:'clamp(28px,4vw,48px)', color:'#111', letterSpacing:'0.04em' }}>NVR <span style={{ color:'#E8600A' }}>DAHUA</span></h2>
+                </div>
+              </FadeIn>
+              <Carousel products={dahNvrProducts} color='#E8600A' brand='Dahua' onOpenModal={openModal} onQuote={requestQuote} />
+
+              {/* Kits */}
+              <div style={{ margin:'64px 0 48px', display:'flex', alignItems:'center', gap:'20px' }}>
+                <div style={{ flex:1, height:'1px', background:'#eee' }}/>
+                <div style={{ fontFamily:'JetBrains Mono', fontSize:'10px', letterSpacing:'0.2em', color:'#bbb', textTransform:'uppercase' }}>Kits Complets</div>
+                <div style={{ flex:1, height:'1px', background:'#eee' }}/>
+              </div>
+              <FadeIn>
+                <div style={{ marginBottom:'36px' }}>
+                  <div style={{ display:'flex', alignItems:'center', gap:'16px', marginBottom:'6px' }}>
+                    <div style={{ fontFamily:'JetBrains Mono', fontSize:'10px', letterSpacing:'0.25em', color:'#E8600A', textTransform:'uppercase' }}>Hikvision · Dahua</div>
+                    <div style={{ flex:1, height:'1px', background:'rgba(232,96,10,0.2)' }}/>
+                  </div>
+                  <h2 style={{ fontFamily:'Bebas Neue', fontSize:'clamp(28px,4vw,48px)', color:'#111', letterSpacing:'0.04em' }}>KITS <span style={{ color:'#E8600A' }}>COMPLETS</span></h2>
+                </div>
+              </FadeIn>
+              <Carousel products={kitProducts} color='#E8600A' brand='Hikvision · Dahua' onOpenModal={openModal} onQuote={requestQuote} />
             </>
           ) : activeCategory === 'access' ? (
             <>
