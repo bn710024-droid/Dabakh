@@ -28,6 +28,16 @@ const realisations: {title:string;category:string;location:string;img:string;bef
     color:'#1A7A3C',
   },
   {
+    title:'Pose & Configuration Capteur de Vibration — ICS',
+    category:'Instrumentation',
+    location:'ICS — Industries Chimiques du Sénégal',
+    img:'/images/real-ics-vibration.jpg.jpeg',
+    pos:'center center',
+    desc:'Installation et configuration de capteurs de vibration sur équipements industriels ICS. Intervention terrain en environnement minier pour la surveillance prédictive des machines.',
+    tags:['ICS','Vibration','Capteurs','Instrumentation','Terrain'],
+    color:'#1A7A3C',
+  },
+  {
     title:'Supervision CCTV — ICS (Industries Chimiques du Sénégal)',
     category:'Télésurveillance',
     location:'ICS — Industries Chimiques du Sénégal',
