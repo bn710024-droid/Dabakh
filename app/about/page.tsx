@@ -124,7 +124,7 @@ export default function AboutPage() {
             </FadeIn>
             <FadeIn direction="right" delay={0.2}>
               <div style={{position:'relative',height:'280px',borderRadius:'8px',overflow:'hidden',boxShadow:'0 8px 32px rgba(0,0,0,0.1)'}}>
-                <Image src="/images/real-equipe-kms3.jpg" alt="Équipe KMS3" fill style={{objectFit:'cover'}}/>
+                <Image src="/images/real-terrain.png" alt="Équipe Terrain" fill style={{objectFit:'cover'}}/>
                 <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg,transparent 40%,rgba(0,0,0,0.75) 100%)'}}/>
                 <div style={{position:'absolute',bottom:'16px',left:'16px'}}>
                   <div style={{fontFamily:'Bebas Neue, sans-serif',fontSize:'18px',color:'white',letterSpacing:'0.06em'}}>Équipe — Station KMS3</div>
