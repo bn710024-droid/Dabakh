@@ -124,11 +124,12 @@ export default function AboutPage() {
             </FadeIn>
             <FadeIn direction="right" delay={0.2}>
               <div style={{position:'relative',height:'280px',borderRadius:'8px',overflow:'hidden',boxShadow:'0 8px 32px rgba(0,0,0,0.1)'}}>
-                <Image src="/images/real-terrain.png" alt="Équipe Terrain" fill style={{objectFit:'cover'}}/>
-                <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg,transparent 40%,rgba(0,0,0,0.75) 100%)'}}/>
+                <Image src="/images/partenariat.jpeg" alt="Forum International" fill style={{objectFit:'cover', objectPosition:'center top'}}/>
+                <div style={{position:'absolute',inset:0,background:'linear-gradient(180deg,transparent 40%,rgba(0,0,0,0.80) 100%)'}}/>
                 <div style={{position:'absolute',bottom:'16px',left:'16px'}}>
-                  <div style={{fontFamily:'Bebas Neue, sans-serif',fontSize:'18px',color:'white',letterSpacing:'0.06em'}}>Équipe — Station KMS3</div>
-                  <div style={{fontFamily:'Rajdhani, sans-serif',fontSize:'12px',color:'rgba(255,255,255,0.7)'}}>Projet Eau Traitée — Sénégal</div>
+                  <div style={{fontFamily:'JetBrains Mono, monospace',fontSize:'9px',letterSpacing:'0.2em',color:'#F97316',textTransform:'uppercase',marginBottom:'4px'}}>Forum International</div>
+                  <div style={{fontFamily:'Bebas Neue, sans-serif',fontSize:'20px',color:'white',letterSpacing:'0.06em',lineHeight:1.1}}>Dabakh — Scène Mondiale</div>
+                  <div style={{fontFamily:'Rajdhani, sans-serif',fontSize:'12px',color:'rgba(255,255,255,0.75)',marginTop:'3px'}}>Représentation internationale & développement business</div>
                 </div>
               </div>
             </FadeIn>
