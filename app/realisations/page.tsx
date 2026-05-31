@@ -96,7 +96,7 @@ const realisations: {title:string;category:string;location:string;img:string;bef
     color:'#E8600A',
   },
   {
-    title:'Centrale Alarme DETNOV — CDE Dépollution',
+    title:'Centrale Alarme DETNOV',
     category:'Sécurité Incendie',
     location:'CDE Dépollution — Baie de Hann',
     img:'/images/real-detnov-centrale.png',
