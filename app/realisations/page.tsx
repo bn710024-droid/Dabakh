@@ -98,7 +98,7 @@ const realisations: {title:string;category:string;location:string;img:string;bef
   {
     title:'Centrale Alarme DETNOV — CDE Dépollution',
     category:'Sécurité Incendie',
-    location:'CDE — Dépollution',
+    location:'CDE Dépollution — Baie de Hann',
     img:'/images/real-detnov-centrale.png',
     pos:'center center',
     desc:'Installation et configuration d\'une centrale d\'alarme incendie DETNOV pour un site industriel côtier. Système opérationnel 24h/24 avec surveillance de plus de 4 boucles.',
