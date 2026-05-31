@@ -449,7 +449,7 @@ function Carousel({ products, color, brand, onOpenModal, onQuote }: {
   // Auto-défilement
   useEffect(() => {
     if (paused) return
-    const t = setInterval(() => setCurrent(c => (c + 1) % total), 5000)
+    const t = setInterval(() => setCurrent(c => (c + 1) % total), 2000)
     return () => clearInterval(t)
   }, [paused, total])
 
