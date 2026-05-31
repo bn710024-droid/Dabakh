@@ -96,13 +96,13 @@ const realisations: {title:string;category:string;location:string;img:string;bef
     color:'#E8600A',
   },
   {
-    title:'Centrale Alarme DETNOV — Baie de Hann',
+    title:'Centrale Alarme DETNOV — CDE Dépollution',
     category:'Sécurité Incendie',
-    location:'Baie de Hann, Dakar',
+    location:'CDE — Dépollution',
     img:'/images/real-detnov-centrale.png',
     pos:'center center',
-    desc:'Installation et configuration d\'une centrale d\'alarme incendie DETNOV pour un site industriel côtier. Système opérationnel 24h/24 avec surveillance de 18 zones.',
-    tags:['DETNOV','Alarme','Incendie','18 zones'],
+    desc:'Installation et configuration d\'une centrale d\'alarme incendie DETNOV pour un site industriel côtier. Système opérationnel 24h/24 avec surveillance de plus de 4 boucles.',
+    tags:['DETNOV','Alarme','Incendie','Plus de 4 boucles'],
     color:'#E8600A',
   },
   {
