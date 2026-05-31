@@ -69,7 +69,7 @@ const services = [
   {
     icon: <Radio size={36} />,
     title: 'Télégestion',
-    subtitle: 'Lacroix · Nivus',
+    subtitle: 'Sofrel · Lacroix',
     img: '/images/refinery.png',
     color: '#1A7A3C',
     desc: 'Solutions de télégestion et de supervision à distance pour vos installations industrielles dispersées. Monitoring en temps réel, alertes automatiques et tableaux de bord centralisés.',
