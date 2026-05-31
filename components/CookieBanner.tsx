@@ -1,13 +1,19 @@
 'use client'
 import { useState, useEffect } from 'react'
+import Script from 'next/script'
+
+const GA_ID = 'G-NHTLJS7GGS'
 
 export default function CookieBanner() {
   const [visible, setVisible] = useState(false)
   const [animate, setAnimate] = useState(false)
+  const [gaLoaded, setGaLoaded] = useState(false)
 
   useEffect(() => {
     const consent = localStorage.getItem('cookie-consent')
-    if (!consent) {
+    if (consent === 'accepted') {
+      setGaLoaded(true)
+    } else if (!consent) {
       setTimeout(() => {
         setVisible(true)
         setTimeout(() => setAnimate(true), 10)
@@ -17,6 +23,7 @@ export default function CookieBanner() {
 
   const accept = () => {
     localStorage.setItem('cookie-consent', 'accepted')
+    setGaLoaded(true)
     setAnimate(false)
     setTimeout(() => setVisible(false), 400)
   }
@@ -27,9 +34,25 @@ export default function CookieBanner() {
     setTimeout(() => setVisible(false), 400)
   }
 
-  if (!visible) return null
-
   return (
+    <>
+      {/* Google Analytics — chargé uniquement si consentement accepté */}
+      {gaLoaded && (
+        <>
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+            strategy="afterInteractive"
+          />
+          <Script id="google-analytics" strategy="afterInteractive">{`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_ID}');
+          `}</Script>
+        </>
+      )}
+
+      {!visible ? null : (
     <div style={{
       position: 'fixed',
       bottom: 0,
@@ -99,5 +122,7 @@ export default function CookieBanner() {
         </div>
       </div>
     </div>
+      )}
+    </>
   )
 }
