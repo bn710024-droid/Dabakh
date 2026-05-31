@@ -68,7 +68,7 @@ export default function AboutPage() {
                   L&apos;EXCELLENCE<br/><span style={{color:'#E8600A'}}>INDUSTRIELLE</span><br/>AU SÉNÉGAL
                 </h2>
                 <p style={{fontFamily:'Rajdhani, sans-serif',fontSize:'15px',color:'#555',lineHeight:1.8,marginBottom:'18px'}}>
-                  Dabakh Global Services SARL est une société sénégalaise spécialisée dans l&apos;ingénierie industrielle, la télésurveillance, la sécurité incendie et l&apos;instrumentation. Fondée avec la vision d&apos;apporter des solutions technologiques de niveau national et international.
+                  Dabakh Global Services SARL est une société sénégalaise spécialisée dans l&apos;ingénierie industrielle, la télésurveillance, la sécurité incendie et l&apos;instrumentation. Fondée avec la vision d&apos;apporter des solutions technologiques au niveau national et international.
                 </p>
                 <p style={{fontFamily:'Rajdhani, sans-serif',fontSize:'15px',color:'#555',lineHeight:1.8,marginBottom:'28px'}}>
                   Partenaire agréé de Hikvision, Dahua, DETNOV, Fuji Electric, NIVUS et Lacroix — nous offrons des solutions complètes, de l&apos;étude jusqu&apos;à la maintenance.
