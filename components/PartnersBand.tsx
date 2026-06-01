@@ -3,8 +3,8 @@ import Image from 'next/image'
 
 const partners = [
   { src: '/images/logo-hikvision.png', name: 'Hikvision' },
-  { src: '/images/logo-dahua.png',     name: 'Dahua' },
-  { src: '/images/logo-detnov.png',    name: 'DETNOV' },
+  { src: '/images/logo-dahua-new.jpg',  name: 'Dahua' },
+  { src: '/images/logo-detnov_250x94px-300x113.jpg', name: 'DETNOV' },
   { src: '/images/logo-fuji.png',      name: 'Fuji Electric' },
   { src: '/images/logo-nivus.png',     name: 'NIVUS' },
   { src: '/images/logo-lacroix.png',   name: 'Lacroix Sofrel' },
