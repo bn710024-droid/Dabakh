@@ -36,7 +36,7 @@ const services = [
     subtitle: 'DETNOV',
     img: '/images/fire-action.png',
     color: '#1A7A3C',
-    desc: 'Systèmes de détection et d\'alarme incendie certifiés pour la protection de vos installations. Détecteurs de fumée et d\'extinction, extincteurs, sprinklers et équipements de lutte contre l\'incendie.',
+    desc: 'Systèmes de détection et d\'extinction certifiés pour la protection de vos installations. Détecteurs de fumée et d\'extinction, extincteurs, sprinklers et équipements de lutte contre l\'incendie.',
     features: ['Détecteurs de fumée', 'Centrales alarme', 'Extincteurs', 'Alarmes sonores/visuelles', 'Sprinklers', 'Certification aux normes', 'Maintenance préventive'],
   },
   {
