@@ -19,6 +19,26 @@ function FadeIn({ children, delay=0, direction='up' }: { children:React.ReactNod
 
 const realisations: {title:string;category:string;location:string;img:string;beforeImg?:string;pos?:string;desc:string;tags:string[];color:string}[] = [
   {
+    title:'Marquage Industriel — CSS',
+    category:'Instrumentation',
+    location:'CSS — Compagnie Sucrière Sénégalaise',
+    img:'/images/css.jpeg',
+    pos:'center center',
+    desc:'Intervention de marquage et identification industrielle sur les équipements et infrastructures de la Compagnie Sucrière Sénégalaise. Conformité aux normes de sécurité et traçabilité des installations.',
+    tags:['CSS','Marquage','Industriel','Identification','Terrain'],
+    color:'#1A7A3C',
+  },
+  {
+    title:'Marquage Industriel — SOCOCIM',
+    category:'Instrumentation',
+    location:'SOCOCIM Industries — Rufisque',
+    img:'/images/Sococim.jpeg',
+    pos:'center center',
+    desc:'Marquage et identification industrielle des équipements sur le site SOCOCIM Industries. Intervention terrain pour la mise en conformité et la traçabilité des infrastructures industrielles.',
+    tags:['SOCOCIM','Marquage','Industriel','Identification','Rufisque'],
+    color:'#E8600A',
+  },
+  {
     title:'Équipe Dabakh — Station KMS3',
     category:'Instrumentation',
     location:'Station KMS3, Sénégal',
