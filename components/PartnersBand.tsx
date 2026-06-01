@@ -31,11 +31,14 @@ export default function PartnersBand() {
           {[...partners, ...partners, ...partners].map((p, i) => (
             <div key={i} style={{
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              width: '240px', height: '90px', margin: '0 14px',
-              background: 'white', borderRadius: '8px', padding: '14px 20px',
+              width: p.name === 'DETNOV' ? '280px' : '240px',
+              height: '90px', margin: '0 14px',
+              background: 'white', borderRadius: '8px',
+              padding: p.name === 'DETNOV' ? '12px 28px' : '14px 20px',
               flexShrink: 0, boxShadow: '0 4px 20px rgba(0,0,0,0.12)',
+              overflow: 'visible',
             }}>
-              <Image src={p.src} alt={p.name} width={200} height={62} style={{ objectFit: 'contain', maxHeight: '58px', width: '100%' }} />
+              <Image src={p.src} alt={p.name} width={p.name === 'DETNOV' ? 224 : 200} height={62} style={{ objectFit: 'contain', maxHeight: '58px', width: '100%', display: 'block' }} />
             </div>
           ))}
         </div>
