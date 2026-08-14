@@ -24,13 +24,17 @@ function isValidPhone(phone: string): boolean {
 export async function POST(request: NextRequest) {
   const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
   const key = `ratelimit:${ip}`;
-  const count = await redis.incr(key);
-  if (count === 1) await redis.expire(key, 60);
-  if (count > 5) {
-    return NextResponse.json(
-      { error: 'Trop de tentatives. Veuillez patienter une minute.' },
-      { status: 429 }
-    );
+  try {
+    const count = await redis.incr(key);
+    if (count === 1) await redis.expire(key, 60);
+    if (count > 5) {
+      return NextResponse.json(
+        { error: 'Trop de tentatives. Veuillez patienter une minute.' },
+        { status: 429 }
+      );
+    }
+  } catch (error) {
+    console.error('Redis rate-limit error:', error);
   }
 
   let body: Record<string, unknown>;
